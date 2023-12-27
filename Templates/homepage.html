@@ -1,4 +1,64 @@
-{% extends 'base.html' %}
-{% block content %}
-<button><a href="{% url 'Rest-index' %}" target="_blank">Login Restaurants</a></button>
-{% endblock content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css"
+    <title>Hungry Students</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Hungry Students Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="hero-image.jpg" alt="Delicious Food">
+        <div class="hero-text">
+            <h1>Welcome to Hungry Students</h1>
+            <p>Discover a world of delightful flavors!</p>
+            <a href="#menu" class="cta-button">Explore Menu</a>
+        </div>
+    </section>
+
+    <section class="featured">
+        <h2>Featured Products</h2>
+        <!-- Featured product cards go here -->
+    </section>
+
+    <section class="special-offers">
+        <h2>Special Offers</h2>
+        <!-- Special offers content goes here -->
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <!-- Testimonials content goes here -->
+    </section>
+
+    <section id="about" class="about-us">
+        <h2>About Us</h2>
+        <!-- About us content goes here -->
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <!-- Contact form or information goes here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Hungry Students. All rights reserved.</p>
+    </footer>
+</body>
+</html>
