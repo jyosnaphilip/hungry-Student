@@ -1,10 +1,8 @@
 from django.shortcuts import render
-
-
-# Create your views here.
 def homepage(request):
     return render(request,'homepage.html')
 
 def restIndex(request):
-    return render(request,'Restaurants/RestIndex.html')
+    return render(request,'RestaurantTemp/RestIndex.html')
+
 # Create your views here.
