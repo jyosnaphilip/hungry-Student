@@ -1,5 +1,5 @@
 """
-URL configuration for hungryStudent project.
+URL configuration for hungryStudentProject project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,12 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Restaurants.views import homepage,restIndex
+
+from restaurants.views import homepage,restIndex,viewOrders,restAnalytics
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',homepage,name='home'),
+     path('',homepage,name='home'),
     path('Restaurants/',restIndex,name='Rest-index'),
-    
+    path('Restaurants/orders',viewOrders,name='viewOrders'),
+    path('Restaurants/analytics',restAnalytics,name='viewAnalytics'),
+
+
 ]
