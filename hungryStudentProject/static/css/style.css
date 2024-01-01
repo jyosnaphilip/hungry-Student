@@ -65,12 +65,20 @@ nav a {
 
 /* Add styling for other sections as needed */
 /* for restindex.html */
-.icons{
-    font-size: 50%;
-    align-self: center;
-    background-color: aqua;
-}
+
 .links{
     text-decoration: none;
     color:black;
+    align-self: center;
+    text-align: center;
+    font-size:medium;
 }
+
+
+.faAd{
+    text-align: center;
+    font-size: x-large;
+}
+    /* adding this cos font awesome icon size class 5xl depends on font-size */
+    
+
