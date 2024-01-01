@@ -2,5 +2,31 @@
 
 {% block content %}
     {% include 'RestaurantTemp\partials\restNavbar.html' %}
-    <h1>Welcome restaurants u r in restindex</h1>
+    
+    <!-- has all options in boxes -->
+    <div class="container-fluid  justify-content-sm-center">
+
+        <div class="row  m-3"> 
+            <div class="col-sm-3  shadow p-5 "> <!-- box1-->
+                <a href='{% url "addMenu" %}'>
+                    <i class="fa-solid fa-utensils  icons" style="color: #4d3400; font-size:9rem;"></i>
+                    <p><b>What's cooking?</b></p>
+                    <p>Add/View today's menu</p>
+                </a>
+            </div>
+
+            <div class="col-sm-3  shadow p-5 offset-1"> <!-- box2-->
+                <i class="fa-regular fa-bell " style="color: #4d3400; font-size:9rem;"></i>
+                <p><b>View orders</b></p>
+            </div>
+
+            <div class="col-sm-3  shadow p-5 offset-1"><!-- box2-->
+                <i class="fa-solid fa-chart-line " style="color: #4d3400; font-size:9rem;"></i>
+                <p><b>View trends</b></p>
+                <p>Lorem ipsum dolor</p>
+            </div>
+
+        </div> 
+
+    </div>
 {% endblock content %}

@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from restaurants.views import homepage,restIndex,viewOrders,restAnalytics
+from restaurants.views import homepage,restIndex,addMenu,restAnalytics
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('',homepage,name='home'),
-    path('Restaurants/',restIndex,name='Rest-index'),
-    path('Restaurants/orders',viewOrders,name='viewOrders'),
+    path('Restaurants/',restIndex,name='RestIndex'),
+    path('Restaurants/menu',addMenu,name='addMenu'),
     path('Restaurants/analytics',restAnalytics,name='viewAnalytics'),
 
 

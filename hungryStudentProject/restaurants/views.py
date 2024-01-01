@@ -4,8 +4,8 @@ def homepage(request):
 
 def restIndex(request):
     return render(request,'RestaurantTemp/RestIndex.html')
-def viewOrders(request):
-    return render(request,'RestaurantTemp/orders.html')
+def addMenu(request):
+    return render(request,'RestaurantTemp/menu.html')
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
 # Create your views here.

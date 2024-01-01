@@ -64,3 +64,13 @@ nav a {
 }
 
 /* Add styling for other sections as needed */
+/* for restindex.html */
+.icons{
+    font-size: 50%;
+    align-self: center;
+    background-color: aqua;
+}
+.links{
+    text-decoration: none;
+    color:black;
+}
