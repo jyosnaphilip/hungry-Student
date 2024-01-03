@@ -82,11 +82,9 @@ urlpatterns = [
     path('edit_rest_profile/<int:user_id>' , edit_rest_profile , name="edit_rest_profile"),
 
 
-
-
-
-
 ]
+
+
 # Restaurant Table (Fathima)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

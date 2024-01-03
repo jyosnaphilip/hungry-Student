@@ -9,7 +9,7 @@ from .models import Restaurant , Notification
 from django.urls import reverse
 
 
-# Credentials
+# Credentials(Fathima)
 @never_cache
 @login_required(login_url ="login" )
 def admin_index(request):
@@ -93,7 +93,7 @@ def forgot_password(request , user_id):
 
     return render(request, 'adminTemp/admin/forgot-password.html')
 
-# All Users Display(Admin)--------------------------------------------------------------------------------------------------------------------------
+# All Users Display(Admin Fathima)--------------------------------------------------------------------------------------------------------------------------
 
 def tables(request):
     users = User.objects.all()
@@ -112,7 +112,7 @@ def status_changetables(request , user_id):
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 
-# Restaurents(Admin Only)--------------------------------------------------------------------------------------------------------------------------
+# Restaurents(Admin_Only_Fathima)--------------------------------------------------------------------------------------------------------------------------
 
 def rest(request):
     users = User.objects.filter(is_staff = True , is_superuser = False)
@@ -168,7 +168,7 @@ def edit_rest(request , user_id):
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Users (Admin Only)--------------------------------------------------------------------------------------------------------------------------
+# Users (Admin_Only Fathima)--------------------------------------------------------------------------------------------------------------------------
 
 def users(request):
     mainusers = User.objects.filter(is_staff=False, is_superuser=False)
@@ -224,7 +224,7 @@ def edit_user(request,user_id):
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Feedback Form (Admin) --------------------------------------------------------------------------------------------------------------------------
+# Feedback Form (Admin_Fathima) --------------------------------------------------------------------------------------------------------------------------
 
 def feedback(request):
     feedbacks = Feedback.objects.all()
@@ -234,7 +234,7 @@ def feedbackform(request):
     return render(request, 'adminTemp/admin/Feedback/feedbackform.html')  #Ujain's Work
 
 
-# Restaurants Table(Admin)
+# Restaurants Table(Admin_Fathima)
 def RestaurantDetails(request):
     resttable = Restaurant.objects.all()
     return render(request, 'adminTemp/admin/RestaurantTable/restaurantdetails.html',{'resttable':resttable})
@@ -318,15 +318,6 @@ def edit_rest_profile(request , user_id):
         rest.save()
         return redirect('rest_profile' , user_id = user_id)
     return render(request , 'adminTemp/restaurant/rest_edit_profile.html' , {'rest':rest})
-
-
-
-    
-
-
-
-
-
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
