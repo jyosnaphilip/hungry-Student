@@ -1,0 +1,108 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Restaurents List</h1>
+                    <p class="mb-4">Below is the lists of restaurents registrered in this webpage.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Restaurents</h6>
+                            <a style="float:right;" href="{% url 'create_rest' %}" class="btn btn-success btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">Create Restaurant</span>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th>First Name</th>
+                                            
+                                            <th>E-mail</th>
+                                            <th>Username</th>
+                                            <th>Status</th>
+                                            <th>User Type</th>
+                                            <th>Action</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>First Name</th>
+                                           
+                                            <th>E-mail</th>
+                                            <th>Username</th>
+                                            <th>Status</th>
+                                            <th>User Type</th>
+                                            <th>Action</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for i in users %}
+                                        <tr>
+                                            <td>{{i.first_name}}</td>
+                                          
+                                            <td>{{i.email}}</td>
+                                            <td>{{i.username}}</td>
+                                            {% if i.is_active == True %}
+                                            <td>Active</td>
+                                            {% else %}
+                                            <td>Inactive</td>
+                                            {% endif %}
+                                            <td>Restaurent</td> 
+                                            <!-- {% if i.is_staff == True %}
+                                            
+                                            {% else %}
+                                            <td>User</td>
+                                            {% endif %} -->
+                                            {% if i.is_active == True %}
+                                            <td><a href="{% url 'status_changerest' user_id=i.id %}" onclick="alert('Are you sure ?')" class="btn btn-warning btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </span>
+                                                <span class="text">Inactivate</span>
+                                            </a></td>
+                                            {% else %}
+                                            <td><a href="{% url 'status_changerest' user_id=i.id %}" onclick="alert('Are you sure ?')" class="btn btn-success btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                                <span class="text">Activate</span>
+                                            </a></td>
+                                            {% endif %}
+                                            <td><a href="{% url 'edit_rest' user_id=i.id %}" onclick="alert('Are you sure ?')" class="btn btn-info btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </span>
+                                                <span class="text">Edit</span>
+                                            </a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                        
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                <!-- /.container-fluid -->
+                
+
+
+            </div>
+            <!-- End of Main Content -->
+            
+
+            {% endblock content %}
