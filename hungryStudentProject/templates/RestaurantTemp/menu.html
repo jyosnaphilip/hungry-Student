@@ -1,102 +1,107 @@
 {% extends 'base.html' %}
-<div class="container-fluid py-3">
-    <div class="row m-auto py-3">
-        <div class="col-6 text-center">
-            Add item 
-            <hr/><hr/>
-            <div>
-                <form>
-                    <label for="Food_Name" class="form-label">Item Name</label>
-                    <input type="text" id="Food_Name" class="form-control" required>
-                    
-                    <label for="Category" class="form-label">Choose a category:</label>
-                    <select name="food_catgeory" id="category">
-                    <option value="Starter">Starter</option>
-                    <option value="Main course">Main course</option>
-                    <option value="Dessert">Dessert</option>
-                    <option value="Drinks">Drinks</option>
-                    </select>
 
-                    <label for="Description" class="form-text">Description</label>
-                    <input type="textarea" id="Description" class="form-control">
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="row m-auto py-3">
+            <div class="col-6 text-center">
+                Add item 
+                <hr/><hr/>
+                <div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <label for="Food_Name" class="form-label">Item Name</label>
+                        <input type="text" id="Food_Name" class="form-control" required>
+                        
+                        <label for="Category" class="form-label">Choose a category:</label>
+                        <select name="food_category" id="Category">
+                        <option value="Starter">Starter</option>
+                        <option value="Main course">Main course</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Beverages">Beverages</option>
+                        </select>
+
+                        <label for="Description" class="form-text">Description</label>
+                        <input type="textarea" id="Description" class="form-control">
+                        
+                        <label for="Price"></label>
+                        <input type="number" inputmode="numeric" id="Price" required class="form-control">
+                        
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" id="Image">
+                            <label class="input-group-text" for="Image">Upload Image</label>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button class="btn btn-sm text-light my-2" style="background-color:#6E040F" type="submit">
+                                Save
+                            </button>
+                        </div>
                     
-                    <label for="Price"></label>
-                    <input type="number" inputmode="numeric" id="Price" required class="form-control">
-                    
-                    <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="Image">
-                        <label class="input-group-text" for="Image">Upload Image</label>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button class="btn btn-sm text-light my-2" style="background-color:#6E040F" type="submit">
-                            Save
-                        </button>
-                    </div>
-                
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col-6 text-center">
-            Today's Menu
-            <hr/>
-            <div class="accordion accordion-flush" id="accordionTaskList">
-                {% for task in tasks %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-task-{{ forloop.counter }}" aria-expanded="false" aria-controls="flush-task-{{ forloop.counter }}">
-                        <div class="row">
+            <div class="col-6 text-center">
+                Today's Menu
+                <hr/>
+                <div class="container-sm" >
+                    {% for menu_item in menu_items %}
+                            <div class="row">
 
-                            <div class="col-sm-4">
-                                {% if task.task_title %}
-                                <div class="fw_bold">
-                                    {{ task.task_title }}
+                                <div class="col-sm-4">
+                                    {% if menu_item.food_item %}
+                                    <div class="fw_bold">
+                                        {{ menu_item.food_item }}
+                                    </div>
+                                    {% endif %}
                                 </div>
-                                {% endif %}
-                            </div>
 
-                            <div class="col-sm-4 offset-4">
-                                {% if task.task_title %}
-                                <div class="fw_bold">
-                                    {{ task.task_title }}
-                                </div>
-                        
-                                {% endif %}
-                            </div>
-                        </div>
-                        
-                    </button>
-                    </h2>
-                <div id="flush-task-{{ forloop.counter }}" class="accordion-collapse collapse show"  data-bs-parent="#accordionTaskList">
-                    <div class="accordion-body">
-                    {% if task.task_description %}
-                        <div class="mt-2 mb-3">
-                            {{ task.task_description|safe }}
-                        </div>
-                    {% else %}
-                        <div class="text-muted small">
-                            No description added
-                        </div>
-                    {% endif %}
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <a href="{% url 'edit-menu' task.taskid %}">
-                            <i class="fa-solid fa-pen float-end p-1 " style="color: #a46269;"></i>
-                            </a>
-                            <!-- uuid gives more security, look at the url after clicking edit, it has random number strings in the url  -->
-                            <i class="fa-solid fa-square-check float-end p-1 btn" id="check-{{forloop.counter}}" onclick="task_done('{{forloop.counter}}')" style="color: #555a62;"></i>
+                                <div class="col-sm-4 offset-4">
+                                    {% if menu_item.food_price %}
+                                    <div class="fw_bold">
+                                        {{ menu_item.food_price }}
+                                    </div>
                             
-                            <a href="{% url 'delete-task' task.taskid %}">
-                                <i class="fa-solid fa-trash-can float-end p-1" style="color: #a46269;"></i>
-                            </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </h2>
+                    
+                        <div class="row-sm">
+                        {% if menu_item.food_description %}
+                            <div class="mt-2 mb-3">
+                                {{ menu_item.food_description|safe }}
+                            </div>
+                        {% else %}
+                            <div class="text-muted small">
+                                No description added
+                            </div>
+                        {% endif %}
                         </div>
-                    </div>
+                        {% if menu_item.food_img %}
+                            <div class="mt-2 mb-3">
+                                {{ menu_item.food_img|safe }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col">
+                                <a href="{% url 'edit-menu' menu_item.id %}">
+                                <i class="fa-solid fa-pen float-end p-1 " style="color: #a46269;"></i>
+                                </a>
+                                <!-- uuid gives more security, look at the url after clicking edit, it has random number strings in the url  -->
+                                <i class="fa-solid fa-square-check float-end p-1 btn" id="check-{{forloop.counter}}" onclick="task_done('{{forloop.counter}}')" style="color: #555a62;"></i>
+                                
+                                <a href="{% url 'delete-item' menu_item.id %}">
+                                    <i class="fa-solid fa-trash-can float-end p-1" style="color: #a46269;"></i>
+                                </a>
+                            </div>
+                        </div>
+                
+                    
+                    {% endfor %}
                 </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </div>
-</div>
+{% endblock content %}
