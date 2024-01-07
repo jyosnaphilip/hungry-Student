@@ -4,7 +4,7 @@ def homepage(request):
     return render(request,'homepage.html')
 
 def restIndex(request):
-    return render(request,'RestaurantTemp/RestIndex.html')
+    return render(request,'RestaurantTemp/restaurant_dashboard.html')
 
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
@@ -17,8 +17,14 @@ def addMenu(request):
         food_price=request.POST['Price']
         food_img=request.POST['Image']
         menu_item=Food(Food_Name=food_item,Category=food_category,Description=food_description,Price=food_price,Image=food_img)
+        
         menu_item.save()
         return redirect('addMenu')
     menu_item=Food.objects.all()
     return render(request,'RestaurantTemp\menu.html',context={'menu_items':menu_item})
-# Create your views here.
+
+def viewFeedback(request):
+    return render(request,'RestaurantTemp/rest_feedback.html')
+
+def viewOrders(request):
+    return render(request,'RestaurantTemp/today_orders.html')

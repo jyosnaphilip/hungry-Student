@@ -1,5 +1,5 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* body {
+    
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -61,7 +61,7 @@ nav a {
 
 .cta-button:hover {
     background-color: #e68a00;
-}
+} */
 
 /* Add styling for other sections as needed */
 /* for restindex.html */
@@ -81,4 +81,7 @@ nav a {
 }
     /* adding this cos font awesome icon size class 5xl depends on font-size */
     
-
+.form-control:focus {
+    border-color: #7f3b00;
+    box-shadow: 0 0 0 0.2rem rgba(123, 63, 0, 1);
+    }

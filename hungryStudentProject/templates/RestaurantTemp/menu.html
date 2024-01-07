@@ -1,72 +1,80 @@
-{% extends 'base.html' %}
+{% extends 'rest_base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="container-fluid py-3">
-        <div class="row m-auto py-3">
-            <div class="col-6 text-center">
-                Add item 
-                <hr/><hr/>
-                <div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <label for="Food_Name" class="form-label">Item Name</label>
-                        <input type="text" id="Food_Name" class="form-control" required>
+        
+        <div class="row m-auto py-3" style="color:#7b3f00">
+            <div class="col-5">
+                <div class="container-fluid p-3 shadow border border-4 " style="background-color:#ffefd6">
+                    <div class="text-center"><b>Add item</b></div> 
+                    <hr/><hr/>
+                    <div>
+                        <form class="user form-inline" method="POST" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <label for="Food_Name" class="form-label m-1">Item Name*</label>
+                            <input type="text" id="Food_Name" class="form-control m-1" required>
+                            
+                            <label for="Category" class="form-label m-1 ">Choose a category</label>
+                            <select name="food_category" class="form-control m-1" id="Category">
+                            <option value="Starter">Starter</option>
+                            <option value="Main course">Main course</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Beverages">Beverages</option>
+                            </select>
+                            <br>
+                            <label for="Description" class="form-text m-1">Description</label>
+                            <input type="textarea" id="Description" class="form-control m-1">
+                            
+                            <label for="Price" class="form-text m-1">Price*</label>
+                            <input type="number" inputmode="numeric" id="Price" required class="form-control m-1">
+                            
+                            <div class="input-group mb-3">
+                                <input  class="form-control" id="Image">
+                                <label class="input-group-text" for="Image">Upload Image</label>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class="input-group-text" style="color:white;background-color:#6E040F" type="submit">
+                                    Save
+                                </button>
+                            </div>
+                            
+                        </form>
+                        <hr/>
+                            <p class="small"><i>Fields marked * are mandatory</i></p>
                         
-                        <label for="Category" class="form-label">Choose a category:</label>
-                        <select name="food_category" id="Category">
-                        <option value="Starter">Starter</option>
-                        <option value="Main course">Main course</option>
-                        <option value="Dessert">Dessert</option>
-                        <option value="Beverages">Beverages</option>
-                        </select>
-
-                        <label for="Description" class="form-text">Description</label>
-                        <input type="textarea" id="Description" class="form-control">
-                        
-                        <label for="Price"></label>
-                        <input type="number" inputmode="numeric" id="Price" required class="form-control">
-                        
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control" id="Image">
-                            <label class="input-group-text" for="Image">Upload Image</label>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button class="btn btn-sm text-light my-2" style="background-color:#6E040F" type="submit">
-                                Save
-                            </button>
-                        </div>
-                    
-                    </form>
+                    </div>
                 </div>
             </div>
             <div class="col-6 text-center">
-                Today's Menu
-                <hr/>
-                <div class="container-sm" >
-                    {% for menu_item in menu_items %}
-                            <div class="row">
+                <div class="container-fluid p-3 shadow border border-4" style="background-color:#ffefd6">
+                    <b>Today's Menu</b>
+                    <hr/>
+                    <div class="container-sm" >
+                        {% for menu_item in menu_items %}
+                        <div class="row">
 
-                                <div class="col-sm-4">
-                                    {% if menu_item.food_item %}
-                                    <div class="fw_bold">
-                                        {{ menu_item.food_item }}
-                                    </div>
-                                    {% endif %}
+                            <div class="col-sm-4">
+                                {% if menu_item.food_item %}
+                                <div class="fw_bold">
+                                    {{ menu_item.food_item }}
                                 </div>
-
-                                <div class="col-sm-4 offset-4">
-                                    {% if menu_item.food_price %}
-                                    <div class="fw_bold">
-                                        {{ menu_item.food_price }}
-                                    </div>
-                            
-                                    {% endif %}
-                                </div>
+                                {% endif %}
                             </div>
 
+                            <div class="col-sm-4 offset-4">
+                                {% if menu_item.food_price %}
+                                <div class="fw_bold">
+                                    {{ menu_item.food_price }}
+                                </div>
+                        
+                                {% endif %}
+                            </div>
+                        </div>
+
                         </h2>
-                    
+                        
                         <div class="row-sm">
                         {% if menu_item.food_description %}
                             <div class="mt-2 mb-3">
@@ -77,13 +85,13 @@
                                 No description added
                             </div>
                         {% endif %}
-                        </div>
+                        
                         {% if menu_item.food_img %}
                             <div class="mt-2 mb-3">
                                 {{ menu_item.food_img|safe }}
                             </div>
                         {% endif %}
-
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <a href="{% url 'edit-menu' menu_item.id %}">
@@ -99,7 +107,8 @@
                         </div>
                 
                     
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

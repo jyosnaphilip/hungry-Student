@@ -1,0 +1,67 @@
+{% extends 'rest_base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-end m-5">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-primary btn-toggle active">
+          <input type="radio" name="options" id="today_order" autocomplete="off" checked>Today's Orders
+        </label>
+        <label class="btn btn-outline-primary btn-toggle active">
+          <input type="radio" name="options" id="all_order" autocomplete="off"> All orders
+        </label>
+    </div>
+</div>
+
+<div class="container-fluid m-3 rounded-3 p-0" style="background-color: white;">
+    <table class="table table-striped rounded-3">
+        <thead class="rounded-3">
+        <tr class="rounded-3">
+            <th scope="col-sm-1 p-5">#</th>
+            <th scope="col-sm-1">Order No</th>
+            <th scope="col-sm-2">Customer Name</th>
+            <th scope="col-sm-2">Order Date</th>
+            <th scope="col-sm-6 text-wrap">Items</th>
+            <th scope="col-sm-2">Payment Status</th>
+            <th scope="col-sm-2">Service Status</th>
+            
+
+
+            
+        </tr>
+        </thead>
+        <tbody class="rounded-3">
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}
