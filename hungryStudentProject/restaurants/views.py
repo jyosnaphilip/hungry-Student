@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from . models import Food
+from customadmin.models import Restaurant
 def homepage(request):
     return render(request,'homepage.html')
 
@@ -16,9 +17,9 @@ def addMenu(request):
         food_description=request.POST['Description']
         food_price=request.POST['Price']
         food_img=request.POST['Image']
-        menu_item=Food(Food_Name=food_item,Category=food_category,Description=food_description,Price=food_price,Image=food_img)
-        
+        menu_item=Food(Food_Name=food_item,Category=food_category,Description=food_description,Image=food_img)
         menu_item.save()
+        food_id=menu_item.Food_ID
         return redirect('addMenu')
     menu_item=Food.objects.all()
     return render(request,'RestaurantTemp\menu.html',context={'menu_items':menu_item})

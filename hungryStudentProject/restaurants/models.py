@@ -27,10 +27,10 @@ class Food(models.Model):
 
 
 class Restaurant_Food_bridge(models.Model):
-    
+    rest_id=models.ForeignKey('Restaurant',on_delete=models.CASCADE)
     Food_ID=models.ForeignKey('Food',on_delete=models.CASCADE)
     Status=models.BooleanField(blank=False,default=True)
     Price=models.DecimalField(max_digits=5,decimal_places=2,blank=False)
 
     def __str__(self):
-        return f'{self.Rest_id.__str__(), self.Food_ID.__str__()}'
+        return f'{self.rest_id.__str__(), self.Food_ID.__str__()}'
