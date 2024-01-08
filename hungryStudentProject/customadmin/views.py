@@ -14,8 +14,14 @@ from django.urls import reverse
 @login_required(login_url ="login" )
 def admin_index(request):
     noti = Notification.objects.filter(is_read = False).order_by('-created_at')
+    total = User.objects.filter(is_superuser = False).count()
+
+    rest = User.objects.filter(is_superuser = False , is_staff = True)
+    rest_count = rest.count()
+    user = User.objects.filter(is_superuser = False , is_staff = False)
+    user_count = user.count()
     count = noti.count()
-    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count})
+    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total})
 
 def read_msg(request , msg_id):
     noti = Notification.objects.get(id = msg_id)
@@ -152,7 +158,7 @@ def create_rest(request):
                 users.save()
                 noti = Notification.objects.create(user=users , message="A new user Signed up")
                 noti.save()
-                return render(request , 'adminTemp/admin/restaurents/rest_list.html')
+                return redirect('rest')
     msg ="Hello"
     return render(request , 'adminTemp/admin/restaurents/create_rest.html' , {'msg' : msg})
 
@@ -191,7 +197,7 @@ def create_user(request):
                 return render(request,'adminTemp/admin/users/create_user.html' , {'mess':mess}) 
             
             else:
-                users = User.objects.create_user(first_name = first_name,last_name=last_name,username = username, email=email)
+                users = User.objects.create_user(first_name = first_name,last_name=last_name,username = username, email=email)  
                 users.set_password(password)
                 users.save()
                 return redirect('users')
@@ -278,7 +284,7 @@ def rest_edit_user(request , user_id):
     return render(request , 'adminTemp/restaurant/rest_edit_user.html' , {'user':user})
 
 def create_profile(request , user_id):
-    if Restaurant.objects.filter(user_id = user_id).exists():
+    if Restaurant.objects.filter(user_id = user_id).exists():   
         user = Restaurant.objects.get(user_id = user_id)
         return render(request , 'adminTemp/restaurant/rest_profile.html' , {'user':user})
     else:
@@ -318,6 +324,8 @@ def edit_rest_profile(request , user_id):
         rest.save()
         return redirect('rest_profile' , user_id = user_id)
     return render(request , 'adminTemp/restaurant/rest_edit_profile.html' , {'rest':rest})
+
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

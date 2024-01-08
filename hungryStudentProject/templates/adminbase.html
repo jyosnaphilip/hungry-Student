@@ -116,13 +116,13 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
+            <!-- Heading ADDONs like Pages  -->
+            <!-- <div class="sidebar-heading">
                 Addons
-            </div>
+            </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -140,29 +140,29 @@
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
+            <!-- <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            </div> -->
 
             
         </ul>
@@ -240,6 +240,17 @@
                                 <h6 class="dropdown-header">
                                     Message Center
                                 </h6>
+                                {% if not noti %}
+                                
+                                    
+                                    
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate"><p style="margin: 3%;">No new messages</p></div>
+                                        <div class="small text-gray-500"></div>
+                                    </div>
+                                    
+                                
+                                {% else %}
                                 {% for i in noti %}
                                 <a class="dropdown-item d-flex align-items-center" href="{% url 'read_msg' msg_id=i.id %}">
                                     <div class="dropdown-list-image mr-3">
@@ -253,9 +264,10 @@
                                         <div class="small text-gray-500">{{i.created_at}}</div>
                                     </div>
                                     
-                                </a>
+                                </a>    
                                 {% endfor %}
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                
+                                {% endif %}
                             </div>
                         </li>
 
