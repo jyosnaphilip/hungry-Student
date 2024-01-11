@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 import uuid
 
 
+# class userdetails(models.Models):
+#     user = models.ForeignKey(User,on_delete = models.CASCADE)
+#     user_phone = models.CharField(max_length = 22)
+#     user_type = models.CharField(max_length = 5)
+
 class Feedback(models.Model):
 
     name = models.CharField(max_length=100)

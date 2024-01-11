@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from restaurants.views import homepage,restIndex,addMenu,restAnalytics
-from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg
+from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -41,6 +41,7 @@ urlpatterns = [
     #Admin Side(Fathima)
 
     path('',admin_login, name='login'),
+    path('forgotpassword/<int:user_id>' , fpassword , name="fpassword"),
     path('admin_logout',admin_logout, name='admin_logout'),
     
     path('Register',admin_register,name = 'register'),
@@ -77,7 +78,6 @@ urlpatterns = [
     path('rest_edit_user/<int:user_id>',rest_edit_user,name = 'rest_edit_user'),
     path('create_profile/<int:user_id>',create_profile,name = 'create_profile'),
     path('rest_profile/<int:user_id>',rest_profile,name = 'rest_profile'),
-
     path('create_rest_profile/<int:user_id>' , create_rest_profile , name='create_rest_profile'),
     path('edit_rest_profile/<int:user_id>' , edit_rest_profile , name="edit_rest_profile"),
 
