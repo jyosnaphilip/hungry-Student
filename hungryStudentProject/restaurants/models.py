@@ -17,20 +17,23 @@ class Food(models.Model):
         )
     Category=models.CharField(max_length=50,choices=CATEGORIES,blank=True,null=True,default='main_course')
     Image=models.ImageField(upload_to='food_images/')
+    Description=models.CharField(max_length=100,blank=True,null=True)
     class Meta:
         ordering=['Food_Name']
     def __str__(self):
          #String for representing the Model object.
         return f'({self.Food_Name})'
     
+    
 
 
 
 class Restaurant_Food_bridge(models.Model):
-    rest_id=models.ForeignKey('Restaurant',on_delete=models.CASCADE)
-    Food_ID=models.ForeignKey('Food',on_delete=models.CASCADE)
+    rest_id=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
+    Food_ID=models.ForeignKey(Food,on_delete=models.CASCADE)
     Status=models.BooleanField(blank=False,default=True)
     Price=models.DecimalField(max_digits=5,decimal_places=2,blank=False)
 
     def __str__(self):
         return f'{self.rest_id.__str__(), self.Food_ID.__str__()}'
+    

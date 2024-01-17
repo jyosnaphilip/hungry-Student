@@ -10,10 +10,11 @@
                     <div class="text-center"><b>Add item</b></div> 
                     <hr/><hr/>
                     <div>
-                        <form class="user form-inline" method="POST" enctype="multipart/form-data" >
+                        <form class="user form-inline" action="{% url 'addMenu' rest_id  %}" method="POST" enctype="multipart/form-data" >
                             {% csrf_token %}
+                            <input type="hidden" name="rest_id" id="rest_id" value="{{ rest_id }}">
                             <label for="Food_Name" class="form-label m-1">Item Name*</label>
-                            <input type="text" id="Food_Name" class="form-control m-1" required>
+                            <input type="text" id="Food_Name" name="food_name" ,class="form-control m-1" required>
                             
                             <label for="Category" class="form-label m-1 ">Choose a category</label>
                             <select name="food_category" class="form-control m-1" id="Category">
@@ -24,14 +25,14 @@
                             </select>
                             <br>
                             <label for="Description" class="form-text m-1">Description</label>
-                            <input type="textarea" id="Description" class="form-control m-1">
+                            <input type="textarea" id="Description" name="description" class="form-control m-1">
                             
                             <label for="Price" class="form-text m-1">Price*</label>
-                            <input type="number" inputmode="numeric" id="Price" required class="form-control m-1">
+                            <input type="number" name="price" inputmode="numeric" id="Price"  class="form-control m-1" required>
                             
                             <div class="input-group mb-3">
-                                <input  class="form-control" id="Image">
-                                <label class="input-group-text" for="Image">Upload Image</label>
+                                <input  class="form-control"  name="image" id="Image">
+                                <label class="input-group-text"  for="Image">Upload Image</label>
                             </div>
                             
                             <div class="text-center">
@@ -52,60 +53,70 @@
                     <b>Today's Menu</b>
                     <hr/>
                     <div class="container-sm" >
+                        
                         {% for menu_item in menu_items %}
                         <div class="row">
-
+                                {{menu_item}}
                             <div class="col-sm-4">
-                                {% if menu_item.food_item %}
+                                {% if menu_item.Food_Name %}
                                 <div class="fw_bold">
-                                    {{ menu_item.food_item }}
+                                    {{ menu_item.Food_Name }}
                                 </div>
                                 {% endif %}
                             </div>
 
                             <div class="col-sm-4 offset-4">
-                                {% if menu_item.food_price %}
-                                <div class="fw_bold">
-                                    {{ menu_item.food_price }}
-                                </div>
+                                {% for bridge_item in bridge_items %}
+
+                                    {% if bridge_item.rest_id.rest_id == request.rest_id %}
+    
+                                    {% if bridge_item.Food_ID.Food_ID == menu_item.Food_ID %} 
+                                        {{ bridge_item.Price }}
+                                                <div class="fw_bold">
                         
-                                {% endif %}
+                                                </div>
+                                            
+                                        {% endif %}
+                                
+                                    {% endif %}
+                                    
+                                {% endfor %}
                             </div>
                         </div>
 
                         </h2>
                         
                         <div class="row-sm">
-                        {% if menu_item.food_description %}
-                            <div class="mt-2 mb-3">
-                                {{ menu_item.food_description|safe }}
-                            </div>
-                        {% else %}
+                            {% if menu_item.Description %}
+                             <div class="mt-2 mb-3"><em>
+                                    {{ menu_item.Description|safe }}</em>
+                                </div>
+                            {% else %}
                             <div class="text-muted small">
                                 No description added
                             </div>
-                        {% endif %}
+                            {% endif %}
                         
-                        {% if menu_item.food_img %}
-                            <div class="mt-2 mb-3">
-                                {{ menu_item.food_img|safe }}
+                            {% if menu_item.Image %}
+                                <div class="mt-2 mb-3">
+                                    {{ menu_item.Image|safe }}
+                                </div>
+                            {% endif %}
                             </div>
-                        {% endif %}
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a href="{% url 'edit-menu' menu_item.id %}">
-                                <i class="fa-solid fa-pen float-end p-1 " style="color: #a46269;"></i>
-                                </a>
-                                <!-- uuid gives more security, look at the url after clicking edit, it has random number strings in the url  -->
-                                <i class="fa-solid fa-square-check float-end p-1 btn" id="check-{{forloop.counter}}" onclick="task_done('{{forloop.counter}}')" style="color: #555a62;"></i>
-                                
-                                <a href="{% url 'delete-item' menu_item.id %}">
-                                    <i class="fa-solid fa-trash-can float-end p-1" style="color: #a46269;"></i>
-                                </a>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="{#% url 'edit-menu' menu_item.id %#}">
+                                    <i class="fa-solid fa-pen float-end p-1 " style="color: #a46269;"></i>
+                                    </a>
+                                    <!-- uuid gives more security, look at the url after clicking edit, it has random number strings in the url  -->
+                                    <i class="fa-solid fa-square-check float-end p-1 btn" id="check-{{forloop.counter}}" onclick="task_done('{{forloop.counter}}')" style="color: #555a62;"></i>
+                                    
+                                    <a href="{#% url 'delete-item' menu_item.id %#}">
+                                        <i class="fa-solid fa-trash-can float-end p-1" style="color: #a46269;"></i>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                
+                    
                     
                         {% endfor %}
                     </div>

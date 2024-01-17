@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import uuid
 
 
+
 class Feedback(models.Model):
 
     name = models.CharField(max_length=100)
@@ -23,6 +24,7 @@ class Restaurant(models.Model):
     image = models.ImageField(upload_to='restaurant_images/')
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     status = models.BooleanField(default = True)
+    menu_item=models.ManyToManyField('restaurants.Food',through='restaurants.Restaurant_Food_bridge')
 
     def __str__(self):
         return self.name   

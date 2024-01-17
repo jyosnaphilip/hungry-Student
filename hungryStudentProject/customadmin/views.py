@@ -54,7 +54,9 @@ def admin_login(request):
                 
             if user.is_staff == True:
                 login(request , user)
-                return redirect('rest_dashboard')
+                restaurant= Restaurant.objects.get(user_id=user)
+                rest_id=restaurant.rest_id           
+                return redirect('RestDashboard',rest_id)
         else:
             msg = "Wrong credentials"
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
