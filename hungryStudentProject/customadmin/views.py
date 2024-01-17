@@ -327,6 +327,23 @@ def edit_rest_profile(request , user_id):
         return redirect('rest_profile' , user_id = user_id)
     return render(request , 'adminTemp/restaurant/rest_edit_profile.html' , {'rest':rest})
 
+def fpassword(request , user_id):
+    user = User.objects.get(id=user_id)
+    if request.method == "POST":
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        if password == cpassword:
+            user.set_password('password')
+            user.save()
+            return redirect('rest')
+        else:
+            msg = "Password didn't match!"
+            return render(request , 'adminTemp/admin/forgot-password.html' , {'msg':msg})
+    return render(request , 'adminTemp/admin/forgot-password.html')
+    
+
+
+
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

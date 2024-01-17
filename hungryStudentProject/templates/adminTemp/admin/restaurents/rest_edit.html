@@ -60,7 +60,7 @@
                             <hr>
                             <!-- LATER TO FIX THE FORGOT PASSWORD -->
                             <div class="text-center">
-                                <a class="small" href="{% url 'forgotpassword' %}">Forgot Password?</a>
+                                <a class="small" href="{% url 'fpassword' user_id=user.id %}">Forgot Password?</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="{% url 'login' %}">Already have an account? Login!</a>
