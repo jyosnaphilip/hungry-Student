@@ -22,7 +22,7 @@ class Food(models.Model):
         ordering=['Food_Name']
     def __str__(self):
          #String for representing the Model object.
-        return f'({self.Food_Name})'
+        return f'{self.Food_Name}'
     
     
 
@@ -35,5 +35,5 @@ class Restaurant_Food_bridge(models.Model):
     Price=models.DecimalField(max_digits=5,decimal_places=2,blank=False)
 
     def __str__(self):
-        return f'{self.rest_id.__str__(), self.Food_ID.__str__()}'
+        return str(self.rest_id.__str__()) +" - "+str(self.Food_ID.__str__())
     
