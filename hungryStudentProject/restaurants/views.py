@@ -15,14 +15,15 @@ def restDash(request,rest_id):
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
 
-def menu_pg(request,rest_id):
+def menu_pg(request,rest_id): #function that renders menu _items pg
     menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
     bridge_items=Restaurant_Food_bridge.objects.all()
     return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items})
 
-def addMenu(request, rest_id):
+def addMenu(request, rest_id):     #function to save items, runs when new menu item added
     if request.user.is_authenticated:
         print("Here....")
+        
         if request.POST:
             print("Here....")
             rest_id=request.POST.get('rest_id')
@@ -52,3 +53,24 @@ def viewFeedback(request):
 
 def viewOrders(request):
     return render(request,'RestaurantTemp/today_orders.html')
+
+def editMenu(request,Food_ID):
+    item = Food.objects.get(Food_ID=Food_ID)
+    item_bridge=Restaurant_Food_bridge.objects.get(Food_ID=Food_ID)
+    rest_id=item_bridge.rest_id.rest_id
+    if request.method =="POST":
+        item.Food_Name = request.POST['edit-'+Food_ID].strip()
+        item_bridge.Price = request.POST['editPrice-'+Food_ID]
+        item.Description=request.POST['editdesc-'+Food_ID]
+        item.save()
+        item_bridge.save()
+        return redirect('menu_pg',rest_id)
+    return redirect('menu_pg',rest_id)
+
+def delMenuItem(request, Food_ID,rest_id):
+    item=Food.objects.get(Food_ID=Food_ID)
+    item_bridge=Restaurant_Food_bridge.objects.get(Food_ID=Food_ID)
+    rest_id=rest_id
+    item.delete()
+    item_bridge.delete()
+    return redirect('menu_pg',rest_id)
