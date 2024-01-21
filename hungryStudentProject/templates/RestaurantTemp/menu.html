@@ -19,6 +19,7 @@
                             <label for="Food_Name" class="form-label m-1">Item Name*</label>
                             <input type="text" id="Food_Name" name="food_name" class="form-control m-1" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="Category" class="form-label m-1 ">Category</label>
                             <select name="food_category" class="form-control m-1" id="Category">
@@ -48,6 +49,13 @@
                             <button class="input-group-text" style="color:white;background-color:#6E040F" type="submit">
                                 Save
                             </button>
+                            {% if messages %}
+                                <ul class="messages">
+                                {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
 
                     </form>

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,viewOrders,menu_pg,editMenu,delMenuItem,toggle_status
+from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,viewOrders,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile
 from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
 from django.conf.urls.static import static
 from django.conf import settings
@@ -33,10 +33,11 @@ urlpatterns = [
     path('Restaurants/addmenu/<str:rest_id>',addMenu, name ='addMenu'),  #function to save items, runs when new menu item added
     path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'),
     path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'),
-    path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'), 
     path('Restaurants/edit-menu/<str:Food_ID>',editMenu,name='editMenu'),
     path('restaurant/del-Menu-Item/<str:Food_ID>/<str:rest_id>',delMenuItem,name='delete-item'),
     path('restaurants/toggle-status/<str:Food_ID>/<str:rest_id>',toggle_status,name='toggle_status'),
+    path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'),
+    path('Restaurants/ViewProfile/<str:rest_id>',viewRestProfile, name='viewProfile'),
     
    
     

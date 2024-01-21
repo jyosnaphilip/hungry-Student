@@ -48,11 +48,11 @@ def addMenu(request, rest_id):     #function to save items, runs when new menu i
 
 
 
-def viewFeedback(request):
-    return render(request,'RestaurantTemp/rest_feedback.html')
+def viewFeedback(request,rest_id):
+    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id})
 
-def viewOrders(request):
-    return render(request,'RestaurantTemp/today_orders.html')
+def viewOrders(request,rest_id):
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id})
 
 def editMenu(request,Food_ID):
     item = Food.objects.get(Food_ID=Food_ID)
@@ -83,3 +83,6 @@ def toggle_status(request,Food_ID,rest_id):
         bridge_item.Status=True
     bridge_item.save()
     return redirect('menu_pg',rest_id) 
+
+def viewRestProfile(request,rest_id):
+    return render(request,'RestaurantTemp\create_rest_profile.html',{'rest_id':rest_id})
