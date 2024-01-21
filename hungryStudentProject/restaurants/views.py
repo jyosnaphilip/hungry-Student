@@ -74,3 +74,12 @@ def delMenuItem(request, Food_ID,rest_id):
     item.delete()
     item_bridge.delete()
     return redirect('menu_pg',rest_id)
+
+def toggle_status(request,Food_ID,rest_id):
+    bridge_item=Restaurant_Food_bridge.objects.get(Food_ID_id=Food_ID,rest_id_id=rest_id)
+    if bridge_item.Status == True:
+        bridge_item.Status=False
+    else:
+        bridge_item.Status=True
+    bridge_item.save()
+    return redirect('menu_pg',rest_id) 
