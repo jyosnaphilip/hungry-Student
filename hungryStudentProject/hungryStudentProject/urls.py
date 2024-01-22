@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+<<<<<<< Updated upstream
 from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,viewOrders,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile
+=======
+from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,viewOrders,menu_pg
+>>>>>>> Stashed changes
 from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
+from users.views import users_index,users_dash,user_details,user_login
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -29,6 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home',homepage,name='home'),
     path('Restaurants/<str:rest_id>',restDash,name='RestDashboard'),
+<<<<<<< Updated upstream
     path('Restaurants/menu/<str:rest_id>',menu_pg, name ='menu_pg'), #function that renders menu _items pg
     path('Restaurants/addmenu/<str:rest_id>',addMenu, name ='addMenu'),  #function to save items, runs when new menu item added
     path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'),
@@ -38,6 +44,14 @@ urlpatterns = [
     path('restaurants/toggle-status/<str:Food_ID>/<str:rest_id>',toggle_status,name='toggle_status'),
     path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'),
     path('Restaurants/ViewProfile/<str:rest_id>',viewRestProfile, name='viewProfile'),
+=======
+    path('Restaurants/menu/<str:rest_id>',menu_pg, name ='menu_pg'),
+    path('Restaurants/addmenu/<str:rest_id>',addMenu, name ='addMenu'),
+    path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'),
+    path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'), #put userid
+    path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'), #put userid
+
+>>>>>>> Stashed changes
     
    
     
@@ -90,6 +104,13 @@ urlpatterns = [
     path('create_rest_profile/<int:user_id>' , create_rest_profile , name='create_rest_profile'),
     path('edit_rest_profile/<int:user_id>' , edit_rest_profile , name="edit_rest_profile"),
 
+    #Users-Ujain's Part(Fathima)
+    path('users_index',users_index,name='users_index'),
+    path('user_details',user_details,name='user_details'),
+    path('user_login',user_login,name='user_login')
+    # path('users_dash/<str:rest_id>',users_dash,name='users_dash'),
+    # path('')
+    
 
 
 ]
