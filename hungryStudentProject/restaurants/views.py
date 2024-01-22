@@ -1,11 +1,8 @@
-<<<<<<< Updated upstream
 from django.shortcuts import render,redirect,get_object_or_404
 
 from restaurants.models import Food,Restaurant_Food_bridge
-=======
 from django.shortcuts import render,redirect
 from . models import Food,Restaurant_Food_bridge
->>>>>>> Stashed changes
 from customadmin.models import Restaurant
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -20,7 +17,6 @@ def restDash(request,rest_id):
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
 
-<<<<<<< Updated upstream
 def menu_pg(request,rest_id): #function that renders menu _items pg
     menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
     bridge_items=Restaurant_Food_bridge.objects.all()
@@ -30,7 +26,6 @@ def addMenu(request, rest_id):     #function to save items, runs when new menu i
     if request.user.is_authenticated:
         print("Here....")
         
-=======
 def menu_pg(request,rest_id):
     menu_items=Food.objects.all()
     bridge_items=Restaurant_Food_bridge.objects.all()
@@ -40,7 +35,6 @@ def menu_pg(request,rest_id):
 def addMenu(request, rest_id):
     if request.user.is_authenticated:
         print("Here....")
->>>>>>> Stashed changes
         if request.POST:
             print("Here....")
             rest_id=request.POST.get('rest_id')
@@ -51,13 +45,10 @@ def addMenu(request, rest_id):
             food_img=request.POST.get('image')
             menu_item=Food(Food_Name=food_item,Category=food_category,Description=food_description,Image=food_img)
             menu_item.save()
-<<<<<<< Updated upstream
             bridgeItem=Restaurant_Food_bridge(rest_id=Restaurant.objects.get(rest_id=rest_id),Food_ID=menu_item,Price=food_price)### is this the error, try removing get
-=======
             food=Food.objects.last()
             foodId=food.Food_ID
             bridgeItem=Restaurant_Food_bridge(rest_id=Restaurant.objects.get(rest_id=rest_id),Food_ID=Food.objects.get(Food_ID=foodId),Price=food_price)
->>>>>>> Stashed changes
             bridgeItem.save()
             print("Here....")
             return redirect('menu_pg',rest_id)
@@ -71,7 +62,6 @@ def addMenu(request, rest_id):
 
 
 
-<<<<<<< Updated upstream
 def viewFeedback(request,rest_id):
     return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id})
 
@@ -110,10 +100,8 @@ def toggle_status(request,Food_ID,rest_id):
 
 def viewRestProfile(request,rest_id):
     return render(request,'RestaurantTemp\create_rest_profile.html',{'rest_id':rest_id})
-=======
 def viewFeedback(request):
     return render(request,'RestaurantTemp/rest_feedback.html')
 
 def viewOrders(request):
     return render(request,'RestaurantTemp/today_orders.html')
->>>>>>> Stashed changes

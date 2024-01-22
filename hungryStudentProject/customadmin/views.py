@@ -57,15 +57,12 @@ def admin_login(request):
                 restaurant= Restaurant.objects.get(user_id=user)
                 rest_id=restaurant.rest_id           
                 return redirect('RestDashboard',rest_id)
-<<<<<<< Updated upstream
-=======
             
             if user.is_active == True:
                 login(request, user)
                 users= User.objects.get(user_id=user)
                 return redirect('UsersDash') 
                 
->>>>>>> Stashed changes
         else:
             msg = "Wrong credentials"
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
