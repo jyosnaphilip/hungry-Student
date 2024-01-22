@@ -2,12 +2,12 @@
 {% load static %}
 {% block content %}
 <div class="d-flex justify-content-end m-5">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-primary btn-toggle active">
-          <input type="radio" name="options" id="today_order" autocomplete="off" checked>Today's Orders
+    <div class="btn-group btn-group-toggle " data-toggle="buttons">
+        <label class="btn btn-outline btn-toggle active text-light base-bg" style="border-radius:5%;">
+          <input type="radio" name="options" id="today_order" style="border-radius:5%;" autocomplete="off" checked>Today's Orders
         </label>
-        <label class="btn btn-outline-primary btn-toggle active">
-          <input type="radio" name="options" id="all_order" autocomplete="off"> All orders
+        <label class="btn btn-outline btn-toggle text-light" >
+          <input type="radio" name="options" id="all_order" style="border-color: #201607; border-radius: 5%;" autocomplete="off"> All orders
         </label>
     </div>
 </div>
@@ -15,7 +15,7 @@
 <div class="container-fluid m-3 rounded-3 p-0" style="background-color: white;">
     <table class="table table-striped rounded-3">
         <thead class="rounded-3">
-        <tr class="rounded-3">
+        <tr class="rounded-3 bg-color text-light">
             <th scope="col-sm-1 p-5">#</th>
             <th scope="col-sm-1">Order No</th>
             <th scope="col-sm-2">Customer Name</th>
@@ -29,7 +29,7 @@
             
         </tr>
         </thead>
-        <tbody class="rounded-3">
+        <tbody class="rounded-3 text-color">
         <tr>
             <th scope="row">1</th>
             <td>Mark</td>
