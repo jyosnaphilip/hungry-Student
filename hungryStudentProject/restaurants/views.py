@@ -4,6 +4,7 @@ from restaurants.models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.conf import settings
 
 def homepage(request):
     return render(request,'homepage.html')
@@ -84,5 +85,17 @@ def toggle_status(request,Food_ID,rest_id):
     bridge_item.save()
     return redirect('menu_pg',rest_id) 
 
-def viewRestProfile(request,rest_id):
-    return render(request,'RestaurantTemp\create_rest_profile.html',{'rest_id':rest_id})
+def viewRestProfile(request,rest_id):    
+    rest_details=Restaurant.objects.get(rest_id=rest_id)
+    return render(request,'RestaurantTemp\create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details,'media_url':settings.MEDIA_URL})
+
+def editRestProfile(request,rest_id):
+    rest_details=Restaurant.objects.get(rest_id=rest_id)
+    if request.method == "POST":
+            print('here')
+            rest_details.phone_number=request.POST.get('rest_phone')
+            rest_details.location=request.POST.get('rest_location')
+            rest_details.image=request.POST.get('idImage1')
+            rest_details.save()
+            return redirect('viewProfile',rest_id)
+    return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
