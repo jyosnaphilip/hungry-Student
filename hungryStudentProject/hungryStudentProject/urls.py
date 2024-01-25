@@ -30,16 +30,20 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home',homepage,name='home'),
     path('Restaurants/<str:rest_id>',restDash,name='RestDashboard'),
+    # related to menu
     path('Restaurants/menu/<str:rest_id>',menu_pg, name ='menu_pg'), #function that renders menu _items pg
     path('Restaurants/addmenu/<str:rest_id>',addMenu, name ='addMenu'),  #function to save items, runs when new menu item added
-    path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'),
-    path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'),
     path('Restaurants/edit-menu/<str:Food_ID>',editMenu,name='editMenu'),
     path('restaurant/del-Menu-Item/<str:Food_ID>/<str:rest_id>',delMenuItem,name='delete-item'),
     path('restaurants/toggle-status/<str:Food_ID>/<str:rest_id>',toggle_status,name='toggle_status'),
+    
+    path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'),
+    path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'),
+    # related to view orders
     path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'),
     path('restaurants/accept-order/<str:Order_Id>',acceptOrder,name='accept'),
     path('restaurants/decline-order/<str:Order_Id>',declineOrder,name='decline'),
+    #related to rest profile
     path('Restaurants/ViewProfile/<str:rest_id>',viewRestProfile, name='viewProfile'),
     path('Restaurants/edit_profile/<str:rest_id>',editRestProfile,name="edit_profile"),
     

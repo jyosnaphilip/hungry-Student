@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+
 from customadmin.models import Restaurant
 from restaurants.models import Food
+
 
 
 class Customer_Profile(models.Model):
@@ -37,7 +39,7 @@ class Orders(models.Model):
     
 
 class Order_Items(models.Model):
-    Order_ID=models.ForeignKey('Orders',on_delete=models.CASCADE)
+    Order_ID=models.ForeignKey(Orders,on_delete=models.CASCADE)
     Restaurant_ID=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
     Food_ID=models.ForeignKey(Food,on_delete=models.CASCADE)
     Quantity=models.IntegerField(default=1)
@@ -50,7 +52,7 @@ class Order_Items(models.Model):
     
 class Payment(models.Model):
     Transaction_ID=models.UUIDField(auto_created=True,primary_key=True,default=uuid.uuid4)
-    Order_ID=models.ForeignKey('Orders',on_delete=models.CASCADE)
+    Order_ID=models.ForeignKey(Orders,on_delete=models.CASCADE)
     mode=models.CharField(max_length=10,blank=False,default='upi')
     def __str__(self):
          #String for representing the Model object.
