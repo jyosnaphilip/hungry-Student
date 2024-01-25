@@ -41,7 +41,7 @@
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
             aria-expanded="false">Click Here</button>
           <div class="dropdown-menu">
-            {% for item in order.order_items_set.all %}
+            
             <table class="table rounded-3">
               <thead class="rounded-3">
                 <tr class="rounded-3  text-color">
@@ -50,6 +50,7 @@
                 </tr>
               </thead>
               <tbody class="rounded-3 text-color">
+                {% for item in order.order_items_set.all %}
                 <tr>
                   <td>{{item.Food_ID.Food_Name}}
                     
@@ -57,9 +58,10 @@
                   <td>{{item.Quantity}}</td>
                   <!-- create a dropdown here so that when clicked, you can see item details and quantities -->
                 </tr>
+                {% endfor %}
               </tbody>
             </table>
-            {% endfor %}
+            
           </div>
         </td>
         <td>{{order.Total_Price}}</td>

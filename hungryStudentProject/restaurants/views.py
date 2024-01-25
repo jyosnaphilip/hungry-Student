@@ -17,7 +17,8 @@ def restDash(request,rest_id):
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
 
-def menu_pg(request,rest_id): #function that renders menu _items pg
+def menu_pg(request,rest_id):
+     #function that renders menu _items pg
     menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
     bridge_items=Restaurant_Food_bridge.objects.all()
     return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items})
