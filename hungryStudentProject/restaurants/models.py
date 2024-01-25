@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from customadmin.models import Restaurant
-from users.models import Customer_Profile,Orders
+
 
 # Create your models here.
 
@@ -38,13 +38,6 @@ class Restaurant_Food_bridge(models.Model):
     def __str__(self):
         return str(self.rest_id.__str__()) +" - "+str(self.Food_ID.__str__())
     
-class Rest_Feedback(models.Model):
-    customer_ID=models.ForeignKey(Customer_Profile,on_delete=models.CASCADE)
-    rest_id=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
-    Order_Id=models.ForeignKey(Orders,on_delete=models.CASCADE)
-    Description=models.CharField(blank=True,null=True,max_length=100)
-    Rating=models.PositiveIntegerField(default=3,blank=False)
-    
-    def __str__(self):
-        return str(self.rest_id.__str__()) +" - "+str(self.customer_ID.__str__())
+    class Meta:
+        ordering=['-Status']
     

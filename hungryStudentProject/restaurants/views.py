@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 
 from restaurants.models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
-from users.models import Customer_Profile,Order_Items,Orders
+from users.models import Customer_Profile,Order_Items,Orders,Rest_Feedback
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.conf import settings
@@ -10,6 +10,8 @@ from django.conf import settings
 def homepage(request):
     return render(request,'homepage.html')
 
+#------------------------------------------------------------------------------------------
+#restaurant_dashboard.html
 def restDash(request,rest_id):
     context={'rest_id':rest_id}
     return render(request,'RestaurantTemp/restaurant_dashboard.html',context)
@@ -17,10 +19,12 @@ def restDash(request,rest_id):
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
 
+#----------------------------------------------------------------------------------------
+#menu.html
 def menu_pg(request,rest_id):
      #function that renders menu _items pg
     menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
-    bridge_items=Restaurant_Food_bridge.objects.all()
+    bridge_items=Restaurant_Food_bridge.objects.all().order_by('Status')
     return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items})
 
 def addMenu(request, rest_id):     #function to save items, runs when new menu item added
@@ -47,14 +51,6 @@ def addMenu(request, rest_id):     #function to save items, runs when new menu i
     menu_items=Food.objects.all()
     bridge_items=Restaurant_Food_bridge.objects.all()
     return render(request,'RestaurantTemp\menu.html',context={'menu_items':menu_items,'bridge_items':bridge_items})
-
-
-
-
-def viewFeedback(request,rest_id):
-    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id})
-
-
 
 def editMenu(request,Food_ID):
     item = Food.objects.get(Food_ID=Food_ID)
@@ -86,6 +82,9 @@ def toggle_status(request,Food_ID,rest_id):
     bridge_item.save()
     return redirect('menu_pg',rest_id) 
 
+#---------------------------------------------------------------------------------------------------------
+
+#create_rest_profile.html
 def viewRestProfile(request,rest_id):    
     rest_details=Restaurant.objects.get(rest_id=rest_id)
     return render(request,'RestaurantTemp\create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details,'media_url':settings.MEDIA_URL})
@@ -101,7 +100,8 @@ def editRestProfile(request,rest_id):
             return redirect('viewProfile',rest_id)
     return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
 
-
+#-----------------------------------#-------------------------------------------------------#
+#today_orders.html
 def viewOrders(request,rest_id):
     rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
     customers=Customer_Profile.objects.all()
@@ -125,5 +125,22 @@ def declineOrder(request,Order_Id):
     customers=Customer_Profile.objects.all()             #get the name of customers as well,and send everything to temp
     return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
 
+#====================================================#==============================================#
+#rest_feedback.html
+def viewFeedback(request,rest_id):
+    feedbacks=Rest_Feedback.objects.filter(rest_id=rest_id)
+    order_items=Order_Items.objects.all()
+    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id,'feedbacks':feedbacks,'order_items':order_items})
 
+
+#=======================================================#==========================================#
+
+#search in menu
+def searchMenu(request):
+    if request.method == 'POST':
+        query=request.POST['search_query']
+        output=Food.objects.filter(Food_Name__contains=query)
+        return render(request, 'RestaurantTemp/menu.html', {'query':query, 'output':output})
+    else:
+        return render(request, 'RestaurantTemp/menu.html',{})
 

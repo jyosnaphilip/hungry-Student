@@ -75,11 +75,6 @@
                     <span >Today's Orders</span></a>
             </li>
 
-            <li class="nav-item base-bg" >
-                <a class="nav-link base-bg" href="{#% url 'rest_users' %#}">
-                    <i class="fas fa-fw fa-chart-area base-bg"></i>
-                    <span >Users</span></a>
-            </li>
 
             <!-- <li class="nav-item"  style="background-color: #7b3f00;">
                 <a class="nav-link" href="{# url 'create_profile' user_id=request.user.id #}">
@@ -93,7 +88,7 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item bg-color" >
+            <!-- <li class="nav-item bg-color" >
                 <a class="nav-link collapsed base-bg" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
@@ -106,10 +101,10 @@
                         <a class="collapse-item bg-color" style="color:white;" href="cards.html">Cards</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item base-bg" >
+            <!-- <li class="nav-item base-bg" >
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -125,7 +120,7 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="base-bg" >
@@ -195,21 +190,22 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-color">
                         <i class="fa fa-bars "></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search  bg-color">
-                        <div class="input-group" >
-                            <input type="text" class="form-control  border-0 small"  placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append rounded" >
-                                <button class="btn  bg-color"  type="button"  style="border-radius: 15%;" >
-                                    <i class="fas fa-search fa-sm  " style="color: white;" ></i>
-                                </button>
-                            </div>
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search  bg-color" method="POST" role="search" action="{% url 'searchMenu %'}">
+                        {% csrf_token %}
+                    <div class="input-group" >
+                        <input type="search" class="form-control  border-0 small"  placeholder="Search for a menu item"
+                            aria-label="Search" aria-describedby="basic-addon2" name="search_query" required>
+                        <div class="input-group-append rounded" >
+                            <button class="btn  bg-color"  type="button"  style="border-radius: 15%;" >
+                                <i class="fas fa-search fa-sm  " style="color: white;" ></i>
+                            </button>
                         </div>
+                    </div>
                     </form>
+                    
 
+                
+                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto base-bg">
 
@@ -357,31 +353,31 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
+                        <li class="nav-item dropdown no-arrow ">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{request.user.first_name}} {{request.user.last_name}}</span>
+                                <span  class="mr-2 d-none d-lg-inline head-color small">{{request.user.first_name}} {{request.user.last_name}}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{% static 'cadmin/img/undraw_profile.svg' %}">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-color"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="{% url 'viewProfile' rest_id %}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 " ></i>
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 " ></i>
                                     Settings
                                 </a>
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 " ></i>
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'login' %}" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <a class="dropdown-item" href="{% url 'login' %}" data-toggle="modal" data-target="#logoutModal" >
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 " ></i>
                                     Logout
                                 </a>
                             </div>

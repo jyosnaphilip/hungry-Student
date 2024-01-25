@@ -37,7 +37,9 @@ class Orders(models.Model):
          #String for representing the Model object.
         return f'{self.Order_Id}'
     
-
+    class Meta:
+        ordering=['-Timestamp']
+        
 class Order_Items(models.Model):
     Order_ID=models.ForeignKey(Orders,on_delete=models.CASCADE)
     Restaurant_ID=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
@@ -59,3 +61,12 @@ class Payment(models.Model):
         return str(self.Transaction_ID.__str__()) +" - "+str(self.Order_ID.__str__())
 
 
+class Rest_Feedback(models.Model):
+    customer_ID=models.ForeignKey(Customer_Profile,on_delete=models.CASCADE)
+    rest_id=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
+    Order_Id=models.ForeignKey('Orders',on_delete=models.CASCADE)
+    Description=models.CharField(blank=True,null=True,max_length=100)
+    Rating=models.PositiveIntegerField(default=3,blank=False)
+    
+    def __str__(self):
+        return str(self.rest_id.__str__()) +" - "+str(self.customer_ID.__str__())

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="d-flex justify-content-end m-5">
   <div class="btn-group btn-group-toggle " data-toggle="buttons">
-    <label class="btn btn-outline btn-toggle active text-light base-bg" style="border-radius:5%;">
+    <label class="btn btn-outline btn-toggle active text-light base-bg" style="border-radius:10%;">
       <input type="radio" name="options" id="today_order" style="border-radius:5%;" autocomplete="off" checked>Today's
       Orders
     </label>
@@ -14,9 +14,9 @@
   </div>
 </div>
 
-<div class="container-fluid m-3 rounded-3 p-0" style="background-color: white;">
-  <table class="table table-striped rounded-3">
-    <thead class="rounded-3">
+<div class="container-fluid w-75 rounded-5 p-0" style="background-color: white;">
+  <table class="table table-striped rounded-5" >
+    <thead class="rounded" >
       <tr class="rounded-3 bg-color text-light">
         <th scope="col-sm-1 p-5">#</th>
         <th scope="col-sm-2">Customer Name</th>
@@ -30,7 +30,7 @@
 
     {% for order in orders %}
 
-    <tbody class="rounded-3 text-color">
+    <tbody class="rounded-3 text-color" >
       <tr>
         <th scope="row">{{forloop.counter}}</th>
         <td>{{order.Customer_ID.User_ID.first_name}} {{order.Customer_ID.User_ID.last_name}}
@@ -56,7 +56,7 @@
                     
                   </td>
                   <td>{{item.Quantity}}</td>
-                  <!-- create a dropdown here so that when clicked, you can see item details and quantities -->
+                    
                 </tr>
                 {% endfor %}
               </tbody>

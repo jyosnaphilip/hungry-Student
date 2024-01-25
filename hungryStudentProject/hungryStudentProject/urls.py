@@ -37,8 +37,8 @@ urlpatterns = [
     path('restaurant/del-Menu-Item/<str:Food_ID>/<str:rest_id>',delMenuItem,name='delete-item'),
     path('restaurants/toggle-status/<str:Food_ID>/<str:rest_id>',toggle_status,name='toggle_status'),
     
-    path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'),
-    path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'),
+    path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'), #for analytics-not done yet
+    path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'), #feedback
     # related to view orders
     path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'),
     path('restaurants/accept-order/<str:Order_Id>',acceptOrder,name='accept'),
