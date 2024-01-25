@@ -22,12 +22,12 @@ class Orders(models.Model):
     Restaurant_ID=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
     Customer_ID=models.ForeignKey('Customer_Profile',on_delete=models.CASCADE)
     CATEGORIES=(
-        ('Processing','1'),
-        ('Accepted','2'),
-        ('Declined','3'),
-        ('Cancelled','4'),
-        ('Refunded','5'),
-        ('Complete','6')
+        ('Processing','Processing'),
+        ('Accepted','Accepted'),
+        ('Declined','Declined'),
+        ('Cancelled','Cancelled'),
+        ('Refunded','Refunded'),
+        ('Complete','Complete')
     )
     Order_Status=models.CharField(max_length=20,choices=CATEGORIES,blank=False,default='Processing')
     Total_Price=models.DecimalField(max_digits=5,decimal_places=2,blank=False)

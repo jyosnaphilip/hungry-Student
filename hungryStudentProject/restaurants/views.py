@@ -53,10 +53,7 @@ def addMenu(request, rest_id):     #function to save items, runs when new menu i
 def viewFeedback(request,rest_id):
     return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id})
 
-def viewOrders(request,rest_id):
-    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
-    customers=Customer_Profile.objects.all()
-    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
 
 def editMenu(request,Food_ID):
     item = Food.objects.get(Food_ID=Food_ID)
@@ -103,7 +100,29 @@ def editRestProfile(request,rest_id):
             return redirect('viewProfile',rest_id)
     return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
 
-def editOrderStatus(request,Order_ID):
-    order=Orders.objects.get(Order_ID=Order_ID)
-    order.Order_Status
+
+def viewOrders(request,rest_id):
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
+    customers=Customer_Profile.objects.all()
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
+def acceptOrder(request,Order_Id):
+    order=Orders.objects.get(Order_Id=Order_Id)
+    order.Order_Status='Accepted'
+    order.save()
+    rest_id=order.Restaurant_ID
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
+    customers=Customer_Profile.objects.all()
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
+def declineOrder(request,Order_Id):
+    order=Orders.objects.get(Order_Id=Order_Id)  #getting that particular order
+    order.Order_Status='Declined'                #changing order status
+    order.save()                                 #saving it to db
+    rest_id=order.Restaurant_ID                  #getting rest id to pass as its a necc paraMETER for the redirected page
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)    #get all orders of restaurant
+    customers=Customer_Profile.objects.all()             #get the name of customers as well,and send everything to temp
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
+
 
