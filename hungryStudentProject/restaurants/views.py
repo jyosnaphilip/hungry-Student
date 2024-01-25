@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 
 from restaurants.models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
+from users.models import Customer_Profile,Order_Items,Orders
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.conf import settings
@@ -53,7 +54,9 @@ def viewFeedback(request,rest_id):
     return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id})
 
 def viewOrders(request,rest_id):
-    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id})
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
+    customers=Customer_Profile.objects.all()
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
 
 def editMenu(request,Food_ID):
     item = Food.objects.get(Food_ID=Food_ID)
@@ -99,3 +102,8 @@ def editRestProfile(request,rest_id):
             rest_details.save()
             return redirect('viewProfile',rest_id)
     return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
+
+def editOrderStatus(request,Order_ID):
+    order=Orders.objects.get(Order_ID=Order_ID)
+    order.Order_Status
+
