@@ -95,7 +95,7 @@ def editRestProfile(request,rest_id):
             print('here')
             rest_details.phone_number=request.POST.get('rest_phone')
             rest_details.location=request.POST.get('rest_location')
-            rest_details.image=request.POST.get('idImage1')
+            rest_details.image=request.FILES.get('idImage1')
             rest_details.save()
             return redirect('viewProfile',rest_id)
     return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
@@ -140,7 +140,6 @@ def searchMenu(request,rest_id):
     if request.method == 'POST':
         query=request.POST['search_query']
         outputs=Food.objects.filter(restaurant_food_bridge__rest_id__rest_id=rest_id,Food_Name__icontains=query)
-        bridge=Restaurant_Food_bridge.objects.select_related().all()
         return render(request, 'RestaurantTemp/searchResults.html',{'query':query, 'outputs':outputs,'rest_id':rest_id})
     else:
         return render(request, 'RestaurantTemp/searchResults.html',{rest_id:rest_id})

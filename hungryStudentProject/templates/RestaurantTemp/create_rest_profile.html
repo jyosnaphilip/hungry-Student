@@ -8,7 +8,7 @@
             {% csrf_token %}
             {% if rest_id.image %}
             <img class="card-img-top" src="{{ rest_id.image.url }}" alt="">
-            {% else %}
+            {% endif %}
             <div class="card bg-color text-white">
                 <input name="image-1" id="idImage1" type="file">
                 <img class="card-img" src="{% static 'static\img\default_rest_profile.jpeg' %}" alt="No image added">
@@ -18,7 +18,7 @@
                     <p class="card-text">Click here to add image</p>
                 </div>
             </div>
-            {% endif %}
+            
             <div class="card-body">
                 <h5 class="card-title">{{rest_details.name}}</h5>
                 
