@@ -136,11 +136,13 @@ def viewFeedback(request,rest_id):
 #=======================================================#==========================================#
 
 #search in menu
-def searchMenu(request):
+def searchMenu(request,rest_id):
     if request.method == 'POST':
         query=request.POST['search_query']
-        output=Food.objects.filter(Food_Name__contains=query)
-        return render(request, 'RestaurantTemp/menu.html', {'query':query, 'output':output})
+        outputs=Food.objects.filter(restaurant_food_bridge__rest_id__rest_id=rest_id,Food_Name__icontains=query)
+        bridge=Restaurant_Food_bridge.objects.select_related().all()
+        return render(request, 'RestaurantTemp/searchResults.html',{'query':query, 'outputs':outputs,'rest_id':rest_id})
     else:
-        return render(request, 'RestaurantTemp/menu.html',{})
+        return render(request, 'RestaurantTemp/searchResults.html',{rest_id:rest_id})
 
+    

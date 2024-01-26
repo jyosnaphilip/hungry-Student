@@ -190,20 +190,20 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3 bg-color">
                         <i class="fa fa-bars "></i>
                     </button>
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search  bg-color" method="POST" role="search" action="{% url 'searchMenu %'}">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search  bg-color" method="POST" role="search" action="{% url 'searchMenu'  rest_id %}">
                         {% csrf_token %}
                     <div class="input-group" >
                         <input type="search" class="form-control  border-0 small"  placeholder="Search for a menu item"
                             aria-label="Search" aria-describedby="basic-addon2" name="search_query" required>
                         <div class="input-group-append rounded" >
-                            <button class="btn  bg-color"  type="button"  style="border-radius: 15%;" >
+                            <button class="btn  bg-color"  type="submit"  style="border-radius: 15%;" >
                                 <i class="fas fa-search fa-sm  " style="color: white;" ></i>
                             </button>
                         </div>
                     </div>
                     </form>
+                    <!-- search result -->
                     
-
                 
                     
                     <!-- Topbar Navbar -->

@@ -24,9 +24,6 @@ class Food(models.Model):
     def __str__(self):
          #String for representing the Model object.
         return f'{self.Food_Name}'
-    
-    
-
 
 
 class Restaurant_Food_bridge(models.Model):
