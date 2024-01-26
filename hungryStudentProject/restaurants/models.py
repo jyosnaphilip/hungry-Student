@@ -28,8 +28,6 @@ class Food(models.Model):
         return f'{self.Food_Name}'
         return f'({self.Food_Name})'
     
-    
-
 
 
 class Restaurant_Food_bridge(models.Model):

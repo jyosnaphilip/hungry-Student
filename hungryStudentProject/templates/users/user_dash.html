@@ -1,0 +1,467 @@
+{% extends 'user_base2.html' %}
+{% load static %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <!-- Slide 1 below the main image is not getting displayed in this part-->
+          <div class="carousel-item active" style="background-image: url(users/img/slide/slide-1.jpg);">  
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown"><span>Hungry Student</h2>
+                <p class="animate__animated animate__fadeInUp">Revolutionize student dining! Our hungry student webapp offers seamless online booking for delicious meals, eliminating hunger stress. Savor convenience with every click—because no student should compromise taste for a busy schedule. Book now, feast soon</p>
+                
+              </div>
+            </div>
+          </div>
+
+         
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <section id="about" class="about">
+      <div class="container-fluid">
+
+        <div class="row">
+
+          
+
+          <div class="col-lg-12 d-flex flex-column justify-content-center align-items-stretch">
+
+            <div class="content">
+              <h3> About Hungry Student</h3>
+              <p>
+                Welcome to Hungry Student, your go-to solution for satisfying your cravings without leaving your study desk! We understand the hunger pangs that accompany late-night study sessions, and that's why we're here to make sure you never go hungry.
+              </p>
+              <h3>Our Mission</h3>
+              <p class="fst-italic">
+                At Hungry Student, our mission is to provide students with quick and delicious meal options, allowing them to focus on their studies without compromising on flavor. We believe that good food is a key ingredient for academic success, and we're here to fuel your late-night study sessions and weekend cravings.
+              </p>
+              <h3>What Sets Us Apart</h3>
+              <ul>
+                <li><i class="bx bx-check-double"></i><strong>Student-Friendly Choices: </strong>  Our platform is curated with student preferences in mind. We offer a range of affordable and tasty options that cater to the student budget.</li>
+                <li><i class="bx bx-check-double"></i> <strong>Late-Night Delivery:</strong>Burning the midnight oil? No worries. Hungry Student offers late-night delivery options to ensure you get the sustenance you need, no matter the hour.</li>
+                <li><i class="bx bx-check-double"></i> <strong>Diverse Cuisines: </strong>From classic comfort foods to international flavors, we partner with local eateries to bring you a diverse selection of cuisines. There's something for every palate.</li>
+
+                <li><i class="bx bx-check-double"></i><strong>Easy Ordering:</strong> Our user-friendly app makes it a breeze to place orders. Simply browse, customize your meal, and relax while we take care of the rest.</li>
+                <li><i class="bx bx-check-double"></i><strong>Study Fuel Rewards:</strong>Loyalty matters! Earn Study Fuel Rewards for every order and enjoy special discounts, freebies, and exclusive deals.</li>
+
+              </ul>
+              <p>
+                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    
+
+    <!-- ======= Whu Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="section-title">
+          <h2><span>Our Restaurant</span>  Varities</h2>
+          <p>Culinary Diversity, One Destination. Explore the richness of flavors, each dish a testament to our commitment to variety and excellence."</p>
+        </div>
+
+
+
+        <div class="row">
+        
+          <!-- <div class="col-lg-4">
+            <div class="box">
+              <span>01</span>
+              <h4>Lorem Ipsum</h4>
+              <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
+            </div>
+          </div> -->
+          {% for i in rest %}
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span></span>
+              <h4>{{i.name}}</h4>
+              <p>{{i.location}}</p>
+              <a href="{% url 'detail_view' rest_id=i.rest_id %}">View Details</a>
+
+            </div>
+          </div>
+          {% endfor %}
+
+          <!-- <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span>03</span>
+              <h4> Ad ad velit qui</h4>
+              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Whu Us Section -->
+
+    
+
+    <!-- ======= Specials Section ======= -->
+    <section id="specials" class="specials">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Check our <span>Specials</span></h2>
+          <p>"Check out our specials – the ultimate brain fuel for hungry students! Because good food isn't just a treat; it's a study session upgrade.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Coconut Infused Prawn Dream</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Tropical Paradise Fruit Bowl Extravaganza</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Mediterranean Spaghetti al Pomodoro</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Fattoush: A Mediterranean Garden on Your Plate</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Acai Bowl: A Blissful Berry Bonanza</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Coconut Infused Prawn Dream</h3>
+                    <p class="fst-italic">Immerse yourself in the exotic flavors of our Coconut Infused Prawn Dream, a dish that epitomizes culinary artistry. </p>
+                    <p>Perfect for a special occasion or a luxurious treat, the Coconut Infused Prawn Dream is more than just a dish—it's an experience, a journey of flavors that promises to leave you enchanted and longing for more.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-1.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-2">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Tropical Paradise Fruit Bowl Extravaganza</h3>
+                    <p class="fst-italic">Dive into the succulent sweetness of ripe mango chunks, the juicy perfection of pineapple slices, and the tropical allure of kiwi wedges. </p>
+                    <p>Served in an artfully crafted bowl, this extravaganza is not just a fruit salad; it's a visual and gastronomic delight. The burst of colors, the medley of textures, and the symphony of flavors make this bowl a perfect choice for those seeking a healthy yet indulgent treat.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-2.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-3">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Mediterranean Spaghetti al Pomodoro</h3>
+                    <p class="fst-italic">This is an experience that transports you to a quaint seaside village, where the air is fragrant with the scent of the sea and fresh herbs.</p>
+                    <p>These tomatoes are gently simmered with a touch of garlic, extra virgin olive oil, and a sprinkle of fresh basil leaves, creating a sauce that sings with the bright, fresh flavors of a Mediterranean summer.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-3.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-4">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Fattoush: A Mediterranean Garden on Your Plate</h3>
+                    <p class="fst-italic">Dive into the fresh and invigorating world of Fattoush, a vibrant salad that captures the essence of Mediterranean cuisine. </p>
+                    <p>The stars of this dish are the juicy tomatoes, crunchy cucumbers, and vibrant bell peppers, each contributing its unique taste and texture. Radishes add a peppery kick, while red onions bring a hint of sweetness and crunch.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-4.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-5">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Acai Bowl: A Blissful Berry Bonanza</h3>
+                    <p class="fst-italic">Embark on a culinary journey with the Acai Bowl, a delightful concoction that is as nutritious as it is delicious.</p>
+                    <p>A drizzle of honey or agave nectar can be added for a touch of natural sweetness, elevating the flavors and binding them harmoniously.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-5.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Specials Section -->
+
+    <!-- ======= Events Section ======= -->
+    <section id="events" class="events">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Organize Your <span>Events</span> Restaurants</h2>
+        </div>
+
+        <div class="events-slider swiper">
+      
+
+            <div class="swiper-slide">
+              <div class="row event-item">
+                <!-- <div class="col-lg-6">
+                  <img src="{% static 'users/img/event-birthday.jpg' %}" class="img-fluid" alt="">
+                </div> -->
+                <div class="col-lg-12 pt-4 pt-lg-0 content">
+                  <h3>Events</h3>
+                  
+                  <p class="fst-italic">
+                    Making every occasion not just special, but unforgettable.
+                  </p>
+                  <ul>
+                    <li><i class="bi bi-check-circle"></i> <strong>Birthday Celebrations:</strong> Restaurants can provide a festive atmosphere for birthday parties. Options range from private dining rooms for intimate gatherings to larger spaces for big groups. Many offer special menus, decorations, and even entertainment to make birthdays memorable.</li>
+                    <li><i class="bi bi-check-circle"></i><strong>Corporate Meetings and Dinners:</strong> Ideal for business luncheons, dinners, or networking events. These settings often require a more formal atmosphere, with facilities for presentations, meetings, and professional service to ensure the event runs smoothly.</li>
+                    <li><i class="bi bi-check-circle"></i><strong> Wedding Receptions:</strong> Restaurants with elegant decor and excellent catering can be perfect for wedding receptions. Some offer custom menu planning, wedding cake services, and decoration options to align with the wedding theme.</li>
+                    <li><i class="bi bi-check-circle"></i><strong>Baby Showers or Bridal Showers:</strong> Restaurants with a cozy and charming atmosphere are great for these intimate gatherings. They can offer special menus, delightful desserts, and even assist in thematic decorations.</li>
+                    <li><i class="bi bi-check-circle"></i><strong>Product Launches or Business Events:</strong> For showcasing new products or hosting business seminars. Restaurants with modern amenities and space for presentations or showcases are ideal.</li>
+                  </ul>
+                  
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Events Section -->
+
+
+   
+
+    <!-- ======= Chefs Section ======= -->
+    <section id="chefs" class="chefs">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>More Information <span>Hungry Student</span></h2>
+          <p>Fuel your mind, feed your future. With every meal, you're one step closer to success.</p>
+        </div>
+
+        <div class="row">
+
+         <p><li>Study Fuel Rewards: Your Loyalty Rewarded
+
+          Our commitment to your success goes hand in hand with our Study Fuel Rewards program. Every order is an opportunity to earn points, unlocking exclusive discounts, freebies, and special deals. Because at Hungry Student, we believe in rewarding your loyalty, bite by delicious bite.
+          </li><br><br>
+          <li>Beyond Borders, Diverse Palates
+          
+            Hungry Student celebrates the diversity of student preferences. Whether you're craving the comfort of home-cooked meals or the adventure of international flavors, our platform connects you with a diverse range of local eateries. We take pride in being the culinary companion for every palate.
+            </li><br><br>
+          <li>Effortless Ordering, Anytime, Anywhere
+          
+            Navigating student life can be hectic, and we get it. That's why we've designed our user-friendly app to make ordering a breeze. Customize your meal, choose your delivery time – it's all about making sure you get what you need, when you need it, with minimal effort.</p>
+  </li>
+        </div>
+
+      </div>
+    </section><!-- End Chefs Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container position-relative">
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Ceo &amp; Founder</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Designer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Store Owner</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Entrepreneur</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2><span>Contact</span> Us</h2>
+          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+        </div>
+      </div>
+
+      <div class="map">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="container mt-5">
+
+        <div class="info-wrap">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 info">
+              <i class="bi bi-geo-alt"></i>
+              <h4>Location:</h4>
+              <p>A108 Adam Street<br>New York, NY 535022</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+              <i class="bi bi-clock"></i>
+              <h4>Open Hours:</h4>
+              <p>Monday-Saturday:<br>11:00 AM - 2300 PM</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+              <i class="bi bi-envelope"></i>
+              <h4>Email:</h4>
+              <p>info@example.com<br>contact@example.com</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+              <i class="bi bi-phone"></i>
+              <h4>Call:</h4>
+              <p>+1 5589 55488 51<br>+1 5589 22475 14</p>
+            </div>
+          </div>
+        </div>
+
+        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+          </div>
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="submit">Send Message</button></div>
+        </form>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+{% endblock content %}
