@@ -19,7 +19,7 @@ from django.urls import path
 
 from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu,plotMostSold
 from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
-from users.views import users_index,users_dash,user_details,user_login
+# from users.views import users_index,users_dash,user_details,detail_view,user_profile,user_profileedit
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -56,7 +56,7 @@ urlpatterns = [
     # Dashboard(Fathima)
     path('Dashboard', admin_index,name = 'admin'),
     path('read_msg/<int:msg_id>' , read_msg , name="read_msg"),
-    path('rest_dashboard', rest_dashboard,name = 'rest_dashboard'),
+    path('rest_dashboard/<str:rest_id', rest_dashboard,name = 'rest_dashboard'),
     
     #Admin Side(Fathima)
 
@@ -102,9 +102,15 @@ urlpatterns = [
     path('edit_rest_profile/<int:user_id>' , edit_rest_profile , name="edit_rest_profile"),
 
     #Users-Ujain's Part(Fathima)
-    path('users_index',users_index,name='users_index'),
-    path('user_details',user_details,name='user_details'),
-    path('user_login',user_login,name='user_login')
+    # path('users_index',users_index,name='users_index'),
+    # path('user_details',user_details,name='user_details'),
+    # path('users_dash',users_dash,name='users_dash'),
+    # path('detail_view/<uuid:rest_id>',detail_view,name='detail_view'),
+    # path('user_profile',user_profile, name='user_profile'),
+    # path('user_profileedit/<int:id>/<int:user_id>',user_profileedit,name='user_profileedit')
+    # path('restaurant/<uuid:rest_id>/foods/', restaurant_foods, name='restaurant_foods'),
+
+
     # path('users_dash/<str:rest_id>',users_dash,name='users_dash'),
     # path('')
     

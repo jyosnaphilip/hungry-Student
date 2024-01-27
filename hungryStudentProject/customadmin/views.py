@@ -52,17 +52,16 @@ def admin_login(request):
                 return redirect(reverse('admin'))
             # return redirect('admin_login')
                 
-            if user.is_staff == True:
+            if user.is_staff == True and user.is_superuser == False:
                 login(request , user)
                 restaurant= Restaurant.objects.get(user_id=user)
                 rest_id=restaurant.rest_id           
                 return redirect('RestDashboard',rest_id)
             
-            if user.is_active == True:
-                login(request, user)
-                users= User.objects.get(user_id=user)
-                return redirect('UsersDash') 
-                
+            if user.is_superuser == False and user.is_staff == False and user.is_active == True:
+                login(request , user)
+                return redirect('users_dash')
+   
         else:
             msg = "Wrong credentials"
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
