@@ -3,3 +3,4 @@ hungryStudentProject/__pycache__/
 restaurants/__pycache__/4
 restaurants/migrations/__pycache__/
 users/__pycache__/
+db.sqlite3
