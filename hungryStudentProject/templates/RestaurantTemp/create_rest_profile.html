@@ -2,13 +2,15 @@
 {% load static %}
 {% block content %}
 <div class=" row justify-content-center">
-    <div class="card w-75  m-2">
+    <div class="card w-50  m-2">
         
         <form method="POST" enctype="multipart/form-data" action="{% url 'edit_profile' rest_id %}">
             {% csrf_token %}
-
-                <img class="card-img-top" src="{{ rest_details.image.url }}" alt="">
             
+                <div class="container-sm justify-content-center border text-center bg-color rounded-5">
+                <img class="card-img-top" src="{{rest_details.image.url}}" alt="profile pic of {{rest_details.name}}" style="width: 250px;height:250px;border-radius: 100%;">
+                <h3 class="card-title">{{rest_details.name}}</h3>
+                </div>
             <!-- <div class="card bg-color text-white">
                 <input name="image-1" id="idImage1" type="file">
                 <img class="card-img" src="{#% static 'static\img\default_rest_profile.jpeg' %#}" alt="No image added">
@@ -20,7 +22,7 @@
             <!-- </div> -->
 
             <div class="card-body">
-                <h5 class="card-title">{{rest_details.name}}</h5>
+                
                 
                     <div class="form-group row">
                         <label for="restID" class="col-sm-2 col-form-label">User ID</label>
