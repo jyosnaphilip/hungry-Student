@@ -81,7 +81,32 @@ nav a {
 }
     /* adding this cos font awesome icon size class 5xl depends on font-size */
     
-.form-control:focus {
+/* .form-control:focus {
     border-color: #7f3b00;
     box-shadow: 0 0 0 0.2rem rgba(123, 63, 0, 1);
-    }
+    } */
+.text-color{
+    color:#201607;
+}
+.bg-color{
+    background-color:#CF9E55 ;
+    color:white;
+}
+.head-color{
+    color:#FFF5E6;
+}
+.form-box{
+    background-color:#FFF5E6;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+
+}
+
+.base-bg{
+    background-color: #201607;
+}
+
+.form-control:focus {
+    border-color: #CF9E55  !important;
+    box-shadow: 0 0 0 0.2rem rgba(207, 158, 75, 0.5) !important;
+  }

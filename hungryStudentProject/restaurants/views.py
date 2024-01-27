@@ -1,15 +1,19 @@
 from django.shortcuts import render,redirect,get_object_or_404
 
 from restaurants.models import Food,Restaurant_Food_bridge
-from django.shortcuts import render,redirect
-from . models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
+
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.conf import settings
+import plotly.express as px
+import pandas as pd
 
 def homepage(request):
     return render(request,'homepage.html')
 
+#------------------------------------------------------------------------------------------
+#restaurant_dashboard.html
 def restDash(request,rest_id):
     context={'rest_id':rest_id}
     return render(request,'RestaurantTemp/restaurant_dashboard.html',context)
@@ -17,24 +21,18 @@ def restDash(request,rest_id):
 def restAnalytics(request):
     return render(request,'RestaurantTemp/analytics.html')
 
-def menu_pg(request,rest_id): #function that renders menu _items pg
+#----------------------------------------------------------------------------------------
+#menu.html
+def menu_pg(request,rest_id):
+     #function that renders menu _items pg
     menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
-    bridge_items=Restaurant_Food_bridge.objects.all()
+    bridge_items=Restaurant_Food_bridge.objects.all().order_by('Status')
     return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items})
 
 def addMenu(request, rest_id):     #function to save items, runs when new menu item added
     if request.user.is_authenticated:
         print("Here....")
         
-def menu_pg(request,rest_id):
-    menu_items=Food.objects.all()
-    bridge_items=Restaurant_Food_bridge.objects.all()
-
-    return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items})
-
-def addMenu(request, rest_id):
-    if request.user.is_authenticated:
-        print("Here....")
         if request.POST:
             print("Here....")
             rest_id=request.POST.get('rest_id')
@@ -46,9 +44,6 @@ def addMenu(request, rest_id):
             menu_item=Food(Food_Name=food_item,Category=food_category,Description=food_description,Image=food_img)
             menu_item.save()
             bridgeItem=Restaurant_Food_bridge(rest_id=Restaurant.objects.get(rest_id=rest_id),Food_ID=menu_item,Price=food_price)### is this the error, try removing get
-            food=Food.objects.last()
-            foodId=food.Food_ID
-            bridgeItem=Restaurant_Food_bridge(rest_id=Restaurant.objects.get(rest_id=rest_id),Food_ID=Food.objects.get(Food_ID=foodId),Price=food_price)
             bridgeItem.save()
             print("Here....")
             return redirect('menu_pg',rest_id)
@@ -58,15 +53,6 @@ def addMenu(request, rest_id):
     menu_items=Food.objects.all()
     bridge_items=Restaurant_Food_bridge.objects.all()
     return render(request,'RestaurantTemp\menu.html',context={'menu_items':menu_items,'bridge_items':bridge_items})
-
-
-
-
-def viewFeedback(request,rest_id):
-    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id})
-
-def viewOrders(request,rest_id):
-    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id})
 
 def editMenu(request,Food_ID):
     item = Food.objects.get(Food_ID=Food_ID)
@@ -98,10 +84,74 @@ def toggle_status(request,Food_ID,rest_id):
     bridge_item.save()
     return redirect('menu_pg',rest_id) 
 
-def viewRestProfile(request,rest_id):
-    return render(request,'RestaurantTemp\create_rest_profile.html',{'rest_id':rest_id})
-def viewFeedback(request):
-    return render(request,'RestaurantTemp/rest_feedback.html')
+#---------------------------------------------------------------------------------------------------------
 
-def viewOrders(request):
-    return render(request,'RestaurantTemp/today_orders.html')
+#create_rest_profile.html
+def viewRestProfile(request,rest_id):    
+    rest_details=Restaurant.objects.get(rest_id=rest_id)
+    return render(request,'RestaurantTemp/create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details})
+
+def editRestProfile(request,rest_id):
+    rest_details=Restaurant.objects.get(rest_id=rest_id)
+    if request.method == "POST":
+            print('here')
+            rest_details.phone_number=request.POST.get('rest_phone')
+            rest_details.location=request.POST.get('rest_location')
+            rest_details.image=request.FILES.get('idImage1')
+            rest_details.save()
+            return redirect('viewProfile',rest_id)
+    return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
+
+#-----------------------------------#-------------------------------------------------------#
+#today_orders.html
+def viewOrders(request,rest_id):
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
+    customers=Customer_Profile.objects.all()
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
+def acceptOrder(request,Order_Id):
+    order=Orders.objects.get(Order_Id=Order_Id)
+    order.Order_Status='Accepted'
+    order.save()
+    rest_id=order.Restaurant_ID
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
+    customers=Customer_Profile.objects.all()
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
+def declineOrder(request,Order_Id):
+    order=Orders.objects.get(Order_Id=Order_Id)  #getting that particular order
+    order.Order_Status='Declined'                #changing order status
+    order.save()                                 #saving it to db
+    rest_id=order.Restaurant_ID                  #getting rest id to pass as its a necc paraMETER for the redirected page
+    rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)    #get all orders of restaurant
+    customers=Customer_Profile.objects.all()             #get the name of customers as well,and send everything to temp
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+
+#====================================================#==============================================#
+#rest_feedback.html
+def viewFeedback(request,rest_id):
+    feedbacks=Rest_Feedback.objects.filter(rest_id=rest_id)
+    order_items=Order_Items.objects.all()
+    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id,'feedbacks':feedbacks,'order_items':order_items})
+
+
+#=======================================================#==========================================#
+
+#search in menu
+def searchMenu(request,rest_id):
+    if request.method == 'POST':
+        query=request.POST['search_query']
+        outputs=Food.objects.filter(restaurant_food_bridge__rest_id__rest_id=rest_id,Food_Name__icontains=query)
+        return render(request, 'RestaurantTemp/searchResults.html',{'query':query, 'outputs':outputs,'rest_id':rest_id})
+    else:
+        return render(request, 'RestaurantTemp/searchResults.html',{rest_id:rest_id})
+
+#================================#==========================================================#
+    # plotting!
+def plotMostSold(request):
+    order_items=Order_Items.objects.select_related('Food_ID').values_list('Order_ID','Restaurant_ID','Food_ID__Food_Name')
+    print(order_items)
+    return render(request,'homepage.html')
+
+    
+   
