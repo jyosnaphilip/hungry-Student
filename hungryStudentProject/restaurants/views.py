@@ -14,8 +14,54 @@ def homepage(request):
 
 #------------------------------------------------------------------------------------------
 #restaurant_dashboard.html
+def pendingOrders(rest_id):
+    pending=Orders.objects.filter(Restaurant_ID=rest_id,Order_Status='Processing').count()
+    return pending
+
+def ordersServed(rest_id):
+    served=Orders.objects.filter(Restaurant_ID=rest_id,Order_Status='Complete').count()
+    return served
+
+def mostOrdered(rest_id):
+    food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id) #has all unique food items of rest
+    max_v=0                                                 #initialise variable that stores the max of total quantity
+    max_id=0                                      # initialise variable that stores the fod id with highest totat quant
+    for item in food_items:                                        # iterate through each food item
+        item_ID=item.Food_ID                                    #take each item's  id
+        max_q=sum(Order_Items.objects.filter(Restaurant_ID=rest_id,Food_ID=item_ID).values_list('Quantity',flat=True)) 
+                   #filter by restid and food id, then obtain the resultants quantity in list form. then get sum of list
+                  # bubblesort
+
+        if max_q>max_v:
+            max_v=max_q
+            max_id=item_ID
+    if max_id!=0:                                                # for restaurants that have had atleast one order
+        return max_id.Food_Name,max_v    
+    else:
+        return "na","na"    #will through an eror if this is not there, when the restaurant is signing up for 
+                             #first time and has no orders yet.
+    
+
+def totalEarned(rest_id):
+    earning=sum(Orders.objects.filter(Restaurant_ID=rest_id).values_list('Total_Price',flat=True))
+    return earning
+
+def itemRevenue(rest_id): #should return a dictionary with each food_id as key and the amount obtained from each of them as value
+    revenue_all={}
+    food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id)
+    for item in food_items:
+        item_id=item.Food_ID
+        revenue_each=(Order_Items.objects.filter(Food_ID=item_id).values_list('Total Price',flat=True))
+        revenue_all.update({item_id:revenue_each})
+    return revenue_all
+
 def restDash(request,rest_id):
-    context={'rest_id':rest_id}
+    pending=pendingOrders(rest_id)
+    served=ordersServed(rest_id)
+    popular,num=mostOrdered(rest_id)
+    earnings=totalEarned(rest_id)
+    context={'rest_id':rest_id,'pending':pending,'served':served,'popular':popular,'num':num,'earnings':earnings}
+
     return render(request,'RestaurantTemp/restaurant_dashboard.html',context)
 
 def restAnalytics(request):
@@ -89,7 +135,8 @@ def toggle_status(request,Food_ID,rest_id):
 #create_rest_profile.html
 def viewRestProfile(request,rest_id):    
     rest_details=Restaurant.objects.get(rest_id=rest_id)
-    return render(request,'RestaurantTemp/create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details})
+    
+    return render(request,'RestaurantTemp/create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details,'media_url':settings.MEDIA_URL})
 
 def editRestProfile(request,rest_id):
     rest_details=Restaurant.objects.get(rest_id=rest_id)
