@@ -6,19 +6,19 @@
         
         <form method="POST" enctype="multipart/form-data" action="{% url 'edit_profile' rest_id %}">
             {% csrf_token %}
-            {% if rest_id.image %}
-            <img class="card-img-top" src="{{ rest_id.image.url }}" alt="">
-            {% else %}
-            <div class="card bg-color text-white">
-                <input name="image-1" id="idImage1" type="file">
-                <img class="card-img" src="{% static 'static\img\default_rest_profile.jpeg' %}" alt="No image added">
+
+                <img class="card-img-top" src="{{ rest_details.image.url }}" alt="">
             
-                <div class="card-img-overlay">
+            <!-- <div class="card bg-color text-white">
+                <input name="image-1" id="idImage1" type="file">
+                <img class="card-img" src="{#% static 'static\img\default_rest_profile.jpeg' %#}" alt="No image added">
+             -->
+                <!-- <div class="card-img-overlay">
                     <h5 class="card-title">No image added</h5>
                     <p class="card-text">Click here to add image</p>
-                </div>
-            </div>
-            {% endif %}
+                </div> -->
+            <!-- </div> -->
+
             <div class="card-body">
                 <h5 class="card-title">{{rest_details.name}}</h5>
                 

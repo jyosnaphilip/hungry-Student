@@ -9,13 +9,17 @@ from restaurants.models import Food
 
 class Customer_Profile(models.Model):
     User_ID = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer_ID = models.UUIDField(default=uuid.uuid4,auto_created=True,primary_key = True)
-    address=models.CharField(max_length=50,blank=True,null=True)
-    phoneNumber = models.CharField(max_length =30)
+    customer_ID = models.UUIDField(default=uuid.uuid4,auto_created=True,primary_key=True)
+    image = models.ImageField(upload_to='user_profile',null=True,blank=True)
+    phone_number = models.CharField(max_length=10,null=True)
+    customer_address = models.CharField(max_length=100,default='no address')
+    city=models.CharField(max_length=30,default='city')
+    country=models.CharField(max_length=30,default='country')
+    postal_code = models.IntegerField(null=True)
    
     def __str__(self):
          #String for representing the Model object.
-        return f'{self.customer_ID}'
+        return f'{self.User_ID}'
     
 
 class Orders(models.Model):
@@ -49,16 +53,14 @@ class Order_Items(models.Model):
     def __str__(self):
          #String for representing the Model object.
         return str(self.Order_ID.__str__()) +" - "+str(self.Food_ID.__str__())
-    
 
-    
 class Payment(models.Model):
     Transaction_ID=models.UUIDField(auto_created=True,primary_key=True,default=uuid.uuid4)
     Order_ID=models.ForeignKey(Orders,on_delete=models.CASCADE)
     mode=models.CharField(max_length=10,blank=False,default='upi')
     def __str__(self):
          #String for representing the Model object.
-        return str(self.Transaction_ID.__str__()) +" - "+str(self.Order_ID.__str__())
+        return str(self.Transaction_ID.__str__())+"-"+str(self.Order_ID.__str__())
 
 
 class Rest_Feedback(models.Model):

@@ -6,6 +6,8 @@ from users.models import Customer_Profile,Order_Items,Orders,Rest_Feedback
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.conf import settings
+import plotly.express as px
+import pandas as pd
 
 def homepage(request):
     return render(request,'homepage.html')
@@ -87,7 +89,7 @@ def toggle_status(request,Food_ID,rest_id):
 #create_rest_profile.html
 def viewRestProfile(request,rest_id):    
     rest_details=Restaurant.objects.get(rest_id=rest_id)
-    return render(request,'RestaurantTemp\create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details,'media_url':settings.MEDIA_URL})
+    return render(request,'RestaurantTemp/create_rest_profile.html',context={'rest_id':rest_id,'rest_details':rest_details})
 
 def editRestProfile(request,rest_id):
     rest_details=Restaurant.objects.get(rest_id=rest_id)
@@ -95,7 +97,7 @@ def editRestProfile(request,rest_id):
             print('here')
             rest_details.phone_number=request.POST.get('rest_phone')
             rest_details.location=request.POST.get('rest_location')
-            rest_details.image=request.POST.get('idImage1')
+            rest_details.image=request.FILES.get('idImage1')
             rest_details.save()
             return redirect('viewProfile',rest_id)
     return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
@@ -140,9 +142,16 @@ def searchMenu(request,rest_id):
     if request.method == 'POST':
         query=request.POST['search_query']
         outputs=Food.objects.filter(restaurant_food_bridge__rest_id__rest_id=rest_id,Food_Name__icontains=query)
-        bridge=Restaurant_Food_bridge.objects.select_related().all()
         return render(request, 'RestaurantTemp/searchResults.html',{'query':query, 'outputs':outputs,'rest_id':rest_id})
     else:
         return render(request, 'RestaurantTemp/searchResults.html',{rest_id:rest_id})
 
+#================================#==========================================================#
+    # plotting!
+def plotMostSold(request):
+    order_items=Order_Items.objects.select_related('Food_ID').values_list('Order_ID','Restaurant_ID','Food_ID__Food_Name')
+    print(order_items)
+    return render(request,'homepage.html')
+
     
+   
