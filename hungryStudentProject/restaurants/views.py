@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 
 from restaurants.models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
-
+from users.models import Customer_Profile,Order_Items,Orders,Rest_Feedback
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.conf import settings
