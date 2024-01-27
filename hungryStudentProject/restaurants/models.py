@@ -28,7 +28,7 @@ class Food(models.Model):
 
 class Restaurant_Food_bridge(models.Model):
     rest_id=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
-    Food_ID=models.ForeignKey(Food,on_delete=models.CASCADE)
+    Food_ID=models.ForeignKey(Food,on_delete=models.CASCADE) #one to one
     Status=models.BooleanField(blank=False,default=True)
     Price=models.DecimalField(max_digits=5,decimal_places=2,blank=False)
 
