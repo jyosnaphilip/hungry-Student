@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from matplotlib.markers import MarkerStyle
 
 from restaurants.models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
@@ -8,12 +9,15 @@ from django.http import HttpResponse
 from django.conf import settings
 import plotly.express as px
 import pandas as pd
+from plotly.offline import plot
+from django.db.models.functions import Cast
+from django.db.models import TextField
 
 def homepage(request):
     return render(request,'homepage.html')
 
 #------------------------------------------------------------------------------------------
-#restaurant_dashboard.html
+# restaurant_dashboard.html
 def pendingOrders(rest_id):
     pending=Orders.objects.filter(Restaurant_ID=rest_id,Order_Status='Processing').count()
     return pending
@@ -47,21 +51,41 @@ def totalEarned(rest_id):
     return earning
 
 def itemRevenue(rest_id): #should return a dictionary with each food_id as key and the amount obtained from each of them as value
-    revenue_all={}
-    food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id)
+    revenue_all={'item':[],'tot_sales':[]}
+    food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id).annotate(str_item_id=Cast('Food_ID',output_field=TextField())).values_list('str_item_id')
+    
     for item in food_items:
-        item_id=item.Food_ID
-        revenue_each=(Order_Items.objects.filter(Food_ID=item_id).values_list('Total Price',flat=True))
-        revenue_all.update({item_id:revenue_each})
-    return revenue_all
+        item_id=item[-1] #gets food_id! at 0 index this doesnt work!
+        revenue_each=Order_Items.objects.filter(Food_ID=item_id).values_list('Unit_Price','Quantity')
+        item_name=(Food.objects.get(Food_ID=item_id)).Food_Name    #get the row having itemid, then extract name
+        revenue_all['item'].append(item_name)
+        total=0
+        for i in revenue_each:
+            total+=i[0]*i[1]
+        if total!=0:
+            revenue_all['tot_sales'].append(float(total))
+        else:
+            revenue_all['tot_sales'].append(0)
+    df=pd.DataFrame.from_dict(revenue_all)
+    print(df)
+    return df
+
+# def create_bar_chart(rest_id):
+#     df_values=itemRevenue(rest_id)
+#     df=pd.DataFrame.from_dict(df_values)
+    
+    
+
 
 def restDash(request,rest_id):
     pending=pendingOrders(rest_id)
     served=ordersServed(rest_id)
     popular,num=mostOrdered(rest_id)
     earnings=totalEarned(rest_id)
-    context={'rest_id':rest_id,'pending':pending,'served':served,'popular':popular,'num':num,'earnings':earnings}
-
+    bar_df=itemRevenue(rest_id)
+    bar_chart=px.bar(bar_df,x='item',y='tot_sales',height=300,labels={'item':'Food Item','tot_sales':'Sales'})
+    barChartOutput=bar_chart.to_html(full_html=False,include_plotlyjs=False)
+    context={'rest_id':rest_id,'served':served,'popular':popular,'num':num,'earnings':earnings,"pending":pending,'barChartOutput':barChartOutput}
     return render(request,'RestaurantTemp/restaurant_dashboard.html',context)
 
 def restAnalytics(request):
