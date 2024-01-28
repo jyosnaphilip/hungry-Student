@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+<<<<<<< HEAD
 from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu,plotMostSold
 from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,Orders_display
+=======
+from restaurants.views import homepage,restDash,addMenu,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu
+from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
+>>>>>>> aab68b145760c575cee86123cf5f1233bcc65176
 # from users.views import users_index,users_dash,user_details,detail_view,user_profile,user_profileedit
 from django.conf.urls.static import static
 from django.conf import settings
@@ -37,7 +42,7 @@ urlpatterns = [
     path('restaurant/del-Menu-Item/<str:Food_ID>/<str:rest_id>',delMenuItem,name='delete-item'),
     path('restaurants/toggle-status/<str:Food_ID>/<str:rest_id>',toggle_status,name='toggle_status'),
     
-    path('Restaurants/analytics/<int:user_id>',restAnalytics, name='viewAnalytics'), #for analytics-not done yet
+
     path('Restaurants/view_feedback/<str:rest_id>',viewFeedback, name='view-feedback'), #feedback
     # related to view orders
     path('Restaurants/view_orders/<str:rest_id>',viewOrders, name='today-orders'),
@@ -48,8 +53,7 @@ urlpatterns = [
     path('Restaurants/edit_profile/<str:rest_id>',editRestProfile,name="edit_profile"),
     #for search bar in restaurants
     path('Restaurants/searchMenu/<str:rest_id>',searchMenu, name='searchMenu'),
-    #path('Restaurants/searchMenu-results/<str:rest_id>',searchMenu, name=''),
-    path('Restaurants/edit_profile/<str:rest_id>',plotMostSold,name='plot'),
+
    
     
 

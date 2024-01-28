@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from matplotlib.markers import MarkerStyle
 
 from restaurants.models import Food,Restaurant_Food_bridge
 from customadmin.models import Restaurant
@@ -8,14 +9,21 @@ from django.http import HttpResponse
 from django.conf import settings
 import plotly.express as px
 import pandas as pd
+from plotly.offline import plot
+from django.db.models.functions import Cast
+from django.db.models import TextField
 
 def homepage(request):
     return render(request,'homepage.html')
 
 #------------------------------------------------------------------------------------------
-#restaurant_dashboard.html
-def pendingOrders(rest_id):
+# restaurant_dashboard.html
+def newOrders(rest_id):
     pending=Orders.objects.filter(Restaurant_ID=rest_id,Order_Status='Processing').count()
+    return pending
+
+def pendingOrders(rest_id):
+    pending=Orders.objects.filter(Restaurant_ID=rest_id,Order_Status='Accepted').count()
     return pending
 
 def ordersServed(rest_id):
@@ -46,34 +54,71 @@ def totalEarned(rest_id):
     earning=sum(Orders.objects.filter(Restaurant_ID=rest_id).values_list('Total_Price',flat=True))
     return earning
 
+
 def itemRevenue(rest_id): #should return a dictionary with each food_id as key and the amount obtained from each of them as value
-    revenue_all={}
-    food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id)
+    revenue_all={'item':[],'tot_sales':[]}
+    food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id).annotate(str_item_id=Cast('Food_ID',output_field=TextField())).values_list('str_item_id')
+    
     for item in food_items:
-        item_id=item.Food_ID
-        revenue_each=(Order_Items.objects.filter(Food_ID=item_id).values_list('Total Price',flat=True))
-        revenue_all.update({item_id:revenue_each})
-    return revenue_all
+        item_id=item[-1] #gets food_id! at 0 index this doesnt work!
+        revenue_each=Order_Items.objects.filter(Food_ID=item_id).values_list('Unit_Price','Quantity')
+        item_name=(Food.objects.get(Food_ID=item_id)).Food_Name    #get the row having itemid, then extract name
+        revenue_all['item'].append(item_name)
+        total=0
+        for i in revenue_each:
+            total+=i[0]*i[1]
+        if total!=0:
+            revenue_all['tot_sales'].append(float(total))
+        else:
+            revenue_all['tot_sales'].append(0)
+    df=pd.DataFrame.from_dict(revenue_all)
+    return df
+
+def categoryAnalysis(rest_id):
+    cat_dict={'category':['Starter','Main Course','Dessert','Beverage'],'Quantity_Sold':[0,0,0,0]}
+    items_id=Order_Items.objects.filter(Restaurant_ID=rest_id).annotate(str_food_id=Cast('Food_ID',output_field=TextField())).values_list('str_food_id')
+    for item in items_id:
+        item_id=item[-1]
+        cat=Food.objects.get(Food_ID=item_id).Category
+        print(cat)
+        instances=sum(Order_Items.objects.filter(Food_ID=item_id).values_list('Quantity',flat=True))
+        if cat=='Starter':
+            cat_dict['Quantity_Sold'][0]+=instances
+        elif cat=='Main Course':
+            cat_dict['Quantity_Sold'][1]+=instances
+        elif cat== 'Dessert':
+            cat_dict['Quantity_Sold'][2]+=instances
+        else: 
+            cat_dict['Quantity_Sold'][3]+=instances
+    df=pd.DataFrame.from_dict(cat_dict)
+    return df
+    
+
 
 def restDash(request,rest_id):
+    new=newOrders(rest_id)
     pending=pendingOrders(rest_id)
     served=ordersServed(rest_id)
     popular,num=mostOrdered(rest_id)
     earnings=totalEarned(rest_id)
-    context={'rest_id':rest_id,'pending':pending,'served':served,'popular':popular,'num':num,'earnings':earnings}
-
+    bar_df=itemRevenue(rest_id)
+    pie_df=categoryAnalysis(rest_id)
+    pie_chart=px.pie(pie_df,values='Quantity_Sold',names='category',hole=0.5,height=300)
+    bar_chart=px.bar(bar_df,x='item',y='tot_sales',height=320,labels={'item':'Food Item','tot_sales':'Sales'})
+    barChartOutput=bar_chart.to_html(full_html=False,include_plotlyjs=False)
+    pieChartOutput=pie_chart.to_html(full_html=False,include_plotlyjs=False)
+    context={'rest_id':rest_id,'new':new,'served':served,'popular':popular,'num':num,'earnings':earnings,"pending":pending,'barChartOutput':barChartOutput,'pieChartOutput':pieChartOutput}
     return render(request,'RestaurantTemp/restaurant_dashboard.html',context)
 
-def restAnalytics(request):
-    return render(request,'RestaurantTemp/analytics.html')
 
 #----------------------------------------------------------------------------------------
 #menu.html
 def menu_pg(request,rest_id):
      #function that renders menu _items pg
+    new=newOrders(rest_id)
     menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
     bridge_items=Restaurant_Food_bridge.objects.all().order_by('Status')
-    return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items})
+    return render(request,'RestaurantTemp/menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge_items':bridge_items,'new':new})
 
 def addMenu(request, rest_id):     #function to save items, runs when new menu item added
     if request.user.is_authenticated:
@@ -86,7 +131,7 @@ def addMenu(request, rest_id):     #function to save items, runs when new menu i
             food_category=request.POST.get('food_category')
             food_description=request.POST.get('description')
             food_price=request.POST.get('price')
-            food_img=request.POST.get('image')
+            food_img=request.FILES.get('image')
             menu_item=Food(Food_Name=food_item,Category=food_category,Description=food_description,Image=food_img)
             menu_item.save()
             bridgeItem=Restaurant_Food_bridge(rest_id=Restaurant.objects.get(rest_id=rest_id),Food_ID=menu_item,Price=food_price)### is this the error, try removing get
@@ -152,9 +197,10 @@ def editRestProfile(request,rest_id):
 #-----------------------------------#-------------------------------------------------------#
 #today_orders.html
 def viewOrders(request,rest_id):
+    new=newOrders(rest_id)
     rest_orders=Orders.objects.filter(Restaurant_ID=rest_id)
     customers=Customer_Profile.objects.all()
-    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers})
+    return render(request,'RestaurantTemp/today_orders.html',{'rest_id':rest_id,'orders':rest_orders,'customers':customers,'new':new})
 
 def acceptOrder(request,Order_Id):
     order=Orders.objects.get(Order_Id=Order_Id)
@@ -177,9 +223,10 @@ def declineOrder(request,Order_Id):
 #====================================================#==============================================#
 #rest_feedback.html
 def viewFeedback(request,rest_id):
+    new=newOrders(rest_id)
     feedbacks=Rest_Feedback.objects.filter(rest_id=rest_id)
     order_items=Order_Items.objects.all()
-    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id,'feedbacks':feedbacks,'order_items':order_items})
+    return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id,'feedbacks':feedbacks,'order_items':order_items,'new':new})
 
 
 #=======================================================#==========================================#
@@ -194,11 +241,8 @@ def searchMenu(request,rest_id):
         return render(request, 'RestaurantTemp/searchResults.html',{rest_id:rest_id})
 
 #================================#==========================================================#
-    # plotting!
-def plotMostSold(request):
-    order_items=Order_Items.objects.select_related('Food_ID').values_list('Order_ID','Restaurant_ID','Food_ID__Food_Name')
-    print(order_items)
-    return render(request,'homepage.html')
 
-    
+
+
+
    
