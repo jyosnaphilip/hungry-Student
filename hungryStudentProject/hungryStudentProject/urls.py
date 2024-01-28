@@ -17,13 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-<<<<<<< HEAD
-from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu,plotMostSold
-from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,Orders_display
-=======
 from restaurants.views import homepage,restDash,addMenu,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu
-from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
->>>>>>> aab68b145760c575cee86123cf5f1233bcc65176
+from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,Orders_display
 # from users.views import users_index,users_dash,user_details,detail_view,user_profile,user_profileedit
 from django.conf.urls.static import static
 from django.conf import settings
