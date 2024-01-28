@@ -95,9 +95,9 @@
                                     <em>No description added</em>
                                 </div>
                                 {% endif %}</br>
-                                {% if menu_item.Image %}
+                                {% if menu_item.Image.url %}
                                 <div class="mt-2 mb-3">
-                                    {{ menu_item.Image }}
+                                   <img src="{{ menu_item.Image.url }}" style="width: 80px;height:80px;border-radius: 100%;">
                                 </div>
                                 {% endif %}
                             </td>

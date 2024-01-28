@@ -6,20 +6,20 @@
         
         <form method="POST" enctype="multipart/form-data" action="{% url 'edit_profile' rest_id %}">
             {% csrf_token %}
-            
-                <div class="container-sm justify-content-center border text-center bg-color rounded-5">
-                <img class="card-img-top" src="{{rest_details.image.url}}" alt="profile pic of {{rest_details.name}}" style="width: 250px;height:250px;border-radius: 100%;">
-                <h3 class="card-title">{{rest_details.name}}</h3>
-                </div>
-            <!-- <div class="card bg-color text-white">
-                <input name="image-1" id="idImage1" type="file">
-                <img class="card-img" src="{#% static 'static\img\default_rest_profile.jpeg' %#}" alt="No image added">
-             -->
-                <!-- <div class="card-img-overlay">
-                    <h5 class="card-title">No image added</h5>
-                    <p class="card-text">Click here to add image</p>
-                </div> -->
-            <!-- </div> -->
+                <div class="container-sm  text-center bg-color ">
+                    <label for="fileField">
+                {% if rest_details.image %}
+                    <img class="card-img-top" src="{{rest_details.image.url}}" alt="profile pic of {{rest_details.name}}" style="width: 250px;height:250px;border-radius: 100%;">
+                    
+                {% else %}
+                    
+                        <!-- <input name="image-1" id="idImage1" type="file"> -->
+                        <img class="card-img-top text-center " src="{% static 'img/default_rest_profile.jpeg' %}" alt="No image added" title="No image added. Click to add" style="width: 250px;height:250px;border-radius: 100%;opacity: 0.8 ;">
+                {% endif %}
+                    </label>
+                    <input type="file" id="fileField" name="file" accept="image/*" hidden="true">
+                    <h3 class="card-title">{{rest_details.name}}</h3>
+                </div> 
 
             <div class="card-body">
                 
