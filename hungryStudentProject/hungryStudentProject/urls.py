@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from restaurants.views import homepage,restDash,addMenu,restAnalytics,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu,plotMostSold
-from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword
+from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,Orders_display
 # from users.views import users_index,users_dash,user_details,detail_view,user_profile,user_profileedit
 from django.conf.urls.static import static
 from django.conf import settings
@@ -59,11 +59,9 @@ urlpatterns = [
     path('rest_dashboard/<str:rest_id', rest_dashboard,name = 'rest_dashboard'),
     
     #Admin Side(Fathima)
-
     path('',admin_login, name='login'),
     path('forgotpassword/<int:user_id>' , fpassword , name="fpassword"),
     path('admin_logout',admin_logout, name='admin_logout'),
-    
     path('Register',admin_register,name = 'register'),
     path('ForgotPassword',forgot_password,name = 'forgotpassword' ),
     path('tables',tables,name = 'tables'),
@@ -76,7 +74,6 @@ urlpatterns = [
     path('edit_rest/<int:user_id>' ,edit_rest , name="edit_rest"),
 
 # Users(Fathima)
-
     path('users',users,name = 'users'),
     path('create_user',create_user, name = 'create_user'),
     path('inactive_btn/<int:user_id>',status_changeuser,name='status_changeuser'),
@@ -84,15 +81,17 @@ urlpatterns = [
 
 
 # Feedback(Fathima)
-
     path('Feedback',feedback,name='feedbacklist'),
     path('Feedbackform',feedbackform,name = 'feedbackform'),
+
+# Orders(Fathima)
+    path('Orders_display',Orders_display,name = 'Orders_display'),
 
 #Restaurant Details (Fathima)
     path('RestaurantDetails',RestaurantDetails,name = 'RestaurantDetails'),
     path('status_changedetails/<str:email>',status_changedetails,name = 'status_changedetails'),
 
-    # Users (Fathima)
+# Users (Fathima)
     path('rest_users',rest_users,name = 'rest_users'),
     path('user_status_change/<int:user_id>',user_status_change,name = 'user_status_change'),
     path('rest_edit_user/<int:user_id>',rest_edit_user,name = 'rest_edit_user'),

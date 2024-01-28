@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from .models import Feedback
 from .models import Restaurant , Notification
+from users.models import Orders
 from django.urls import reverse
 
 
@@ -21,7 +22,9 @@ def admin_index(request):
     user = User.objects.filter(is_superuser = False , is_staff = False)
     user_count = user.count()
     count = noti.count()
-    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total})
+    val = count , user_count , rest_count
+    datas = list(val)
+    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas})
 
 def read_msg(request , msg_id):
     noti = Notification.objects.get(id = msg_id)
@@ -67,9 +70,10 @@ def admin_login(request):
             if user.is_active == True:
                 login(request, user)
                 users= User.objects.get(user_id=user)
-                return redirect('UsersDash') 
-                
                 return redirect('users_dash')
+               
+                
+                
    
         else:
             msg = "Wrong credentials"
@@ -114,6 +118,13 @@ def forgot_password(request , user_id):
         cpassword = request.POST.get('cpassword')
 
     return render(request, 'adminTemp/admin/forgot-password.html')
+
+
+
+def Orders_display(request,Order_Id):
+    orders = Orders.objects.get(id=Order_Id)
+
+
 
 # All Users Display(Admin Fathima)--------------------------------------------------------------------------------------------------------------------------
 

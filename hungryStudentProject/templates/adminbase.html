@@ -21,6 +21,11 @@
     <!-- Custom styles for this template-->
     <link href="{% static 'cadmin/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-xp3xXxnOK42L7cmld0Pb8F9C4pPDJcUHcNSvVmOKMO3UqWkhMttK7I5d3roOPlYea8EG+TcA2q3An+ccgbfJWSIBQ==" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="path/to/font-awesome/css/all.min.css" />
+
+
 </head>
 
 <body id="page-top">
@@ -58,28 +63,33 @@
             </div>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'tables' %}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-users"></i>
                     <span>Users</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'rest' %}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-utensil-spoon"></i>
                     <span>Restaurants</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'users' %}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa fa-user"></i>
                     <span>Account</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'feedbacklist' %}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-comment"></i>
                     <span>Feedback</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'feedbacklist' %}">
+                    <i class="fas fa-utensils"></i>
+                    <span>Orders</span></a>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
@@ -92,10 +102,10 @@
                         <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -111,10 +121,15 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider d-none d-md-block base-bg">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline base-bg" >
+                <button class="rounded-circle border-0" id="sidebarToggle" ></button>
+            </div>
 
             <!-- Heading ADDONs like Pages  -->
             <!-- <div class="sidebar-heading">
@@ -372,6 +387,42 @@
     <!-- Page level custom scripts -->
     <script src="{% static 'cadmin/js/demo/chart-area-demo.js' %}"></script>
     <script src="{% static 'cadmin/js/demo/chart-pie-demo.js' %}"></script>
+    <script>
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
+
+// Pie Chart Example
+var ctx = document.getElementById("myPieChart");
+var myPieChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Rest Users", "Users", "Count"],
+    datasets: [{
+      data: {{ datas }},
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      hoverBorderColor: "rgba(234, 236, 244, 1)",
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    tooltips: {
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+    },
+    legend: {
+      display: false
+    },
+    cutoutPercentage: 80,
+  },
+});
+    </script>
 
 </body>
 
