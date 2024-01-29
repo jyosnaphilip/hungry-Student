@@ -31,10 +31,10 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
-<body id="page-top" style="background-image: url({% static 'img\food_new.jpg' %})" >
+<body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper" style="background-image: url({% static 'img\food_new.svg' %})">
+    <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav  sidebar sidebar-dark accordion base-bg " id="accordionSidebar">
@@ -52,9 +52,9 @@
             <!-- <hr class="sidebar-divider my-0" style="background-color: #7b3f00;"> -->
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active base-bg" >
+            <li class="nav-item active" >
                 <a class="nav-link base-bg" href="{% url 'RestDashboard' rest_id %}" >
-                    <i class="fas fa-fw fa-tachometer-alt base-bg"  style="font-size: medium;"></i>
+                    <i class="fas fa-fw fa-tachometer-alt"  style="font-size: medium;"></i>
                     <span class="base-bg"  style="font-size: medium;">Dashboard</span></a>
             </li>
 
@@ -70,7 +70,7 @@
                     <span style="font-size:medium;">Add Today's Menu</span></a>
                     
             </li>
-            <li class="nav-item base-bg" >
+            <li class="nav-item" >
                 <a class="nav-link base-bg" href="{% url 'today-orders' rest_id %}">
                     <i class="fa-solid fa-bell-concierge fa-xl"  style="font-size:medium;"></i>
                     <span style="font-size: medium;" >Today's Orders</span></a>
@@ -82,7 +82,7 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Restaurant Profile</span></a>
             </li> -->
-            <li class="nav-item base-bg" >
+            <li class="nav-item " >
                 <a class="nav-link base-bg" href="{% url 'view-feedback' rest_id %}" >
                     <i class="fa-solid fa-comment-dots fa-xl" style="font-size: medium;" ></i>
                     <span style="font-size: medium;">Feedback</span></a>
@@ -396,13 +396,13 @@
                 
 
             <!-- Footer -->
-            <footer class="sticky-footer" >
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                <footer class="sticky-footer" >
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2021</span>
+                        </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
             <!-- End of Footer -->
 
         </div>
