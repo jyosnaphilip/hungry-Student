@@ -25,7 +25,7 @@ class Customer_Profile(models.Model):
 class Orders(models.Model):
     Order_Id=models.UUIDField(primary_key=True,auto_created=True,default=uuid.uuid4)
     Timestamp=models.DateTimeField(auto_now_add=True,blank=False)
-    Restaurant_ID=models.ForeignKey(Restaurant,on_delete=models.CASCADE)
+    Restaurant_ID=models.ForeignKey(Restaurant,on_delete=models.CASCADE)  
     Customer_ID=models.ForeignKey('Customer_Profile',on_delete=models.CASCADE)
     CATEGORIES=(
         ('Processing','Processing'),

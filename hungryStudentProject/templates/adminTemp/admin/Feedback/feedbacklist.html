@@ -1,4 +1,4 @@
-{% extends 'adminbase.html' %}
+ {% extends 'adminbase.html' %}
 {% block content %}
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -19,29 +19,35 @@
                                     
                                     <thead>
                                         <tr>                                            
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Subject</th>
-                                            <th>Message</th>
+                                            <th>Customer Name</th>
+                                            <th>Restaurant name</th>
+                                            <th>Description</th>
+                                            <th>TimeStamp</th>
+                                            <th>Food Ordered</th>
                                             
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Subject</th>
-                                            <th>Message</th>
+                                            <th>Customer Name</th>
+                                            <th>Restaurant name</th>
+                                            <th>Description</th>
+                                            <th>TimeStamp</th>
+                                            <th>Food Ordered</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         {% for i in feedbacks %}
+
                                         <tr>
-                                            <td>{{i.name}}</td>
-                                          
-                                            <td>{{i.email}}</td>
-                                            <td>{{i.subject}}</td>
-                                            <td>{{i.message}}</td>
+                                            <td>{{i.customer_ID.User_ID.first_name}} {{i.customer_ID.User_ID.last_name}}</td>
+                                            <td>{{i.rest_id}}</td>
+                                            <td>{{i.Description}}</td>
+                                           
+
+                                            <td>{{i.Order_Id.Timestamp}}</td>
+                                            
+                                            <td>{{ i.rest_id.Restaurant_ID}}</td>
                                             
                                             <!-- {% if i.is_staff == True %}
                                             
