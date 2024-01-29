@@ -20,10 +20,10 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'cadmin/css/sb-admin-2.min.css' %}" rel="stylesheet">
-
+    <link href="{% static 'rest/css/style.css' %}" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="base-bg">
 
     <div class="container">
 
@@ -35,12 +35,12 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Edit User!</h1>
+                                <h1 class="h4 text-color mb-4">Edit User!</h1>
                                 
                             </div>
                             <form class="user" method="POST" >
                                 {% csrf_token %}
-                                <div class="form-group row">
+                                <div class="form-group row text-color">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" name="firstname" class="form-control form-control-user" id="exampleFirstName"
                                             placeholder="FirstName" value="{{user.first_name}}">
@@ -52,12 +52,12 @@
                                     
                                 </div>
                              
-                                <div class="form-group">
+                                <div class="form-group text-color">
                                     <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
                                         placeholder="Email Address" value="{{user.email}}">
                                 </div>
                                 
-                                <button class=" btn-primary" type="submit">Create</button>
+                                <button class="bg-color" type="submit">Create</button>
                                 
                                 <hr>
                                 
