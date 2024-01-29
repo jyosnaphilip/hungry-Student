@@ -113,3 +113,7 @@ nav a {
     border-color: #CF9E55  !important;
     box-shadow: 0 0 0 0.2rem rgba(207, 158, 75, 0.5) !important;
   }
+
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+    border: 1px solid white;
+}

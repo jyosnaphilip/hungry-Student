@@ -9,7 +9,6 @@ from django.http import HttpResponse
 from django.conf import settings
 import plotly.express as px
 import pandas as pd
-from plotly.offline import plot
 from django.db.models.functions import Cast
 from django.db.models import TextField
 
@@ -39,7 +38,6 @@ def mostOrdered(rest_id):
         max_q=sum(Order_Items.objects.filter(Restaurant_ID=rest_id,Food_ID=item_ID).values_list('Quantity',flat=True)) 
                    #filter by restid and food id, then obtain the resultants quantity in list form. then get sum of list
                   # bubblesort
-
         if max_q>max_v:
             max_v=max_q
             max_id=item_ID
@@ -48,12 +46,10 @@ def mostOrdered(rest_id):
     else:
         return "na","na"    #will through an eror if this is not there, when the restaurant is signing up for 
                              #first time and has no orders yet.
-    
 
 def totalEarned(rest_id):
     earning=sum(Orders.objects.filter(Restaurant_ID=rest_id).values_list('Total_Price',flat=True))
     return earning
-
 
 def itemRevenue(rest_id): #should return a dictionary with each food_id as key and the amount obtained from each of them as value
     revenue_all={'item':[],'tot_sales':[]}
@@ -93,8 +89,6 @@ def categoryAnalysis(rest_id):
     df=pd.DataFrame.from_dict(cat_dict)
     return df
     
-
-
 def restDash(request,rest_id):
     new=newOrders(rest_id)
     pending=pendingOrders(rest_id)
@@ -110,7 +104,6 @@ def restDash(request,rest_id):
     context={'rest_id':rest_id,'new':new,'served':served,'popular':popular,'num':num,'earnings':earnings,"pending":pending,'barChartOutput':barChartOutput,'pieChartOutput':pieChartOutput}
     return render(request,'RestaurantTemp/restaurant_dashboard.html',context)
 
-
 #----------------------------------------------------------------------------------------
 #menu.html
 def menu_pg(request,rest_id):
@@ -122,10 +115,7 @@ def menu_pg(request,rest_id):
 
 def addMenu(request, rest_id):     #function to save items, runs when new menu item added
     if request.user.is_authenticated:
-        print("Here....")
-        
         if request.POST:
-            print("Here....")
             rest_id=request.POST.get('rest_id')
             food_item=request.POST.get('food_name')
             food_category=request.POST.get('food_category')
@@ -136,7 +126,6 @@ def addMenu(request, rest_id):     #function to save items, runs when new menu i
             menu_item.save()
             bridgeItem=Restaurant_Food_bridge(rest_id=Restaurant.objects.get(rest_id=rest_id),Food_ID=menu_item,Price=food_price)### is this the error, try removing get
             bridgeItem.save()
-            print("Here....")
             return redirect('menu_pg',rest_id)
     else:
         return HttpResponse("User is not authenticated.")
@@ -176,7 +165,6 @@ def toggle_status(request,Food_ID,rest_id):
     return redirect('menu_pg',rest_id) 
 
 #---------------------------------------------------------------------------------------------------------
-
 #create_rest_profile.html
 def viewRestProfile(request,rest_id):    
     rest_details=Restaurant.objects.get(rest_id=rest_id)
@@ -227,7 +215,6 @@ def viewFeedback(request,rest_id):
     feedbacks=Rest_Feedback.objects.filter(rest_id=rest_id)
     order_items=Order_Items.objects.all()
     return render(request,'RestaurantTemp/rest_feedback.html',{'rest_id':rest_id,'feedbacks':feedbacks,'order_items':order_items,'new':new})
-
 
 #=======================================================#==========================================#
 

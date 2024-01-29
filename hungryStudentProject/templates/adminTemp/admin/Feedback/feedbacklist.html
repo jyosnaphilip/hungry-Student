@@ -4,20 +4,20 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Feedback List</h1>
+                    <h1 class="h3 mb-2 text-color">Feedback List</h1>
                     <p class="mb-4">Below is the lists of Feedback registrered in this webpage.</p>
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Feedbacks</h6>
+                    <div class="card shadow mb-4" style="border-color: #CF9E55;">
+                        <div class="card-header py-3 bg-color">
+                            <h5 class="m-0 font-weight-bold text-light">Feedbacks</h5>
                            
                         </div>
-                        <div class="card-body">
+                        <div class="card-body form-box">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     
-                                    <thead>
+                                    <thead class="text-color">
                                         <tr>                                            
                                             <th>Name</th>
                                             <th>Email</th>
@@ -26,7 +26,7 @@
                                             
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <tfoot class="text-color">
                                         <tr>
                                             <th>Name</th>
                                             <th>Email</th>
@@ -34,7 +34,7 @@
                                             <th>Message</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
+                                    <tbody class="text-color">
                                         {% for i in feedbacks %}
                                         <tr>
                                             <td>{{i.name}}</td>
