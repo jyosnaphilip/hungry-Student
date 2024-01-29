@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from .models import Feedback
 from .models import Restaurant , Notification
-from users.models import Orders
+from users.models import Orders,Rest_Feedback
+from restaurants.models import Food
 from django.urls import reverse
 
 
@@ -121,8 +122,6 @@ def forgot_password(request , user_id):
 
 
 
-def Orders_display(request,Order_Id):
-    orders = Orders.objects.get(id=Order_Id)
 
 
 
@@ -260,7 +259,7 @@ def edit_user(request,user_id):
 # Feedback Form (Admin_Fathima) --------------------------------------------------------------------------------------------------------------------------
 
 def feedback(request):
-    feedbacks = Feedback.objects.all()
+    feedbacks = Rest_Feedback.objects.all()
     return render(request, 'adminTemp/admin/Feedback/feedbacklist.html',{'feedbacks':feedbacks})
 
 def feedbackform(request):
@@ -366,6 +365,23 @@ def fpassword(request , user_id):
             return render(request , 'adminTemp/admin/forgot-password.html' , {'msg':msg})
     return render(request , 'adminTemp/admin/forgot-password.html')
     
+
+
+
+def show_orders(request):
+    bridge_rest_id = Orders.objects.all()
+    return render(request, 'adminTemp/admin/Order/orders.html', {'rest_name': bridge_rest_id})
+
+
+def edit_order(request,order_id):
+    order = Orders.objects.get(Order_Id=order_id)
+    if request.method == "POST":
+        order.Order_Status = request.POST.get("status")
+        order.save()
+        return redirect('show_orders')
+
+    return render(request,'adminTemp/admin/Order/edit_order.html',{'order':order})
+
 
 
 
