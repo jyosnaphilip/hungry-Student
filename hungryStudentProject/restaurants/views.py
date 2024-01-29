@@ -236,7 +236,8 @@ def searchMenu(request,rest_id):
     if request.method == 'POST':
         query=request.POST['search_query']
         outputs=Food.objects.filter(restaurant_food_bridge__rest_id__rest_id=rest_id,Food_Name__icontains=query)
-        return render(request, 'RestaurantTemp/searchResults.html',{'query':query, 'outputs':outputs,'rest_id':rest_id})
+        foodPrice = Restaurant_Food_bridge.objects.all()
+        return render(request, 'RestaurantTemp/searchResults.html',{'query':query, 'outputs':outputs,'rest_id':rest_id,'foodPrice':foodPrice})
     else:
         return render(request, 'RestaurantTemp/searchResults.html',{rest_id:rest_id})
 

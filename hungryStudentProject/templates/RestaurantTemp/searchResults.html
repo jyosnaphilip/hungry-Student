@@ -42,14 +42,16 @@
                             {% endif %}
                         </td>
                         <td class="text-color">     
-                            {{ output.Price }}
+                            {% for item in foodPrice %}
+                                {% if item.Food_ID.Food_ID == output.Food_ID %}
+                                    {{item.Price}}
+                                {% endif %}
+                            {% endfor %}
                         </td>
                         <td class="text-color">
-                                    {% if output.Category %}
-            
-                                        {{ output.Category }}
-            
-                                    {% endif %}
+                            {% if output.Category %}
+                                {{ output.Category }}
+                            {% endif %}
                         </td>
                         <td class="p-0">
                             <!-- Button trigger for modal -->
@@ -121,11 +123,15 @@
                             <div class="float-left p-1">
                                 <a href="{% url 'toggle_status' output.Food_ID rest_id %}"
                                     class="">
-                                        {% if output.Food_ID.Status == True %}
-                                    <span class="badge badge-success">Active</span>
-                                        {% else %}
-                                    <span class="badge badge-secondary">Inactive</span>
+                                    {% for item in foodPrice %}
+                                        {% if item.Food_ID.Food_ID == output.Food_ID %}
+                                            {% if item.Status == True %}
+                                            <span class="badge badge-success">Active</span>
+                                            {% else %}
+                                            <span class="badge badge-secondary">Inactive</span>
+                                            {% endif %}
                                         {% endif %}
+                                    {% endfor %}
                                 </a>
                             </div>
                             <!-- delete food item -->

@@ -5,10 +5,10 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 ">
+        <h1 class="h3 mb-0 text-color">Dashboard</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm border-4 bg-color shadow-sm" style="color: white;"><i
+                class="fas fa-download fa-sm" style="color: white;"></i><b> Generate Report</b></a>
     </div>
 
     <!-- Content Row -->
@@ -25,7 +25,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{total}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                            <i class="fas fa-users fa-2x" style="color: #cab493;"></i>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{rest_count}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-utensil-spoon fa-2x text-gray-300"></i>
+                            <i class="fas fa-utensil-spoon fa-2x" style="color: #cab493;"></i>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{user_count}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fa fa-user fa-2x text-gray-300"></i>
+                            <i class="fa fa-user fa-2x " style="color: #cab493;"></i>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-comments fa-2x" style="color: #cab493;"></i>
                         </div>
                     </div>
                 </div>
@@ -120,11 +120,11 @@
 
         <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4" style="border-color: #CF9E55;">
                 <!-- Card Header - Dropdown -->
                 <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-color">
+                    <h6 class="m-0 font-weight-bold text-light bg-color">Earnings Overview</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -151,11 +151,11 @@
 
         <!-- Pie Chart -->
         <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4" style="border-color: #CF9E55;">
                 <!-- Card Header - Dropdown -->
                 <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                    class="card-header py-3 d-flex flex-row align-items-center bg-color justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-light bg-color">Revenue Sources</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -198,19 +198,13 @@
         <!-- Content Column -->
         <div class="col-lg-6 mb-4">
 
-
-
-            
-
-           
-
         </div>
     </div>
 
 </div>
 <!-- /.container-fluid -->
 
-</div>
+
 <!-- End of Main Content -->
 
 {% endblock content %}
