@@ -20,24 +20,21 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'cadmin/css/sb-admin-2.min.css' %}" rel="stylesheet">
-
+    <link href="{% static 'rest/css/style.css' %}" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="base-bg">
 
-    <div class="container">
+    <div class="container w-50">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Edit Order Status!</h1>
-                                
+        <div class="card   shadow-lg m-0 p w-75">
+            <div class="card-body center m-0 ">
+                <!-- Nested Row within Card Body -->        
+            <div class="text-center m-0">
+                <h1 class="h4 text-light p-5 bg-color m-0 rounded-5">Edit Order Status!</h1>
+                                      
                             </div>
+                        <div class="p-5">  
                             <br>
                             <br>
                             <form class="user" method="POST" >
@@ -45,18 +42,18 @@
 
                                 
                                
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <input type="text" name="name" class="form-control form-control-user" id="exampleFirstName"
+                                <div class="form-group row text-color">
+                                    <div class="col-sm-6 text-color">
+                                        <input type="text" name="name" class="form-control form-control-user text-color" id="exampleFirstName"
                                             placeholder="Name" value="{{ order.Restaurant_ID }}" disabled>
                                     </div>
                                     
                                 </div>
                                 
-                                <div class="form-group row">
-                                    <label for="orderStatus" class="col-sm-3 col-form-label">Order Status:</label>
+                                <div class="form-group row text-color">
+                                    <label for="orderStatus" class="col-sm-3 col-form-label text-color">Order Status:</label>
                                     <div class="col-sm-6">
-                                        <select id="orderStatus" name="orderStatus" class="form-control">
+                                        <select id="orderStatus" name="orderStatus" class="form-control text-color">
                                             <option value="{{ order.Order_Status }}">{{ order.Order_Status }}</option>
                                             <option value="Processing">Processing</option>
                                             <option value="Accepted">Accepted</option>
@@ -68,29 +65,24 @@
 
                                     </div>
                                 </div>
-                                  <button class=" btn-primary" type="submit">Create</button>  
+                                  <button class=" btn bg-color text-center float-center" type="submit">Create</button>  
                                 </div>
                                 
 
-                                
-                                
-                                
-                                
-                                <hr>
                            
                                 
                             </form>
-                            <hr>
+                        </div>   
                             <!-- LATER TO FIX THE FORGOT PASSWORD -->
-                            <div class="text-center">
-                                <a class="small" href="{% url 'fpassword' user_id=user.id %}">Forgot Password?</a>
+                            <div class="text-center bg-color">
+                                <a class="small text-light" href="{% url 'fpassword' user_id=user.id %}">Forgot Password?</a>
                             </div>
-                            <div class="text-center">
-                                <a class="small" href="{% url 'login' %}">Already have an account? Login!</a>
+                            <div class="text-center bg-color">
+                                <a class="small text-light" href="{% url 'login' %}">Already have an account? Login!</a>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        
+                  
+               
             </div>
         </div>
 
