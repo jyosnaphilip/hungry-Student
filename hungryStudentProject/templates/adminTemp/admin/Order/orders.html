@@ -23,6 +23,7 @@
                                             <th>Customer Name</th>
                                             <th>Order Status</th>
                                             <th>Total Price</th>
+                                            <th>Quantity</th>
                                             <th>Edit Order Status</th>
 
                                             
@@ -33,17 +34,18 @@
                                         {% for i in rest_name %}
                                         <tr>
                                         <td>{{ i.Restaurant_ID }}</td>
-                                        <td>{{ i.Customer_ID.User_ID.username }}</td>
-                                        <td>{{ i.Order_Status }}</td>
-                                        <td>{{ i.Total_Price }}</td>
+                                        <td>{{ i.Order_ID.Customer_ID.User_ID.first_name }} {{ i.Order_ID.Customer_ID.User_ID.last_name }}</td>
+                                        <td>{{ i.Order_ID.Order_Status }}</td>
+                                        <td>{{ i.Order_ID.Total_Price }}</td>
+                                        <td>{{ i.Quantity }}</td>
                                       
-                                        <td>{% if i.Order_Id %}
+                                        <td>{% if i.Order_ID %}
 
                                            
                                                
 
                                             
-                                            <center><a style="float:center;" href="{% url 'edit_order' order_id=i.Order_Id %}" class="btn btn-success btn-icon-split">
+                                            <center><a style="float:center;" href="{% url 'edit_order' order_id=i.Order_ID %}" class="btn btn-success btn-icon-split">
                                                    
                                                     <span class="text">Edit Order Status</span> 
                                                 </a></center>
@@ -55,13 +57,13 @@
                                         </tr>        
                                         {% endfor %}
                                     </tbody>
-
                                     <tfoot>
                                         <tr>
                                             <th>Restaurant Name</th>
                                             <th>Customer Name</th>
                                             <th>Order Status</th>
                                             <th>Total Price</th>
+                                            <th>Quantity</th>
                                             <th>Edit Order Status</th>
                                            
                                         </tr>
