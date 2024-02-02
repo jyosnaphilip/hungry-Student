@@ -14,7 +14,6 @@ from django.urls import reverse
 
 
 def users_index(request):
-    
     return render(request,'users/index.html' )
 
 
@@ -26,33 +25,32 @@ def users_dash(request):
 
 
 
-# def user_details(request):
-#     if request.method == "POST":
-#         first_name = request.POST.get('first_name')
-#         last_name = request.POST.get('last_name')
-#         username = request.POST.get('username')
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         cpassword = request.POST.get('cpassword')
-#         if password == cpassword:
-#             if User.objects.filter(username=username).exists():
-#                 msg = "Username already exists"
-#                 return render(request , 'users/signin.html' , {'msg':msg})
-#             else:
-#                 user = User.objects.create_user(first_name = first_name , last_name = last_name , username=username , email = email)
-#                 user.set_password('password')
-#                 user.save()
-#                 return redirect('user_login')
-#         else:
-#             msg = "Password doesn't match!"
-#             return render(request , 'users/signin.html' , {'msg':msg})
-#     return render(request, 'users/signin.html')
+def user_details(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        if password == cpassword:
+            if User.objects.filter(username=username).exists():
+                msg = "Username already exists"
+                return render(request , 'users/signin.html' , {'msg':msg})
+            else:
+                user = User.objects.create_user(first_name = first_name , last_name = last_name , username=username , email = email)
+                user.set_password('password')
+                user.save()
+                return redirect('user_login')
+        else:
+            msg = "Password doesn't match!"
+            return render(request , 'users/signin.html' , {'msg':msg})
+    return render(request, 'users/signin.html')
 
 
 
 def detail_view(request, rest_id):
     restaurant = Restaurant.objects.get(rest_id=rest_id)
-    food = Food.objects.get(Food_ID=rest_id)
     bridge = Restaurant_Food_bridge.objects.filter(rest_id=restaurant)
     return render(request, 'users/detail_view.html', {'restaurant': restaurant, 'bridge':bridge})
 
