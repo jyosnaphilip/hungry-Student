@@ -39,11 +39,11 @@
                             <input type="number" name="price" inputmode="numeric" id="Price" class="form-control m-1"
                                 required>
                         </div>
-
+                        <!-- accept="image/png, image/gif, image/jpeg" -->
                         <div class="form-group">
-                            <label for="exampleFormControlFile1" accept="image/png, image/gif, image/jpeg" class="text-color">Add
+                            <label for="exampleFormControlFile1"  class="text-color">Add
                                 Image</label>
-                            <input type="file" class="form-control-file text-color" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file text-color" name="image" id="exampleFormControlFile1">
                         </div>
                         <br/>
                         <div class="text-center float-right">
@@ -95,10 +95,13 @@
                                     <em>No description added</em>
                                 </div>
                                 {% endif %}</br>
-                                {% if menu_item.Image.url %}
-                                <div class="mt-2 mb-3">
-                                   <img src="{{ menu_item.Image.url }}" style="width: 80px;height:80px;border-radius: 100%;">
-                                </div>
+                                {% if menu_item.Food_ID.Image %}
+                                        
+                                    <div class="mt-2 mb-3">
+                                    <img src="{{ menu_item.Food_ID.Image.url }}" style="width: 80px;height:80px;border-radius: 100%;">
+                                    </div> 
+                                {% else %}
+                                 <div></div>                                   
                                 {% endif %}
                             </td>
                             <td class="text-color">

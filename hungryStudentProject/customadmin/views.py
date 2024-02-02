@@ -61,22 +61,11 @@ def admin_login(request):
                 restaurant= Restaurant.objects.get(user_id=user)
                 rest_id=restaurant.rest_id           
                 return redirect('RestDashboard',rest_id)
-            
-            if user.is_superuser == False and user.is_staff == False and user.is_active == True:
-                login(request , user)
-                restaurant= Restaurant.objects.get(user_id=user)
-                rest_id=restaurant.rest_id           
-                return redirect('RestDashboard',rest_id)
-            
             if user.is_active == True:
                 login(request, user)
-                users= User.objects.get(user_id=user)
                 return redirect('users_dash')
-               
-                
-                
-   
         else:
+            print('wrong')
             msg = "Wrong credentials"
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
     return render(request, 'adminTemp/admin/login.html')
