@@ -58,7 +58,8 @@ urlpatterns = [
     path('rest_dashboard/<str:rest_id', rest_dashboard,name = 'rest_dashboard'),
     
     #Admin Side(Fathima)
-    path('',admin_login, name='login'),
+    path('',users_index,name='users_index'),
+    path('login',admin_login, name='login'),
     path('forgotpassword/<int:user_id>' , fpassword , name="fpassword"),
     path('admin_logout',admin_logout, name='admin_logout'),
     path('Register',admin_register,name = 'register'),
@@ -105,6 +106,7 @@ urlpatterns = [
     #Users-Ujain's Part(Fathima)
     path('users_index',users_index,name='users_index'),
     path('users_dash',users_dash,name='users_dash'),
+    path('user_details',user_details,name='user_details'),
     path('detail_view/<uuid:rest_id>',detail_view,name='detail_view'),
     path('user_profile/<int:user_id>',user_profile, name='user_profile'),
     path('user_profileedit/<int:user_id>',user_profileedit,name='user_profileedit'),
