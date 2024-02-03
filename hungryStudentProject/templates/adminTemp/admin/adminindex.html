@@ -32,7 +32,7 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                Total Users</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                 
+                                {{ total }} 
                                 
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-color">
-                    <h6 class="m-0 font-weight-bold text-light bg-color">Earnings Overview</h6>
+                    <h6 class="m-0 font-weight-bold text-light bg-color">Overview of Items</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -248,14 +248,14 @@
             type: 'pie'
         },
         title: {
-            text: 'Egg Yolk Composition'
+            text: 'Revenue of Restaurants'
         },
         tooltip: {
             valueSuffix: '%'
         },
-        subtitle: {
-            text: 'Source:<a href="https://www.mdpi.com/2072-6643/11/3/684/htm" target="_default">MDPI</a>'
-        },
+        // subtitle: {
+        //     text: 'Source:<a href="https://www.mdpi.com/2072-6643/11/3/684/htm" target="_default">MDPI</a>'
+        // },
         plotOptions: {
             series: {
                 allowPointSelect: true,
@@ -297,13 +297,13 @@
 
     const chart = Highcharts.chart('container-2', {
     title: {
-        text: 'Unemployment rates in engineering and ICT subjects, 2021',
+        text: 'Top Sold Items',
         align: 'left'
     },
     subtitle: {
-        text: 'Chart option: Plain | Source: ' +
+        text: 'The Best Selling Items are Listed ' +
             '<a href="https://www.nav.no/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/helt-ledige"' +
-            'target="_blank">NAV</a>',
+            'target="_blank"></a>',
         align: 'left'
     },
     colors: [
