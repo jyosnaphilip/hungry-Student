@@ -49,6 +49,7 @@ urlpatterns = [
     #for search bar in restaurants
     path('Restaurants/searchMenu/<str:rest_id>',searchMenu, name='searchMenu'),
 
+
    
     
 
@@ -104,6 +105,7 @@ urlpatterns = [
 
     #Users-Ujain's Part(Fathima)
     path('users_index',users_index,name='users_index'),
+    path('user_details',user_details,name='user_details'),
     path('users_dash',users_dash,name='users_dash'),
     path('detail_view/<uuid:rest_id>',detail_view,name='detail_view'),
     path('user_profile/<int:user_id>',user_profile, name='user_profile'),
