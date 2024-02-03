@@ -104,7 +104,6 @@ urlpatterns = [
 
     #Users-Ujain's Part(Fathima)
     path('users_index',users_index,name='users_index'),
-    path('user_details',user_details,name='user_details'),
     path('users_dash',users_dash,name='users_dash'),
     path('detail_view/<uuid:rest_id>',detail_view,name='detail_view'),
     path('user_profile/<int:user_id>',user_profile, name='user_profile'),
@@ -112,7 +111,7 @@ urlpatterns = [
     # path('restaurant/<uuid:rest_id>/foods/', restaurant_foods, name='restaurant_foods'),
 
 
-    path('users_dash/<str:rest_id>',users_dash,name='users_dash'),
+    # path('users_dash/<str:rest_id>',users_dash,name='users_dash'),
     # path('')
 
 ]

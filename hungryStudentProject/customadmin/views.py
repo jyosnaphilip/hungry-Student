@@ -70,6 +70,7 @@ def admin_login(request):
                 login(request, user)
                 return redirect('users_dash')
         else:
+            print('wrong')
             msg = "Wrong credentials"
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
     return render(request, 'adminTemp/admin/login.html')

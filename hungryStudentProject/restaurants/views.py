@@ -177,7 +177,7 @@ def editRestProfile(request,rest_id):
             print('here')
             rest_details.phone_number=request.POST.get('rest_phone')
             rest_details.location=request.POST.get('rest_location')
-            rest_details.image=request.FILES.get('idImage1')
+            rest_details.image=request.FILES.get('file')
             rest_details.save()
             return redirect('viewProfile',rest_id)
     return redirect('RestaurantTemp\create_rest_profile.html',rest_id)
