@@ -23,7 +23,7 @@ class Restaurant(models.Model):
     email_id = models.EmailField()
     image = models.ImageField(upload_to='restaurant_images/')
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
-    status = models.BooleanField(default = True)
+    status = models.BooleanField(default = True) 
     menu_item=models.ManyToManyField('restaurants.Food',through='restaurants.Restaurant_Food_bridge')
 
     def __str__(self):

@@ -8,7 +8,9 @@ from .models import Feedback
 from .models import Restaurant , Notification
 from users.models import Orders,Rest_Feedback
 from restaurants.models import Food
+from users.models import Order_Items,Orders
 from django.urls import reverse
+from django.db.models import Sum
 
 
 # Credentials(Fathima)
@@ -17,7 +19,9 @@ from django.urls import reverse
 def admin_index(request):
     noti = Notification.objects.filter(is_read = False).order_by('-created_at')
     total = User.objects.filter(is_superuser = False).count()
-
+    order = Orders.objects.count()
+    top_5_restaurants = Orders.objects.order_by('Total_Price')[:5]
+    top_food_totals = Order_Items.objects.all().annotate(total_quantity=Sum('Quantity')).order_by('-total_quantity')[:5]
     rest = User.objects.filter(is_superuser = False , is_staff = True)
     rest_count = rest.count()
     user = User.objects.filter(is_superuser = False , is_staff = False)
@@ -25,7 +29,7 @@ def admin_index(request):
     count = noti.count()
     val = count , user_count , rest_count
     datas = list(val)
-    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas})
+    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas,'order':order, 'top_5_restaurants': top_5_restaurants, 'top_food_totals':top_food_totals})
 
 def read_msg(request , msg_id):
     noti = Notification.objects.get(id = msg_id)
@@ -61,6 +65,7 @@ def admin_login(request):
                 restaurant= Restaurant.objects.get(user_id=user)
                 rest_id=restaurant.rest_id           
                 return redirect('RestDashboard',rest_id)
+         
             if user.is_active == True:
                 login(request, user)
                 return redirect('users_dash')
@@ -69,6 +74,14 @@ def admin_login(request):
             msg = "Wrong credentials"
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
     return render(request, 'adminTemp/admin/login.html')
+
+   
+            # if user.is_superuser == False and user.is_staff == False and user.is_active == True:
+            #     login(request , user)
+            #     restaurant= Restaurant.objects.get(user_id=user)
+            #     rest_id=restaurant.rest_id           
+            #     return redirect('RestDashboard',rest_id)
+            
 
 
 
@@ -358,7 +371,7 @@ def fpassword(request , user_id):
 
 
 def show_orders(request):
-    bridge_rest_id = Orders.objects.all()
+    bridge_rest_id = Order_Items.objects.all()
     return render(request, 'adminTemp/admin/Order/orders.html', {'rest_name': bridge_rest_id})
 
 

@@ -210,7 +210,7 @@ def declineOrder(request,Order_Id):
 
 #====================================================#==============================================#
 #rest_feedback.html
-def viewFeedback(request,rest_id):
+def viewFeedback(request,rest_id): 
     new=newOrders(rest_id)
     feedbacks=Rest_Feedback.objects.filter(rest_id=rest_id)
     order_items=Order_Items.objects.all()

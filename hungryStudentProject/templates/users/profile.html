@@ -29,7 +29,6 @@
   <!-- Nucleo Icons -->
   <link href="{% static 'users/css/nucleo-icons.css' %}" rel="stylesheet" />
   <link href="{% static 'users/css/nucleo-svg.css' %}" rel="stylesheet" />
-  hungry-Student\hungryStudentProject\static\users\css\style.css
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="{% static 'users/css/nucleo-svg.css' %}" rel="stylesheet" />
@@ -164,36 +163,40 @@
     <div class="card shadow-lg mx-4 card-profile-bottom">
       <div class="card-body p-3">
         <div class="row gx-4">
-          {% for i in up %}
+
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              
-              <img src="{{i.image.url}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              {% if i.image.url is None %}
+              <img src="{{user_profile.image.url}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              {% else %}
+              <img  alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              {% endif %}
               
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                {{i.user.first_name}} {{i.user.last_name}}
+                {{user.first_name}} {{user.last_name}}
               </h5>
              
             </div>
           </div>
-          {% endfor %}
+
         </div>
       </div>
     </div>
     <div class="container-fluid py-4">
-      {% for i in up %}
+
       <div class="row">
         <div class="col-md-8">
           <div class="card">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <p class="mb-0">Edit Profile</p>
-                <button class="btn btn-primary btn-sm ms-auto"><a href="{% url 'user_profileedit' id=i.id user_id=request.user.id %}">Edit Profile</a></button>
-              </div>
+
+                <button class="btn btn-primary btn-sm ms-auto"><a href="{% url 'user_profileedit' user_id=user.id %}"> Profile</a></button>
+              </div>Edit
             </div>
             <div class="card-body">
               
@@ -202,25 +205,25 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Username</label>
-                    <input class="form-control" type="text" value="{{ i.user.username }}"disabled>
+                    <input class="form-control" type="text" value="{{ user.username }}"disabled>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Email address</label>
-                    <input class="form-control" type="email" value="{{i.user.email}}" disabled>
+                    <input class="form-control" type="email" value="{{user.email}}" disabled>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">First name</label>
-                    <input class="form-control" type="text" value="{{i.user.first_name}}" disabled>
+                    <input class="form-control" type="text" value="{{user.first_name}}" disabled>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Last name</label>
-                    <input class="form-control" type="text" value="{{i.user.last_name}}" disabled>
+                    <input class="form-control" type="text" value="{{user.last_name}}" disabled>
                   </div>
                 </div>
               </div>
@@ -230,25 +233,25 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Address</label>
-                    <input class="form-control" type="text" value="{{i.customer_address}}" disabled>
+                    <input class="form-control" type="text" value="{{user_profile.customer_address}}" disabled>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">City</label>
-                    <input class="form-control" type="text" value="{{i.city}}" disabled>
+                    <input class="form-control" type="text" value="{{user_profile.city}}" disabled>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Country</label>
-                    <input class="form-control" type="text" value="{{i.country}}" disabled>
+                    <input class="form-control" type="text" value="{{user_profile.country}}" disabled>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">Postal code</label>
-                    <input class="form-control" type="text" value="{{i.postal_code}}"disabled>
+                    <input class="form-control" type="text" value="{{user_profile.postal_code}}"disabled>
                   </div>
                 </div>
               </div>
@@ -266,7 +269,11 @@
               <div class="col-4 col-lg-4 order-lg-2">
                 <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
                   <a href="javascript:;">
-                    <img src="{{i.image.url}}" class="rounded-circle img-fluid border border-2 border-white" height="100%">
+                    {% if customer_address.image.url is None %}
+                    <img src="{{customer_address.image.url}}" class="rounded-circle img-fluid border border-2 border-white" height="100%">
+                    {% else %}
+                    <img src="" alt="Image" class="rounded-circle img-fluid border border-2 border-white" height="100%">4
+                    {% endif %}
                   </a>
                 </div>
               </div>
@@ -282,10 +289,10 @@
               <div class="text-center mt-4">
                 
                 <h5>
-                  {{i.user.first_name}}<span class="font-weight-light"></span>
+                  {{user.first_name}}<span class="font-weight-light"></span>
                 </h5>
                 <div class="h6 font-weight-300">
-                  <i class="ni location_pin mr-2">{{i.customer_address}}</i>
+                  <i class="ni location_pin mr-2">{{customer_address.customer_address}}</i>
                 </div>
                 
                 
@@ -293,7 +300,7 @@
             </div>
           </div>
         </div>
-        {% endfor %}
+
       </div>
       <footer class="footer pt-3  ">
         <div class="container-fluid">

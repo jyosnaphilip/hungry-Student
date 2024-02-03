@@ -25,24 +25,42 @@ def users_dash(request):
 
 
 
-
-
+def user_details(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        if password == cpassword:
+            if User.objects.filter(username=username).exists():
+                msg = "Username already exists"
+                return render(request , 'users/signin.html' , {'msg':msg})
+            else:
+                user = User.objects.create_user(first_name = first_name , last_name = last_name , username=username , email = email)
+                user.set_password('password')
+                user.save()
+                return redirect('user_login')
+        else:
+            msg = "Password doesn't match!"
+            return render(request , 'users/signin.html' , {'msg':msg})
+    return render(request, 'users/signin.html')
 
 
 
 def detail_view(request, rest_id):
     restaurant = Restaurant.objects.get(rest_id=rest_id)
-    food = Food.objects.get(Food_ID=rest_id)
     bridge = Restaurant_Food_bridge.objects.filter(rest_id=restaurant)
     return render(request, 'users/detail_view.html', {'restaurant': restaurant, 'bridge':bridge})
 
 
-def user_profile(request):
-    user_profile = Customer_Profile.objects.all()
-    return render(request,'users/profile.html',{'up':user_profile})
+def user_profile(request, user_id):
+    user_profile = Customer_Profile.objects.get(User_ID=user_id)
+    return render(request,'users/profile.html',{'user_profile':user_profile})
 
-def user_profileedit(request,id, user_id):
-    user_profile = Customer_Profile.objects.get(id=id)
+def user_profileedit(request, user_id):
+    user_profile = Customer_Profile.objects.get(User_ID=user_id)
     user = User.objects.get(id=user_id)
     
     if request.method=="POST":
@@ -55,7 +73,7 @@ def user_profileedit(request,id, user_id):
         user_profile.country = request.POST.get('country')
         user_profile.postal_code = request.POST.get('postal_code')
         user_profile.save()
-        return redirect('user_profile')
+        return redirect('user_profile', user_id)
     return render(request, 'users/profile_edit.html', {'user_profile': user_profile})
 
 

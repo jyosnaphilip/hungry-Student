@@ -22,8 +22,8 @@
                                             <th>Customer Name</th>
                                             <th>Restaurant name</th>
                                             <th>Description</th>
-                                            <th>TimeStamp</th>
-                                            <th>Food Ordered</th>
+                                            <th>Rating</th>
+                                            <th>Order Date</th>
                                             
                                         </tr>
                                     </thead>
@@ -32,8 +32,10 @@
                                             <th>Customer Name</th>
                                             <th>Restaurant name</th>
                                             <th>Description</th>
-                                            <th>TimeStamp</th>
-                                            <th>Food Ordered</th>
+                                            <th>Rating</th>
+                                            <th>Order Date</th>
+                                            
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody class="text-color text-center">
@@ -43,11 +45,12 @@
                                             <td>{{i.customer_ID.User_ID.first_name}} {{i.customer_ID.User_ID.last_name}}</td>
                                             <td>{{i.rest_id}}</td>
                                             <td>{{i.Description}}</td>
+                                            <td>{{i.Rating}}</td>
+                                            
                                            
 
                                             <td>{{i.Order_Id.Timestamp}}</td>
                                             
-                                            <td>{{ i.rest_id.Restaurant_ID}}</td>
                                             
                                             <!-- {% if i.is_staff == True %}
                                             
