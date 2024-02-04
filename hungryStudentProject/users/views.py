@@ -61,7 +61,7 @@ def user_details(request):
         if password == cpassword:
             if User.objects.filter(username=username).exists():
                 msg = "Username already exists"
-                return render(request , 'users/signin.html' , {'msg':msg})
+                return render(request , 'users/signin.html' , {'msg':msg})  
             else:
                 user = User.objects.create_user(first_name = first_name , last_name = last_name , username=username , email = email)
                 user.set_password('password')
