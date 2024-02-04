@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -7,7 +7,7 @@ from django.views.decorators.cache import never_cache
 from customadmin.models import Feedback
 from customadmin.models import Restaurant , Notification
 from restaurants.models import Food,Restaurant_Food_bridge
-from .models import Customer_Profile
+from .models import Customer_Profile, Rest_Feedback
 from django.urls import reverse
 
 
@@ -92,8 +92,19 @@ def restaurant_foods(request, rest_id):
     return render(request, 'users/detail_view.html', {'foods': foods,'restaurant':restaurant,'food':food})
 
 
-
-            
+def userdashboard(request,id):
+    return render(request,'users/order_now/userdashboard.html')
+def orderOptions(request,id):
+    rest=Restaurant.objects.all()
+    return render(request,'users/order_now/order_options.html',{'rest':rest})
+def orderMenu(request,rest_id):
+    menu_items=get_object_or_404(Restaurant,rest_id=rest_id)
+    bridge=Restaurant_Food_bridge.objects.all()    
+    return render(request,'users/order_now/order_menu.html',{'rest_id':rest_id,'menu_items':menu_items,'bridge':bridge})
+def givenFeedback(request,id):
+    customer_ID=Customer_Profile.objects.get(User_ID=id)
+    feedbacks=Rest_Feedback.objects.filter(customer_ID=customer_ID.customer_ID)
+    return render(request,'users/order_now/givenFeedback.html',{'feedbacks':feedbacks})
         
 
         
