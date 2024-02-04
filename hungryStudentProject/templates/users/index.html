@@ -17,8 +17,7 @@
                 <h2 class="animate__animated animate__fadeInDown"><span>Hungry Student</span> </h2> 
                 <p class="animate__animated animate__fadeInUp">Revolutionize student dining! Our hungry student webapp offers seamless online booking for delicious meals, eliminating hunger stress. Savor convenience with every click—because no student should compromise taste for a busy schedule. Book now, feast soon</p>
                 <div>
-                  <a href="#" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+                  <a href="{% url 'user_details' %}" class="btn-book animate__animated animate__fadeInUp scrollto">Order Now</a>
                 
                   
                 </div>
@@ -27,7 +26,7 @@
           </div>
 
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg);">
+          <!-- <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg);">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
@@ -38,10 +37,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Slide 3 -->
-          <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
+          <!-- <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
@@ -52,17 +51,17 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <!-- <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
           <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
         </a>
 
         <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
           <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
+        </a> -->
 
       </div>
     </div>
@@ -142,8 +141,9 @@
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="box">
               <span>03</span>
-              <h4> Keep track of what you eat</h4>
-              <p>An add-on to digitizing a process is that we gain records of all our purchases. This helps you make better decisions for a brighter future.</p>
+              <h4> <strong>Study Fuel Rewards</strong>
+              </h4>
+              <p>Loyalty matters! Earn Study Fuel Rewards for every order and enjoy special discounts, freebies, and exclusive deals.</p>
             </div>
           </div>
 
@@ -358,44 +358,35 @@
     </section>End Specials Section -->
 
     <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
+    <section id="mission" class="events">
       <div class="container">
 
         <div class="section-title">
-          <h2>Organize Your <span>Events</span> in our Restaurant</h2>
+          <h2><span>Our Mission</span></h2>
+              
         </div>
 
-        <div class="events-slider swiper">
+        <!-- <div class="events-slider swiper">
           <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
+            <div class="swiper-slide"> -->
               <div class="row event-item">
                 <div class="col-lg-6">
-                  <img src="{% static 'users/img/event-birthday.jpg' %}" class="img-fluid" alt="">
+                  <img src="{% static 'img\mission-img.png' %}" class="img-fluid" height="300px" width="400px">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Birthday Parties</h3>
-                  <div class="price">
-                    <p><span>$189</span></p>
-                  </div>
+                 
                   <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                    
+                      At Hungry Student, our mission is to provide students with quick and delicious meal options, allowing them to focus on their studies without compromising on flavor. We believe that good food is a key ingredient for academic success, and we're here to fuel your late-night study sessions and weekend cravings.
+                    
                   </p>
-                  <ul>
-                    <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                    <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                    <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cillum dolore eu fugiat nulla pariatur
-                  </p>
+                  
                 </div>
               </div>
             </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <div class="row event-item">
                 <div class="col-lg-6">
                   <img src="{% static 'users/img/event-private.jpg' %}" class="img-fluid" alt="">
@@ -420,9 +411,9 @@
                   </p>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>End testimonial item -->
 
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <div class="row event-item">
                 <div class="col-lg-6">
                   <img src="{% static 'users/img/event-custom.jpg' %}" class="img-fluid" alt="">
@@ -447,13 +438,13 @@
                   </p>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>End testimonial item -->
 
           </div>
-          <div class="swiper-pagination"></div>
+          <!-- <div class="swiper-pagination"></div>
         </div>
 
-      </div>
+      </div> -->
     </section><!-- End Events Section -->
 
     <!-- ======= Book A Table Section ======= -->
@@ -745,7 +736,31 @@
     </section><!-- End Testimonials Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="info" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>More Information <span>Hungry Student</span></h2>
+          <p>Fuel your mind, feed your future. With every meal, you're one step closer to success.</p>
+        </div>
+
+        <div class="row">
+
+         <p><li>Study Fuel Rewards: Your Loyalty Rewarded
+
+          Our commitment to your success goes hand in hand with our Study Fuel Rewards program. Every order is an opportunity to earn points, unlocking exclusive discounts, freebies, and special deals. Because at Hungry Student, we believe in rewarding your loyalty, bite by delicious bite.
+          </li><br><br>
+          <li>Beyond Borders, Diverse Palates
+          
+            Hungry Student celebrates the diversity of student preferences. Whether you're craving the comfort of home-cooked meals or the adventure of international flavors, our platform connects you with a diverse range of local eateries. We take pride in being the culinary companion for every palate.
+            </li><br><br>
+          <li>Effortless Ordering, Anytime, Anywhere
+          
+            Navigating student life can be hectic, and we get it. That's why we've designed our user-friendly app to make ordering a breeze. Customize your meal, choose your delivery time – it's all about making sure you get what you need, when you need it, with minimal effort.</p>
+  </li>
+        </div>
+
+      </div>
       <div class="container">
 
         <div class="section-title">

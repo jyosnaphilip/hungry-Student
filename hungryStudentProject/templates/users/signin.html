@@ -20,10 +20,11 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'cadmin/css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link href="{% static 'rest/css/style.css' %}" rel="stylesheet">
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-color">
 
     <div class="container">
 
@@ -31,11 +32,13 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 ">
+                      <img src="{% static 'img/login-image.jpg' %}" style="height:100%;width:100%;">
+                    </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account For Users!</h1>
+                                <h1 class="h4 text-color mb-4">Create an Account For Users!</h1>
                             </div>
                             <form class="user" method="POST">
                                 {% csrf_token %}
@@ -72,7 +75,7 @@
                                             id="exampleRepeatPassword" placeholder="Repeat Password" name="cpassword">
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-user btn-block">
+                                <button class="btn bg-color btn-user btn-block">
                                     Sign-In
                                 </button>
                                 
@@ -82,10 +85,10 @@
                             <hr>
                             <!-- LATER TO FIX THE FORGOT PASSWORD -->
                             <div class="text-center">
-                                <a class="small" href="{% url 'forgotpassword' %}">Forgot Password?</a>
+                                <a class="small text-color" href="{% url 'forgotpassword' %}">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{% url 'login' %}">Already have an account? Login!</a>
+                                <a class="small text-color" href="{% url 'login' %}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
