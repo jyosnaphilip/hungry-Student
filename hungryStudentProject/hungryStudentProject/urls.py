@@ -19,7 +19,7 @@ from django.urls import path
 
 from restaurants.views import homepage,restDash,addMenu,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu
 from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,show_orders,edit_order,user_logout
-from users.views import users_index,users_dash,detail_view,user_profile,user_profileedit
+from users.views import  addFeedback, users_index,users_dash,detail_view,user_profile,user_profileedit,userdashboard,orderOptions,orderMenu,givenFeedback,user_orders,addFeedback,userDashboard,cancelOrder
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -48,7 +48,15 @@ urlpatterns = [
     path('Restaurants/edit_profile/<str:rest_id>',editRestProfile,name="edit_profile"),
     #for search bar in restaurants
     path('Restaurants/searchMenu/<str:rest_id>',searchMenu, name='searchMenu'),
-
+    #for actual working user dashboard
+    path('user/a-dashboard/<int:id>',userdashboard,name='userdashboard'),
+    path('user/orderoptions/<int:id>',orderOptions,name='orderOptions'),
+    path('user/orderMenu/<str:rest_id>',orderMenu,name='orderMenu'),
+    path('user/givenFeedback/<int:id>',givenFeedback,name='givenFeedback'),
+    path('user/user_orders/<int:id>',user_orders,name='user_orders'),
+    path('user/add_feedback/<int:id>/<str:order_id>',addFeedback,name='addFeedback'),
+    path('user/userdashboard/<int:id>',userDashboard,name='userdashboard'),
+    path('user/cancelOrder/<str:order_id>/<int:id>',cancelOrder,name='cancelOrder'),
    
     
 

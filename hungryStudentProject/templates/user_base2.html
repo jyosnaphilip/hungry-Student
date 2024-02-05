@@ -64,13 +64,11 @@
           <!-- {% if user.is_authenticated %} -->
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-          <li><a class="nav-link scrollto" href="#menu">Restaurants</a></li>
-          <li><a class="nav-link scrollto" href="#specials">Specials</a></li>
-          <li><a class="nav-link scrollto" href="#events">Events</a></li>
-          <li><a class="nav-link scrollto" href="#chefs">Info</a></li>
+          <li><a class="nav-link scrollto" href="#restaurants">Restaurants</a></li>
+          <li><a class="nav-link scrollto" href="#mission">Our Mission</a></li>
 
-          
-          
+          <li><a class="nav-link scrollto" href="#chefs">Info</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'orderOptions' id=request.user.id %}">Order Now</a></li>
 
           <!-- Drop Down Menu -->
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>

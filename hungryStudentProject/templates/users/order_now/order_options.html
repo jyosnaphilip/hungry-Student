@@ -1,0 +1,27 @@
+{% extends 'user_base3.html' %}
+{% load static %}
+{% block content %}
+<div>  
+    <div class="row m-1">
+    {% for i in rest %} 
+    <div class="card m-4" style="width: 18rem;">
+        {% if i.image %}
+        <img class="card-img-top" src="{{i.image.url}}" alt="Card image cap" height="200px" width="50 px">
+        {% else %}
+        <img class="card-img-top text-center " src="{% static 'img/default_rest_profile.jpeg' %}" alt="No image added"  style="width: 250px;height:250px;border-radius: 100%;opacity: 0.8 ;">
+        {% endif %}
+        <div class="align-items-end card-body">
+          <h5 class="card-title">{{i.name}}</h5>
+          <p class="card-text">{{i.location}}</p>
+          <div class="d-flex align-items-baseline">
+          <a href="{% url 'orderMenu' i.rest_id %}" class="btn bg-color">Order</a>
+        </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+       
+
+      
+</div>
+{% endblock content %}

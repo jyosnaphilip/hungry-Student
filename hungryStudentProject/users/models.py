@@ -35,8 +35,10 @@ class Orders(models.Model):
         ('Refunded','Refunded'),
         ('Complete','Complete')
     )
+
     Order_Status=models.CharField(max_length=20,choices=CATEGORIES,blank=False,default='Processing')
     Total_Price=models.DecimalField(max_digits=5,decimal_places=2,blank=False)
+    feedback=models.BooleanField(default=False)
     def __str__(self):
          #String for representing the Model object.
         return f'{self.Order_Id}'
