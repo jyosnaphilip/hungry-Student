@@ -52,7 +52,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Restaurant Added</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{rest_count}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{rest_count}} , {{data1}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-building fa-3x" style="color: #cab493;"></i>
@@ -97,7 +97,9 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 CUSTOMERS</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{user_count}}</div>
+                                {% for i in data %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{  i.average_rating }}</div>
+                            {% endfor %}
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-user fa-3x " style="color: #cab493;"></i>
@@ -185,6 +187,8 @@
                         </div>
                     </div>
                 </div>
+                
+                
                 <!-- Card Body -->
                 
                     <div class="chart-pie pt-4 pb-2">
@@ -206,6 +210,35 @@
                 
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8 col-lg-5">
+            <div class="card shadow mb-4" style="border-color: #CF9E55;">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center bg-color justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-light bg-color">Revenue Sources</h6> </div>
+                    <div class="dropdown no-arrow">
+                        <figure class="highcharts-figure">
+                            <div id="container-pie-2"></div>
+                            <p class="highcharts-description">
+                                A variation of a 3D pie chart with an inner radius added.
+                                These charts are often referred to as donut charts.
+                            </p>
+                        </figure>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+              
     </div>
 
     <!-- Content Row -->
@@ -321,7 +354,7 @@
         '#23e274'
     ],
     xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        categories: fooddata.map(item => item.name)
     },
     series: [{
         type: 'column',
@@ -377,6 +410,7 @@ document.getElementById('polar').addEventListener('click', () => {
 
 
 </script>
+
 
 
 <style>
@@ -478,8 +512,192 @@ input[type="number"] {
 
 </style>
 
+<!-- Add the JavaScript to make the AJAX request and render the chart -->
+<script>
 
-<!-- End of Main Content -->
+</script>
+
+<style>
+    .highcharts-figure,
+.highcharts-data-table table {
+    min-width: 310px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+#container {
+    height: 400px;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+</style>
+
+
+<script>
+    // Data retrieved from https://olympics.com/en/olympic-games/beijing-2022/medals
+Highcharts.chart('container', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Beijing 2022 gold medals by country',
+        align: 'left'
+    },
+    subtitle: {
+        text: '3D donut in Highcharts',
+        align: 'left'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Medals',
+        data: [
+            ['Norway', 16],
+            ['Germany', 12],
+            ['USA', 8],
+            ['Sweden', 8],
+            ['Netherlands', 8],
+            ['ROC', 6],
+            ['Austria', 7],
+            ['Canada', 4],
+            ['Japan', 3]
+
+        ]
+    }]
+});
+
+</script>
+
+<script>
+
+Highcharts.chart('container-pie-2', {
+    chart: {
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares. January, 2022',
+        align: 'left'
+    },
+    
+
+    series: [{
+        name: 'Medals',
+        data: 
+    }]
+});
+
+
+</script>
+
+<style>
+ #container {
+    height: 400px;
+}
+
+.highcharts-figure,
+.highcharts-data-table table {
+    min-width: 310px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+</style>
+
+
+<style>
+
+
+
+</style>
+
+<script>
+
+
+
+</script>
+
+
+
+// <!-- End of Main Content -->
 
 {% endblock content %}
 
