@@ -27,10 +27,10 @@ Hungry Student is your campus food savior letting you:
 ### About the Team
 
 - Jyosna Philip (23122019): Handled Restaurant Module, Partial Worked with the User Module.
-- [GitHub]: https://github.com/jyosnaphilip.
+- GitHub: https://github.com/jyosnaphilip.
 
 - Fathimathul Susna ShoukkathAli (23122014): Handled Custom Module, Partial Worked with the User Module.
-- [GitHub]: https://github.com/FathimathulSusnaAli.
+- GitHub: https://github.com/FathimathulSusnaAli.
 
 
 
