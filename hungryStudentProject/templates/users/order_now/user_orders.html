@@ -77,7 +77,7 @@
         </td>
         <td>
           {% if order.Order_Status == 'Complete' %}
-            {% if order.feedback == 'False' %}
+            {% if order.feedback == False %}
           <button data-toggle="modal" data-target="#addFeedback-{{forloop.counter}}"
             class="badge badge-pill badge-secondary"> Add Feedback
           </button>
