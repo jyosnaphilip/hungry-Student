@@ -39,6 +39,23 @@ Hungry Student is your campus food savior letting you:
 - New restaurants can be added by clicking on the 'Create Restaurant' option.
 <img src="readme-ss/admin5.png">
 
+<img src="readme-ss/admin6.png">
+
+-Clicking on 'Account' option in the sidebar will load all the customers who have signed up on the site. They can be created,edited and activated/deactivated.
+<img src="readme-ss/admin12.png">
+<img src="readme-ss/admin7.png">
+
+- Clicking on 'Feedback' in the sidebar will load all the feedbacks given on all the restaurants of the site.
+<img src="readme-ss/admin8.png">
+
+- Clicking on 'Orders' in the sidebar will load all the orders generated in the site.
+<img src="readme-ss/admin9.png">
+Admin can change the Order Status of an order by clicking on 'Edit Order Status' option available next to each order, if the need arises.
+<img src="readme-ss/admin10.png">
+
+The admin can click on the icon next to admin name on upper right corner to edit profile or logout.
+<img src="readme-ss/admin11.png">
+
 
 ### Guide for Restaurants
 
