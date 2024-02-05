@@ -7,7 +7,7 @@ from django.views.decorators.cache import never_cache
 from customadmin.models import Feedback
 from customadmin.models import Restaurant , Notification
 from restaurants.models import Food,Restaurant_Food_bridge
-from .models import Customer_Profile, Rest_Feedback
+from .models import Customer_Profile, Order_Items, Rest_Feedback,Orders
 from django.urls import reverse
 
 
@@ -105,7 +105,27 @@ def givenFeedback(request,id):
     customer_ID=Customer_Profile.objects.get(User_ID=id)
     feedbacks=Rest_Feedback.objects.filter(customer_ID=customer_ID.customer_ID)
     return render(request,'users/order_now/givenFeedback.html',{'feedbacks':feedbacks})
+def user_orders(request,id):
+    customer_ID=Customer_Profile.objects.get(User_ID=id)
+    orders=Orders.objects.filter(Customer_ID=customer_ID.customer_ID)
+    feedbacks=Rest_Feedback.objects.filter(customer_ID=customer_ID.customer_ID)
+    
+    return render(request,'users/order_now/user_orders.html',{'orders':orders,'feedbacks':feedbacks})
         
+def addFeedback(request,id,order_id):
+    if request.method=='POST':
+        customer_ID=Customer_Profile.objects.get(User_ID=id)
+        rest=Orders.objects.get(Order_Id=order_id)
+        rest_id=rest.Restaurant_ID.rest_id
+        description=request.POST['description'].strip()
+        rating=request.POST.get('rating')
+        feedback=Rest_Feedback(customer_ID=customer_ID,rest_id=Restaurant.objects.get(rest_id=rest_id),Order_Id=Orders.objects.get(Order_Id=order_id),Description=description,Rating=rating)
+        feedback.save()
+        rest.feedback=True
+        rest.save()
+        return redirect('user_orders',id)
+    return redirect('user_orders',id)
+
 
         
 

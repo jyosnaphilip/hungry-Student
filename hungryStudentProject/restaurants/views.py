@@ -174,7 +174,7 @@ def viewRestProfile(request,rest_id):
 def editRestProfile(request,rest_id):
     rest_details=Restaurant.objects.get(rest_id=rest_id)
     if request.method == "POST":
-            print('here')
+            
             rest_details.phone_number=request.POST.get('rest_phone')
             rest_details.location=request.POST.get('rest_location')
             rest_details.image=request.FILES.get('file')

@@ -66,16 +66,11 @@
 
             <!-- Heading -->
             
-            <li class="nav-item base-bg" >
-                <a class="nav-link base-bg" href="{#% url 'menu_pg' rest_id %#}">
-                    <i class="fa-solid fa-pen-to-square fa-xl"  style="font-size: medium;"></i>
-                    <span style="font-size:medium;">Order Now</span></a>
-                    
-            </li>
+            
             <li class="nav-item" >
-                <a class="nav-link base-bg" href="{#% url 'today-orders' rest_id %#}">
+                <a class="nav-link base-bg" href="{% url 'user_orders' id=request.user.id %}">
                     <i class="fa-solid fa-bell-concierge fa-xl"  style="font-size:medium;"></i>
-                    <span style="font-size: medium;" >View Past Orders</span></a>
+                    <span style="font-size: medium;" >View Orders</span></a>
             </li>
 
 
