@@ -52,7 +52,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Restaurant Added</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{rest_count}} , {{data1}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{rest_count}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-building fa-3x" style="color: #cab493;"></i>
@@ -97,9 +97,9 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 CUSTOMERS</div>
-                                {% for i in data %}
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{  i.average_rating }}</div>
-                            {% endfor %}
+                                
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{  user_count }}</div>
+                         
                         </div>
                         <div class="col-auto">
                             <i class="fa fa-user fa-3x " style="color: #cab493;"></i>
@@ -626,6 +626,7 @@ Highcharts.chart('container-pie-2', {
     series: [{
         name: 'Medals',
         data: 
+                {{ data }}
     }]
 });
 

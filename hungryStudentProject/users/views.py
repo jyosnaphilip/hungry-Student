@@ -9,6 +9,8 @@ from customadmin.models import Restaurant , Notification
 from restaurants.models import Food,Restaurant_Food_bridge
 from .models import Customer_Profile, Order_Items, Rest_Feedback,Orders
 from django.urls import reverse
+from django.db.models import Sum
+
 
 
 
@@ -92,8 +94,16 @@ def restaurant_foods(request, rest_id):
     return render(request, 'users/detail_view.html', {'foods': foods,'restaurant':restaurant,'food':food})
 
 
-def userdashboard(request,id):
-    return render(request,'users/order_now/userdashboard.html')
+def userdashboard(request, id):
+    rest=Restaurant.objects.all()
+    customer_ID=Customer_Profile.objects.get(User_ID=id)
+    # order = Orders.objects.all()
+    order_count = Orders.objects.filter(Customer_ID=customer_ID.customer_ID).count()
+    total_amount = Orders.objects.filter(Customer_ID=customer_ID.customer_ID).aggregate(total_amount=Sum('Total_Price'))['total_amount'] or 0
+    # restaurants_count = rest.count()
+    # print(restaurants_count,"hgkhgjgjg")
+    return render(request, 'users/order_now/userdashboard.html', {'id':id,'rest': rest,'order_count':order_count,'total_amount':total_amount})
+
 def orderOptions(request,id):
     rest=Restaurant.objects.all()
     return render(request,'users/order_now/order_options.html',{'rest':rest})
@@ -132,9 +142,9 @@ def cancelOrder(request,order_id,id):
     order.save()
     return redirect('user_orders',id)
    
-def userDashboard(request,id):
+# def userDashboard(request,id):
     
-    return render(request,'users/order_now/userdashboard.html',{'id':id})
+#     return render(request,'users/order_now/userdashboard.html',{'id':id})
 
         
 
