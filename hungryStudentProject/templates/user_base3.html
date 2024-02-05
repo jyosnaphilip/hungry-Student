@@ -55,7 +55,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active" >
-                <a class="nav-link base-bg" href="{#% url 'RestDashboard' rest_id %#}" >
+                <a class="nav-link base-bg" href="{% url 'userdashboard' id=request.user.id %}" >
                     <i class="fas fa-fw fa-tachometer-alt"  style="font-size: medium;"></i>
                     <span class="base-bg"  style="font-size: medium;">Dashboard</span></a>
             </li>

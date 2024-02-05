@@ -126,6 +126,15 @@ def addFeedback(request,id,order_id):
         return redirect('user_orders',id)
     return redirect('user_orders',id)
 
+def cancelOrder(request,order_id,id):
+    order=Orders.objects.get(Order_Id=order_id)
+    order.Order_Status='Cancelled'
+    order.save()
+    return redirect('user_orders',id)
+   
+def userDashboard(request,id):
+    
+    return render(request,'users/order_now/userdashboard.html',{'id':id})
 
         
 
