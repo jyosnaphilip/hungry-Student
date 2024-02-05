@@ -21,6 +21,16 @@ Hungry Student is your campus food savior letting you:
 | Customer | [Click Here](#customers) |
 
 
+### About the Team
+
+- Jyosna Philip (23122019): Handled Restaurant Module, Partial Worked with the User Module.
+- [GitHub]: https://github.com/jyosnaphilip.
+
+- Fathimathul Susna ShoukkathAli (23122014): Handled Custom Module, Partial Worked with the User Module.
+- [GitHub]: https://github.com/FathimathulSusnaAli.
+
+
+
 ### Guide for admins  { # admins}
 - The admin has to login at http://127.0.0.1:8000/login.
 <img src="readme-ss/rest1.png">
@@ -105,3 +115,7 @@ The number of orders that have been accepted but not completed are shown on your
 <img src="readme-ss/rest24.png">
 
 ### Guide for Customers
+
+
+
+
