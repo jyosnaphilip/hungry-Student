@@ -22,6 +22,22 @@ Hungry Student is your campus food savior letting you:
 
 
 ### Guide for admins  { # admins}
+- The admin has to login at http://127.0.0.1:8000/login.
+<img src="readme-ss/rest1.png">
+
+- Once logged in, admin is shown the dashboard where various analysis of the site is provided.
+<img src="readme-ss/admin1.png">
+
+- You will be notified of new users who signed up. It is shown in the envelope symbol on the topbar.
+<img src="readme-ss/admin2.png">
+
+- Clicking on 'Users' will retreive all the users of the site, showing the type of users. Their status can be toggled.
+<img src="readme-ss/admin3.png">
+
+- Clicking on 'Restaurants' on the sidebar will retrieve all the restaurants available in the site. 
+<img src="readme-ss/admin4.png">
+- New restaurants can be added by clicking on the 'Create Restaurant' option.
+<img src="readme-ss/admin5.png">
 
 
 ### Guide for Restaurants
