@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.urls import path
 
 from restaurants.views import homepage,restDash,addMenu,addMenu,viewFeedback,menu_pg,editMenu,delMenuItem,toggle_status,viewRestProfile,editRestProfile,viewOrders,acceptOrder,declineOrder,searchMenu
-from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,show_orders,edit_order
-from users.views import users_index,users_dash,detail_view,user_profile,user_profileedit,user_details
+from customadmin.views import admin_index, admin_login, admin_register,forgot_password,tables , status_changeuser  , rest , create_rest , edit_rest, users, create_user, edit_user, feedback, feedbackform , admin_logout, RestaurantDetails, status_changerest, status_changetables, status_changedetails , rest_dashboard , rest_users , user_status_change , rest_edit_user , create_profile ,  create_rest_profile , rest_profile , edit_rest_profile , read_msg , fpassword,show_orders,edit_order,user_logout
+from users.views import users_index,users_dash,detail_view,user_profile,user_profileedit
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -62,6 +62,7 @@ urlpatterns = [
     path('login',admin_login, name='login'),
     path('forgotpassword/<int:user_id>' , fpassword , name="fpassword"),
     path('admin_logout',admin_logout, name='admin_logout'),
+    path('user_logout',user_logout,name='user_logout'),
     path('Register',admin_register,name = 'register'),
     path('ForgotPassword',forgot_password,name = 'forgotpassword' ),
     path('tables',tables,name = 'tables'),
@@ -106,7 +107,6 @@ urlpatterns = [
     #Users-Ujain's Part(Fathima)
     path('users_index',users_index,name='users_index'),
     path('users_dash',users_dash,name='users_dash'),
-    path('user_details',user_details,name='user_details'),
     path('detail_view/<uuid:rest_id>',detail_view,name='detail_view'),
     path('user_profile/<int:user_id>',user_profile, name='user_profile'),
     path('user_profileedit/<int:user_id>',user_profileedit,name='user_profileedit'),

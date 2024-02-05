@@ -11,6 +11,10 @@ from restaurants.models import Food
 from users.models import Order_Items,Orders
 from django.urls import reverse
 from django.db.models import Sum
+from django.db.models import Avg,Count
+from django.db.models.functions import TruncDate
+
+
 
 
 # Credentials(Fathima)
@@ -29,7 +33,15 @@ def admin_index(request):
     count = noti.count()
     val = count , user_count , rest_count
     datas = list(val)
-    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas,'order':order, 'top_5_restaurants': top_5_restaurants, 'top_food_totals':top_food_totals})
+    restaurants = Restaurant.objects.all()
+    data = list(Restaurant.objects.values('name').annotate(average_rating=Avg('rest_feedback__Rating')).order_by('name'))
+    data1 = Restaurant.objects.values('name').annotate(avg=Avg('rest_feedback__Rating'))
+    
+    print(data[0]["average_rating"])
+
+    
+   
+    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas,'order':order, 'top_5_restaurants': top_5_restaurants, 'top_food_totals':top_food_totals,'data':data, 'data1':data1})
 
 def read_msg(request , msg_id):
     noti = Notification.objects.get(id = msg_id)
@@ -42,10 +54,6 @@ def read_msg(request , msg_id):
 def rest_dashboard(request):
     return render(request , 'adminTemp/restaurant/rest_dashboard.html')
 
-
-def admin_logout(request):
-    logout(request)
-    return redirect('admin_login')
 
 
 def admin_login(request):
@@ -75,6 +83,16 @@ def admin_login(request):
             return render(request , 'adminTemp/admin/login.html' , {'msg':msg})
     return render(request, 'adminTemp/admin/login.html')
 
+
+def admin_logout(request):
+    logout(request)
+    return redirect('admin_login')
+
+
+def user_logout(request):
+    logout(request)
+    return render(request,'adminTemp/admin/login.html') 
+
    
             # if user.is_superuser == False and user.is_staff == False and user.is_active == True:
             #     login(request , user)
@@ -101,13 +119,12 @@ def admin_register(request):
                 first_name = request.POST.get('firstname')
                 last_name =  request.POST.get('lastname')
                 password = request.POST.get('password')
-                new_user=User.objects.create(first_name=first_name,last_name=last_name, password=password)
+                username = request.POST.get('username')
+                new_user=User.objects.create(first_name=first_name,last_name=last_name, password=password,username=username)
                 new_user.set_password(password)
                 messages.success(request,'Account Created Successfully ')
                 new_user.save()
                 return redirect('login')
-            
-
     else:
         msg = 'Password entered is Incorrect'
         return render(request,'adminTemp/admin/register.html',{'msg':msg})
@@ -147,7 +164,7 @@ def status_changetables(request , user_id):
     
 
 # Restaurents(Admin_Only_Fathima)--------------------------------------------------------------------------------------------------------------------------
-
+@login_required()
 def rest(request):
     users = User.objects.filter(is_staff = True , is_superuser = False)
     return render(request ,'adminTemp/admin/restaurents/rest_list.html' , {'users':users})
@@ -383,6 +400,10 @@ def edit_order(request,order_id):
         return redirect('show_orders')
 
     return render(request,'adminTemp/admin/Order/edit_order.html',{'order':order})
+
+
+
+
 
 
 
