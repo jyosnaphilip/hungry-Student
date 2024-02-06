@@ -19,9 +19,7 @@ Hungry Student is your campus food savior letting you:
 | Admin | Ideally an official of the institute where Hungry Student is implemented. |
 | Restaurant | Restaurant manager/ someone authorised from the restaurant who function within and around the institute. |
 | Customer | The students and faculty of the institute.  |
-| Admin | [Click Here](#admins)|
-| Restaurant | [Click Here](#restaurants) |
-| Customer | [Click Here](#customers) |
+
 
 
 ### About the Team
