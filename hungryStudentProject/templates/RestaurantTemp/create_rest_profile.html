@@ -1,0 +1,54 @@
+{% extends 'rest_base.html' %}
+{% load static %}
+{% block content %}
+<div class=" row justify-content-center">
+    <div class="card w-50  m-2">
+        
+        <form method="POST" enctype="multipart/form-data" action="{% url 'edit_profile' rest_id %}">
+            {% csrf_token %}
+                <div class="container-sm  text-center bg-color ">
+                    <label for="fileField">
+                {% if rest_details.image %}
+                    <img class="card-img-top" src="{{rest_details.image.url}}" alt="profile pic of {{rest_details.name}}" style="width: 250px;height:250px;border-radius: 100%;">
+                    
+                {% else %}
+                    
+                        <!-- <input name="image-1" id="idImage1" type="file"> -->
+                        <img class="card-img-top text-center " src="{% static 'img/default_rest_profile.jpeg' %}" alt="No image added" title="No image added. Click to add" style="width: 250px;height:250px;border-radius: 100%;opacity: 0.8 ;">
+                {% endif %}
+                    </label>
+                    <input type="file" id="fileField" name="file" accept="image/*" hidden="true">
+                    <h3 class="card-title">{{rest_details.name}}</h3>
+                </div> 
+
+            <div class="card-body">
+                
+                
+                    <div class="form-group row">
+                        <label for="restID" class="col-sm-2 col-form-label">User ID</label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="restID" value="{{rest_details.user_id}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="restEmail" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" name="restEmail" id="restEmail" value="{{rest_details.email_id}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rest_phone">Phone Number</label>
+                        <input type="text" class="form-control" id="rest_phone" name="rest_phone" value="{{rest_details.phone_number}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="rest_location">Location</label>
+                        <textarea class="form-control" id="rest_location" name="rest_location" rows="3" >{{rest_details.location}}</textarea>
+                    </div>
+                    <button class="btn bg-color text-color" type="submit" >Apply changes</button>
+               
+            </div>
+        </form>
+    </div>
+    
+</div>
+{% endblock content %}

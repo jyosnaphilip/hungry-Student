@@ -1,0 +1,135 @@
+{% extends 'user_base3.html' %}
+{% load static %}
+{% block content %}
+<div class="container bg-light text-center p-2 " style="border-radius:1%;">
+  <table class="table table-striped rounded-3">
+    <thead class="rounded-3">
+      <tr class="rounded-3 bg-color">
+        <th scope="col-sm-1 p-5">#</th>
+        <th scope="col-sm-2">Order Date</th>
+        <th scope="col-sm-2">Restaurant</th>
+        <th scope="col-sm-6 text-wrap">Details</th>
+        <th scope="col-sm-2">Total Price</th>
+        <th scope="col-sm-1">Order Status</th>
+        <th scope="col-sm-1">Feedback</th>
+      </tr>
+    </thead>
+    <tbody class="rounded-3 text-color">
+      {% for order in orders %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{order.Timestamp}}</td>
+        <td>{{order.Restaurant_ID.name}}</td>
+        <td>
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-expanded="false">Click Here</button>
+          <div class="dropdown-menu">
+
+            <table class="table rounded-3">
+              <thead class="rounded-3">
+                <tr class="rounded-3  text-color">
+                  <th scope="col-sm-1 ">Item</th>
+                  <th scope="col-sm-1">Quantity</th>
+                </tr>
+              </thead>
+              <tbody class="rounded-3 text-color">
+                {% for item in order.order_items_set.all %}
+                <tr>
+                  <td>{{item.Food_ID.Food_Name}}
+
+                  </td>
+                  <td>{{item.Quantity}}</td>
+
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+        </td>
+
+        <td>{{order.Total_Price}}</td>
+        <td>
+          {% if order.Order_Status == 'Processing' %}
+          <span class="badge badge-pill badge-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-expanded="false">{{order.Order_Status}}</span>
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" name="Cancelled" href="{% url 'cancelOrder' order_id=order.Order_Id  id=request.user.id%}"><span
+                class="badge badge-pill badge-danger">Cancel</span></a>
+          </div>
+          {% elif order.Order_Status == 'Accepted' %}
+          <span class="badge badge-pill badge-info dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-expanded="false">{{order.Order_Status}}</span>
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" name="Cancelled" href="{% url 'cancelOrder' id=request.user.id order_id=order.Order_Id %}"><span
+                class="badge badge-pill badge-danger">Cancel</span></a>
+          </div>
+          {% elif order.Order_Status == 'Declined' %}
+          <span class="badge badge-pill badge-danger">{{order.Order_Status}}</span>
+          {% elif order.Order_Status == 'Complete' %}
+          <span class="badge badge-pill badge-success">{{order.Order_Status}}</span>
+          {% else %}
+          <span class="badge badge-pill badge-dark">{{order.Order_Status}}</span>
+          {% endif %}
+
+        </td>
+        <td>
+          {% if order.Order_Status == 'Complete' %}
+            {% if order.feedback == False %}
+          <button data-toggle="modal" data-target="#addFeedback-{{forloop.counter}}"
+            class="badge badge-pill badge-secondary"> Add Feedback
+          </button>
+          <div class="modal fade" id="addFeedback-{{forloop.counter}}" tabindex="-1" role="dialog"
+            aria-labelledby="AddFeedbackLabel-{{forloop.counter}}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <form method="POST" action="{% url 'addFeedback' order_id=order.Order_Id id=request.user.id  %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-content">
+                  <div class="modal-header bg-color">
+                    <h5 class="modal-title text-light" id="AddFeedbackLabel-{{forloop.counter}}">
+                      Add Feedback</h5>
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-row">
+                      <div class="form-group col-md-6 text-color">
+                        <input placeholder="Add description" name="description"></input>
+                      </div>
+                      <div class="form-group col-md-6 text-color">
+                        <label for="rating"  required>Rate:</label>
+                        <select id="rating" name="rating">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary text-light" data-dismiss="modal"
+                      aria-label="Close">Close</button>
+                    <button type="submit" class="btn bg-color text-light">Add Feedback</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+            {% else %}
+            <div>Feedback Added!</div>
+            {% endif %}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

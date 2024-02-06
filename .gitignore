@@ -1,0 +1,8 @@
+db.sqlite3
+hungryStudentProject/customadmin/__pycache__/
+hungryStudentProject/hungryStudentProject/__pycache__/
+hungryStudentProject/restaurants/__pycache__/
+hungryStudentProject/restaurants/migrations/__pycache__/
+hungryStudentProject/users/__pycache__/
+hungryStudentProject/users/migrations/__pycache__/
+

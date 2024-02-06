@@ -1,0 +1,513 @@
+{% extends 'user_base2.html' %}
+{% load static %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <!-- Slide 1 below the main image is not getting displayed in this part-->
+          <div class="carousel-item active" style="background-image: url(users/img/slide/slide-1.jpg);">  
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown"><span>Hungry Student</h2>
+                <p class="animate__animated animate__fadeInUp">Revolutionize student dining! Our hungry student webapp offers seamless online booking for delicious meals, eliminating hunger stress. Savor convenience with every click—because no student should compromise taste for a busy schedule. Book now, feast soon</p>
+                
+              </div>
+            </div>
+          </div>
+
+         
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <section id="about" class="about">
+      <div class="container-fluid">
+
+        <div class="row">
+
+          
+
+          <div class="col-lg-12 d-flex flex-column justify-content-center align-items-stretch">
+
+            <div class="content">
+              
+                <h3>About Us</h3>
+                   
+                <h5>
+                  It all began on a Monday morning. We were asked to create an app for something we
+                   could relate to. As students, what more can we understand than the hunger that comes
+                    with student life??              
+                <ul>
+                  <li><i class="bx bx-check-double"></i>We've stood in long queues just to end up awkwardly staring at the cashier
+                     as we wait for our payment to go through. 
+                  </li>
+                  <li><i class="bx bx-check-double"></i>We've also spent more than half of our break going around canteens to find the perfect dish that satisfies us.
+                  </li>
+                </ul>
+                So we bring to you - <strong>Hungry Student</strong> - the ultimate solution to our hunger woes!
+  
+              </h5>
+                  
+              
+              
+              
+              <!-- <p>
+                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum
+              </p> -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Why choose <span>Us</span></h2>
+          <p>You're probably wondering, "Isn't this just another Zomato ripoff?" 
+            Well, yes, but also no. This is a campus exclusive enterprise.
+             Once your campus is under our radar, we form partnerships with all your favorite
+              canteens/restaurants to better assist you</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4">
+            <div class="box">
+              <span>01</span>
+              <h4>Know what's cooking</h4>
+              <p>With our app, you can browse menus- everything, everywhere, all at once!
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span>02</span>
+              <h4>No more awkward waiting</h4>
+              <p>Network failures are stories of the past. Now, you can pay ahead and pick up your order directly.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span>03</span>
+              <h4> <strong>Study Fuel Rewards</strong>
+              </h4>
+              <p>Loyalty matters! Earn Study Fuel Rewards for every order and enjoy special discounts, freebies, and exclusive deals.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    
+
+    <!-- ======= Whu Us Section ======= -->
+    <section id="restaurants" class="why-us">
+      <div class="container">
+
+        <div class="section-title">
+          <h2><span>Our Restaurant</span>  Varieties</h2>
+          <p>Culinary Diversity, One Destination. Explore the richness of flavors, each dish a testament to our commitment to variety and excellence."</p>
+        </div>
+
+
+
+        <div class="row">
+        
+          <!-- <div class="col-lg-4">
+            <div class="box">
+              <span>01</span>
+              <h4>Lorem Ipsum</h4>
+              <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
+            </div>
+          </div> -->
+          {% for i in rest %}
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span></span>
+              <h4>{{i.name}}</h4>
+              <p>{{i.location}}</p>
+              <a href="{% url 'detail_view' rest_id=i.rest_id %}">View Details</a>
+
+            </div>
+          </div>
+          {% endfor %}
+
+          <!-- <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box">
+              <span>03</span>
+              <h4> Ad ad velit qui</h4>
+              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Whu Us Section -->
+
+    
+
+    <!-- ======= Specials Section ======= -->
+    <!-- <section id="specials" class="specials">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Check our <span>Specials</span></h2>
+          <p>"Check out our specials – the ultimate brain fuel for hungry students! Because good food isn't just a treat; it's a study session upgrade.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Coconut Infused Prawn Dream</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Tropical Paradise Fruit Bowl Extravaganza</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Mediterranean Spaghetti al Pomodoro</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Fattoush: A Mediterranean Garden on Your Plate</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Acai Bowl: A Blissful Berry Bonanza</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Coconut Infused Prawn Dream</h3>
+                    <p class="fst-italic">Immerse yourself in the exotic flavors of our Coconut Infused Prawn Dream, a dish that epitomizes culinary artistry. </p>
+                    <p>Perfect for a special occasion or a luxurious treat, the Coconut Infused Prawn Dream is more than just a dish—it's an experience, a journey of flavors that promises to leave you enchanted and longing for more.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-1.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-2">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Tropical Paradise Fruit Bowl Extravaganza</h3>
+                    <p class="fst-italic">Dive into the succulent sweetness of ripe mango chunks, the juicy perfection of pineapple slices, and the tropical allure of kiwi wedges. </p>
+                    <p>Served in an artfully crafted bowl, this extravaganza is not just a fruit salad; it's a visual and gastronomic delight. The burst of colors, the medley of textures, and the symphony of flavors make this bowl a perfect choice for those seeking a healthy yet indulgent treat.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-2.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-3">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Mediterranean Spaghetti al Pomodoro</h3>
+                    <p class="fst-italic">This is an experience that transports you to a quaint seaside village, where the air is fragrant with the scent of the sea and fresh herbs.</p>
+                    <p>These tomatoes are gently simmered with a touch of garlic, extra virgin olive oil, and a sprinkle of fresh basil leaves, creating a sauce that sings with the bright, fresh flavors of a Mediterranean summer.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-3.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-4">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Fattoush: A Mediterranean Garden on Your Plate</h3>
+                    <p class="fst-italic">Dive into the fresh and invigorating world of Fattoush, a vibrant salad that captures the essence of Mediterranean cuisine. </p>
+                    <p>The stars of this dish are the juicy tomatoes, crunchy cucumbers, and vibrant bell peppers, each contributing its unique taste and texture. Radishes add a peppery kick, while red onions bring a hint of sweetness and crunch.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-4.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-5">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Acai Bowl: A Blissful Berry Bonanza</h3>
+                    <p class="fst-italic">Embark on a culinary journey with the Acai Bowl, a delightful concoction that is as nutritious as it is delicious.</p>
+                    <p>A drizzle of honey or agave nectar can be added for a touch of natural sweetness, elevating the flavors and binding them harmoniously.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{% static 'users/img/specials-5.jpg' %}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>End Specials Section -->
+
+    <!-- ======= Events Section ======= -->
+    <section id="mission" class="events">
+      <div class="container">
+
+        <div class="section-title">
+<h2><span>Our Mission</span></h2>
+        </div>
+
+        <!-- <div class="events-slider swiper">
+      
+
+            <div class="swiper-slide"> -->
+              <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src="{% static 'img\mission-img.png' %}" class="img-fluid" alt="" height="300px" width="400px">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                 
+                  <p class="fst-italic">
+                    
+                      At Hungry Student, our mission is to provide students with quick and delicious meal options, allowing them to focus on their studies without compromising on flavor. We believe that good food is a key ingredient for academic success, and we're here to fuel your late-night study sessions and weekend cravings.
+                    
+                  </p>
+                  
+                </div>
+                
+              </div>
+            </div><!-- End testimonial item -->
+
+          
+          <!-- <div class="swiper-pagination"></div>
+        </div> -->
+
+      </div>
+    </section><!-- End Events Section -->
+
+
+   
+
+    <!-- ======= Chefs Section ======= -->
+    <section id="chefs" class="chefs">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>More Information <span>Hungry Student</span></h2>
+          <p>Fuel your mind, feed your future. With every meal, you're one step closer to success.</p>
+        </div>
+
+        <div class="row">
+
+         <p><li>Study Fuel Rewards: Your Loyalty Rewarded
+
+          Our commitment to your success goes hand in hand with our Study Fuel Rewards program. Every order is an opportunity to earn points, unlocking exclusive discounts, freebies, and special deals. Because at Hungry Student, we believe in rewarding your loyalty, bite by delicious bite.
+          </li><br><br>
+          <li>Beyond Borders, Diverse Palates
+          
+            Hungry Student celebrates the diversity of student preferences. Whether you're craving the comfort of home-cooked meals or the adventure of international flavors, our platform connects you with a diverse range of local eateries. We take pride in being the culinary companion for every palate.
+            </li><br><br>
+          <li>Effortless Ordering, Anytime, Anywhere
+          
+            Navigating student life can be hectic, and we get it. That's why we've designed our user-friendly app to make ordering a breeze. Customize your meal, choose your delivery time – it's all about making sure you get what you need, when you need it, with minimal effort.</p>
+  </li>
+        </div>
+
+      </div>
+    </section><!-- End Chefs Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <!-- <section id="testimonials" class="testimonials">
+      <div class="container position-relative">
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
+                <h3>Mehek Mehta</h3>
+                <h4>System Admin &amp; User</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Being a student with a tight schedule, finding a convenient and affordable food solution was crucial for me, and CrunchEats has truly been a game-changer.
+
+                  The app's user-friendly interface makes ordering food a breeze. With just a few taps, I can browse through a variety of local restaurants, explore diverse cuisines, and place an order without any hassle. The app's quick and secure payment options have made my life so much easier, especially during hectic study sessions.
+                  
+                  What sets CrunchEats apart is its student-friendly discounts and deals. As a budget-conscious student, I appreciate the exclusive offers that allow me to enjoy delicious meals without breaking the bank. The app's loyalty program is also a great perk – earning points with every order feels like a rewarding bonus!                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+              
+            </div>End testimonial item -->
+
+            <!-- <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Designer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>End testimonial item -->
+
+            <!-- <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Store Owner</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>End testimonial item -->
+
+            <!-- <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>End testimonial item -->
+
+            <!-- <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'users/img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Entrepreneur</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div>End testimonial item -->
+
+          <!-- </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section>End Testimonials Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2><span>Contact</span> Us</h2>
+          <p>If you are a restaurant owner and want to be Hungry-fied please fill up the below form.</p>
+          <p>We're also looking forward to improve our services based on your feedback. </p>
+        </div>
+      </div>
+
+      <div class="map">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30285.203264384894!2d73.48324745061869!3d18.40875521044102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc29fab4f3879ef%3A0x3ec0a2792791b9bd!2sLavasa%2C%20Maharashtra%20412112!5e0!3m2!1sen!2sin!4v1706946320481!5m2!1sen!2sin"   loading="lazy"  frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="container mt-5">
+
+        <div class="info-wrap">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 info">
+              <i class="bi bi-geo-alt"></i>
+              <h4>Location:</h4>
+              <p>Lavasa<br>India</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+              <i class="bi bi-clock"></i>
+              <h4>Open Hours:</h4>
+              <p>Monday-Saturday:<br>11:00 AM - 2300 PM</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+              <i class="bi bi-envelope"></i>
+              <h4>Email:</h4>
+              <p>info@hungry-student.com<br>contact@hungry-student.com</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+              <i class="bi bi-phone"></i>
+              <h4>Call:</h4>
+              <p>+91 1234567890<br>+91 1234567890</p>
+            </div>
+          </div>
+        </div>
+
+
+        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+          </div>
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="submit">Send Message</button></div>
+        </form>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+{% endblock content %}

@@ -1,0 +1,155 @@
+{% extends 'rest_base.html' %}
+{% load static %}
+
+{% block content %}
+{% if not query %}
+<p>please enter search query</p>
+{% else %}
+    {% if not outputs %}
+        <p>No results found for "{{query}}"</p>
+    {% else %}
+    <p>results for '{{query}}'</p>
+    <div class="col-7 text-center " style="border-radius: 5%;border-color: #FFEBCE;"> 
+        <div class="container-fluid  bg-color shadow border border-4 p-0 " style="border-radius:5%;border-color: #FFEBCE;">
+             <br/>
+            <div class="p-3 form-box" >
+                <table class="table table-hover " style="border-style:dotted; border-color:#FFF5E6" >
+                <thead >
+                    <tr style="border-radius: 5%;border-style:none">
+                        <th scope="col" class="text-color" >Item Name</th>
+                        <th scope="col" class="text-color">Description</th>
+                        <th scope="col" class="text-color">Price</th>
+                        <th scope="col" class="text-color">Category</th>
+                        <th scope="col" class="text-color">Make Changes</th>
+                    </tr>
+                </thead>
+                <tbody class="form-box">
+                    {% for output in outputs %}
+                    <tr>
+                        <th scope="row fw_bold" class="text-color">{{ output.Food_Name }}</th>
+                        <td class="row-sm">
+                            {% if output.Description %}
+                            <em class="text-color">{{ output.Description|safe }}</em>
+                            {% else %}
+                            <div class="text-muted small text-color">
+                                <em>No description added</em>
+                            </div>
+                            {% endif %}</br>
+                            {% if output.Image %}
+                            <div class="mt-2 mb-3">
+                                {{ output.Image }}
+                            </div>
+                            {% endif %}
+                        </td>
+                        <td class="text-color">     
+                            {% for item in foodPrice %}
+                                {% if item.Food_ID.Food_ID == output.Food_ID %}
+                                    {{item.Price}}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td class="text-color">
+                            {% if output.Category %}
+                                {{ output.Category }}
+                            {% endif %}
+                        </td>
+                        <td class="p-0">
+                            <!-- Button trigger for modal -->
+                            <span  data-toggle="modal"
+                                data-target="#editMenuModal-{{forloop.counter}}" class="float-left p-1">
+                                <i class="fa-solid fa-pen float-end p-1 text-sm-left" style="color: #CF9E55"></i>
+                            </span>
+    
+                            <!-- Modal -->
+                            <div class="modal fade" id="editMenuModal-{{forloop.counter}}" tabindex="-1"
+                                role="dialog" aria-labelledby="editMenuModalLabel-{{forloop.counter}}"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <form method="POST" action="{% url 'editMenu' output.Food_ID %}"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-color">
+                                                <h5 class="modal-title text-light" id="editMenuModalLabel-{{forloop.counter}}">
+                                                    Edit {{menu_item.Food_Name}}</h5>
+                                                <button type="button" class="close text-light" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6 text-color">
+                                                        <label for="edit-{{output.Food_ID}}"
+                                                            style="text-align:left;">Name*</label>
+                                                        <input type="text" class="form-control"
+                                                            id="edit-{{output.Food_ID}}"
+                                                            name="edit-{{output.Food_ID}}"
+                                                            placeholder="Item Name"
+                                                            value="{{output.Food_Name}}" required>
+                                                    </div>
+                                                    <div class="form-group col-md-6 text-color">
+                                                        <label for="editPrice-{{output.Food_ID}}"
+                                                            style="text-align:left;">Price*</label>
+                                                        <input type="text" class="form-control"
+                                                            id="editPrice-{{output.Food_ID}}"
+                                                            name="editPrice-{{output.Food_ID}}"
+                                                            value="{{output.Price}}" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group text-color">
+                                                    <label for="editdesc-{{output.Food_ID}}"
+                                                        style="text-align:start;">Description</label>
+                                                    <input type="text" class="form-control"
+                                                        id="editdesc-{{output.Food_ID}}"
+                                                        name="editdesc-{{output.Food_ID}}"
+                                                        value="{{output.Description}}">
+                                                </div>
+                                                <p class="small text-color" style="text-align:right;"><i>Fields marked * are
+                                                        mandatory</i></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal text-color">Close</button>
+                                                <button type="submit" class="btn bg-color text-light">Apply Changes</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- hidden modal ends -->
+                            <!-- toggle button for food_item -->
+                            <!-- uuid gives more security, look at the url after clicking edit, it has random number strings in the url  -->
+                            <div class="float-left p-1">
+                                <a href="{% url 'toggle_status' output.Food_ID rest_id %}"
+                                    class="">
+                                    {% for item in foodPrice %}
+                                        {% if item.Food_ID.Food_ID == output.Food_ID %}
+                                            {% if item.Status == True %}
+                                            <span class="badge badge-success">Active</span>
+                                            {% else %}
+                                            <span class="badge badge-secondary">Inactive</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </a>
+                            </div>
+                            <!-- delete food item -->
+                            <div class="p-1 float-right">
+                                <a href="{% url 'delete-item' output.Food_ID rest_id  %}">
+                                    <i class="fa-solid fa-trash-can  " style="color: #CF9E55"></i>
+                                </a>
+                               
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}
+
+{% endblock content %}

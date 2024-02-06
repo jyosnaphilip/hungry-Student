@@ -1,0 +1,218 @@
+{% extends 'rest_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid py-3">
+
+    <div class="row py-3" style="color:#7b3f00">
+        <div class="col-5">
+            <div class="container-fluid  bg-color shadow border border-4 p-0 " style="border-radius:5%;border-color: #FFEBCE;">
+                <div class="text-center  m-0  py-3" style="border-radius: 15%;"><b class="head-color blockquote ">ADD ITEM</b></div>
+             
+             <br/>
+                <div class="p-3 form-box" >
+                    <form class="user form-inline" action="{% url 'addMenu' rest_id  %}" method="POST"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="rest_id" id="rest_id" value="{{ rest_id }}">
+                        <div class="form-group">
+                            <label for="Food_Name" class="form-label m-1 text-color">Item Name*</label>
+                            <input type="text" id="Food_Name" name="food_name" class="form-control m-1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="Category" class="form-label m-1 text-color">Category</label>
+                            <select name="food_category" class="form-control m-1" id="Category">
+                                <option value="Starter" class="text-color">Starter</option>
+                                <option value="Main course" class="text-color">Main course</option>
+                                <option value="Dessert" class="text-color">Dessert</option>
+                                <option value="Beverages" class="text-color">Beverages</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Description" class="form-text m-1 text-color">Description</label>
+                            <input type="textarea" id="Description" name="description" class="form-control m-1">
+                        </div>
+                        <div class="form-group">
+                            <label for="Price" class="form-text m-1 text-color">Price*</label>
+                            <input type="number" name="price" inputmode="numeric" id="Price" class="form-control m-1"
+                                required>
+                        </div>
+                        <!-- accept="image/png, image/gif, image/jpeg" -->
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1"  class="text-color">Add
+                                Image</label>
+                            <input type="file" class="form-control-file text-color" name="image" id="exampleFormControlFile1">
+                        </div>
+                        <br/>
+                        <div class="text-center float-right">
+                            <button class="input-group-text float-right mx-4 my-2" style="color:white;background-color:#CF9E55" type="submit">
+                                Save
+                            </button>
+                            {% if messages %}
+                                <ul class="messages">
+                                {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </form>
+                    <hr />
+                    <p class="small"><i>Fields marked * are mandatory</i></p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-7 text-center " style="border-radius: 5%;border-color: #FFEBCE;"> 
+            <div class="container-fluid  bg-color shadow border border-4 p-0 " style="border-radius:5%;border-color: #FFEBCE;">
+                <div class="text-center  m-0  py-3" style="border-radius: 15%;"><b class="head-color blockquote ">TODAY'S MENU</b>
+                </div>
+                 
+                 <br/>
+                    <div class="p-3 form-box" >
+    
+                    <table class="table table-hover " style="border-style:dotted; border-color:#FFF5E6" >
+                    <thead >
+                        <tr style="border-radius: 5%;border-style:none">
+                            <th scope="col" class="text-color" >Item Name</th>
+                            <th scope="col" class="text-color">Description</th>
+                            <th scope="col" class="text-color">Price</th>
+                            <th scope="col" class="text-color">Category</th>
+                            <th scope="col" class="text-color">Make Changes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="form-box">
+                        {% for menu_item in menu_items.restaurant_food_bridge_set.all %}
+                        <tr>
+                            <th scope="row fw_bold" class="text-color">{{ menu_item.Food_ID.Food_Name }}</th>
+                            <td class="row-sm">
+                                {% if menu_item.Food_ID.Description %}
+                                <em class="text-color">{{ menu_item.Food_ID.Description|safe }}</em>
+                                {% else %}
+                                <div class="text-muted small text-color">
+                                    <em>No description added</em>
+                                </div>
+                                {% endif %}</br>
+                                {% if menu_item.Food_ID.Image %}
+                                        
+                                    <div class="mt-2 mb-3">
+                                    <img src="{{ menu_item.Food_ID.Image.url }}" style="width: 80px;height:80px;border-radius: 100%;">
+                                    </div> 
+                                {% else %}
+                                 <div></div>                                   
+                                {% endif %}
+                            </td>
+                            <td class="text-color">
+                                {% if menu_item.Price %}
+
+                                {{ menu_item.Price }}
+
+                                {% endif %}
+                            </td>
+                            <td class="text-color">
+                                {% if menu_item.Food_ID.Category %}
+
+                                {{ menu_item.Food_ID.Category }}
+
+                                {% endif %}
+                            </td>
+                            <td class="p-0">
+                                <!-- Button trigger for modal -->
+                                <span  data-toggle="modal"
+                                    data-target="#editMenuModal-{{forloop.counter}}" class="float-left p-1">
+                                    <i class="fa-solid fa-pen float-end p-1 text-sm-left" style="color: #CF9E55"></i>
+                                </span>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="editMenuModal-{{forloop.counter}}" tabindex="-1"
+                                    role="dialog" aria-labelledby="editMenuModalLabel-{{forloop.counter}}"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form method="POST" action="{% url 'editMenu' menu_item.Food_ID.Food_ID %}"
+                                            enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-color">
+                                                    <h5 class="modal-title text-light" id="editMenuModalLabel-{{forloop.counter}}">
+                                                        Edit {{menu_item.Food_ID.Food_Name}}</h5>
+                                                    <button type="button" class="close text-light" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6 text-color">
+                                                            <label for="edit-{{menu_item.Food_ID.Food_ID}}"
+                                                                style="text-align:left;">Name*</label>
+                                                            <input type="text" class="form-control"
+                                                                id="edit-{{menu_item.Food_ID.Food_ID}}"
+                                                                name="edit-{{menu_item.Food_ID.Food_ID}}"
+                                                                placeholder="Item Name"
+                                                                value="{{menu_item.Food_ID.Food_Name}}" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6 text-color">
+                                                            <label for="editPrice-{{menu_item.Food_ID.Food_ID}}"
+                                                                style="text-align:left;">Price*</label>
+                                                            <input type="text" class="form-control"
+                                                                id="editPrice-{{menu_item.Food_ID.Food_ID}}"
+                                                                name="editPrice-{{menu_item.Food_ID.Food_ID}}"
+                                                                value="{{menu_item.Price}}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group text-color">
+                                                        <label for="editdesc-{{menu_item.Food_ID.Food_ID}}"
+                                                            style="text-align:start;">Description</label>
+                                                        <input type="text" class="form-control"
+                                                            id="editdesc-{{menu_item.Food_ID.Food_ID}}"
+                                                            name="editdesc-{{menu_item.Food_ID.Food_ID}}"
+                                                            value="{{menu_item.Food_ID.Description}}">
+                                                    </div>
+                                                    <p class="small text-color" style="text-align:right;"><i>Fields marked * are
+                                                            mandatory</i></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary text-light"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close" >Close</button>
+                                                    <button type="submit" class="btn bg-color text-light">Apply Changes</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- hidden modal ends -->
+                                <!-- toggle button for food_item -->
+                                <!-- uuid gives more security, look at the url after clicking edit, it has random number strings in the url  -->
+                                <div class="float-left p-1">
+                                    <a href="{% url 'toggle_status' menu_item.Food_ID.Food_ID rest_id %}"
+                                        class="">
+                                        {% if menu_item.Status == True %}
+                                        <span class="badge badge-success">Active</span>
+                                        {% else %}
+                                        <span class="badge badge-secondary">Inactive</span>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <!-- delete food item -->
+                                <div class="p-1 float-right">
+                                    <a href="{% url 'delete-item' menu_item.Food_ID.Food_ID rest_id  %}">
+                                        <i class="fa-solid fa-trash-can  " style="color: #CF9E55"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

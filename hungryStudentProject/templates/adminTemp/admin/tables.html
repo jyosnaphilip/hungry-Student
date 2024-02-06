@@ -1,0 +1,91 @@
+{% extends 'adminbase.html' %}
+{% block content %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-color">Tables</h1>
+                    <p class="mb-4">The details of all the Members are listed below<a target="_blank"></p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4" style="border-color: #CF9E55;">
+                        <div class="card-header bg-color  py-3" >
+                            <h6 class="m-0 font-weight-bold text-light" >Super User, Restaurants and Users List are mentioned below.</h6>
+                        </div>
+                        <div class="card-body form-box">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="text-center text-color">
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>E-mail</th>
+                                            <th>Username</th>
+                                            <th>Status</th>
+                                            <th>User Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr class="text-center text-color">
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>E-mail</th>
+                                            <th>Username</th>
+                                            <th>Status</th>
+                                            <th>User Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody class="text-center text-color">
+                                        {% for i in users %}
+                                        <tr>
+                                            <td>{{i.first_name}}</td>
+                                            <td>{{i.last_name}}</td>
+                                            <td>{{i.email}}</td>
+                                            <td>{{i.username}}</td>
+                                            {% if i.is_active == True %}
+                                            <td>Active</td>
+                                            {% else %}
+                                            <td>Inactive</td>
+                                            {% endif %}
+                                            {% if i.is_superuser == True %}
+                                            <td>Super user</td>
+                                            {% elif i.is_staff == True %}
+                                            <td>Staff</td>
+                                            {% else %}
+                                            <td>User</td>
+                                            {% endif %}
+                                            {% if i.is_active == True %}
+                                            <td><a href="{% url 'status_changetables' user_id=i.id %}" onclick="alert('Are you sure ?')" class="btn btn-warning btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </span>
+                                                <span class="text">Inactivate</span>
+                                            </a></td>
+                                            {% else %}
+                                            <td><a href="{% url 'status_changetables' user_id=i.id %}" onclick="alert('Are you sure ?')" class="btn btn-success btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-check"></i>
+                                                </span>
+                                                <span class="text">Activate</span>
+                                            </a></td>
+                                            {% endif %}
+                                           
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                        
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            {% endblock content %}

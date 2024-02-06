@@ -1,0 +1,160 @@
+/* body {
+    
+/* body {
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.hero {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.hero img {
+    width: 100%;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff9900;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e68a00;
+} */
+
+
+/* Add styling for other sections as needed */
+/* for restindex.html */
+
+.links{
+   
+    color:black;
+    align-self: center;
+    text-align: center;
+    
+}
+
+
+.faAd{
+    text-align: center;
+    font-size: x-large;
+}
+    /* adding this cos font awesome icon size class 5xl depends on font-size */
+    
+/* .form-control:focus {
+    border-color: #7f3b00;
+    box-shadow: 0 0 0 0.2rem rgba(123, 63, 0, 1);
+    } */
+.text-color{
+    color:#201607;
+}
+.bg-color{
+    background-color:#CF9E55 ;
+    color:white;
+}
+.head-color{
+    color:#FFF5E6;
+}
+.form-box{
+    background-color:#FFF5E6;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+
+}
+
+.base-bg{
+    background-color: #201607;
+}
+
+.form-control:focus {
+    border-color: #CF9E55  !important;
+    box-shadow: 0 0 0 0.2rem rgba(207, 158, 75, 0.5) !important;
+  }
+
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+    border: 3px solid white;
+}
+
+.why-us .box {
+    padding: 50px 30px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    transition: all ease-in-out 0.3s;
+    height: 100%;
+  }
+  
+  .why-us .box span {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffcf88;
+  }
+  
+  .why-us .box h4 {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 0;
+    margin: 20px 0;
+    color: #6c665c;
+  }
+  
+  .why-us .box p {
+    color: #aaaaaa;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .why-us .box:hover {
+    background: #ffb03b;
+    padding: 30px 30px 70px 30px;
+    box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.18);
+  }
+  
+  .why-us .box:hover span,
+  .why-us .box:hover h4,
+  .why-us .box:hover p {
+    color: #fff;
+  }

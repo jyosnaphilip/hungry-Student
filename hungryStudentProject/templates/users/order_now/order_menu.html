@@ -1,0 +1,35 @@
+{% extends 'user_base3.html' %}
+{% load static %}
+{% block content %}
+<div class="container bg-light text-center p-5 " style="border-radius:1%;">
+    
+    <h1 style="font-family: Brush Script MT, Brush Script Std, cursive;">Starters</h1>
+    <hr/>
+    {% for menu_item in menu_items.restaurant_food_bridge_set.all %}
+        {% if menu_item.Food_ID.Category == "Starter" %}
+        {{menu_item.Food_ID.Food_Name}}<br>
+        {% endif %}
+    {% endfor %}
+    <h1 style="font-family: Brush Script MT, Brush Script Std, cursive;">Main course</h1>
+    <hr/>
+    {% for menu_item in menu_items.restaurant_food_bridge_set.all %}
+        {% if menu_item.Food_ID.Category == "Main Course" %}
+        {{menu_item.Food_ID.Food_Name}}<br>
+        {% endif %}
+    {% endfor %}
+    <h1 style="font-family: Brush Script MT, Brush Script Std, cursive;">Desserts</h1>
+    <hr/>
+    {% for menu_item in menu_items.restaurant_food_bridge_set.all %}
+        {% if menu_item.Food_ID.Category == "Desserts" %}
+        {{menu_item.Food_ID.Food_Name}}<br>
+        {% endif %}
+    {% endfor %}
+    <h1 style="font-family: Brush Script MT, Brush Script Std, cursive;">Beverages</h1>
+    <hr/>
+    {% for menu_item in menu_items.restaurant_food_bridge_set.all %}
+        {% if menu_item.Food_ID.Category == "Beverages" %}
+        {{menu_item.Food_ID.Food_Name}}<br>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock content %}
