@@ -32,7 +32,7 @@ Hungry Student is your campus food savior letting you:
 
 
 
-### Guide for admins  { # admins}
+### Guide for admins  
 
 - The admin has to login at http://127.0.0.1:8000/login.
 
