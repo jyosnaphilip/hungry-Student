@@ -71,7 +71,7 @@ urlpatterns = [
     path('admin_logout',admin_logout, name='admin_logout'),
     path('user_logout',user_logout,name='user_logout'),
     path('Register',admin_register,name = 'register'),
-    path('ForgotPassword',forgot_password,name = 'forgotpassword' ),
+    path('ForgotPassword/<int:user_id>',forgot_password,name = 'forgotpassword' ),
     path('tables',tables,name = 'tables'),
     path('status_changetables/<int:user_id>' ,status_changetables , name="status_changetables"),
 

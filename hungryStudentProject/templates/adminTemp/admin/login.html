@@ -78,7 +78,7 @@
                                     <hr>
                                     <div class="text-center">
                                         <!-- LATER TO RESOLVE THE FORGOT PASSWORD -->
-                                        <a class="small text-color" href="{% url 'forgotpassword' %}">Forgot Password?</a> 
+                                        <a class="small text-color" href="{% url 'forgotpassword' user_id=user.id %}">Forgot Password?</a> 
                                     </div>
                                     <div class="text-center">
                                         <a class="small text-color" href="{% url 'register' %}">Create an Account!</a>
