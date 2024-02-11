@@ -37,15 +37,14 @@ def admin_index(request):
     val = count , user_count , rest_count
     datas = list(val)
     restaurants = Restaurant.objects.all()
-    data = list(
-        Restaurant.objects
-        .values('name')
-        .annotate(average_rating=Coalesce(Avg('rest_feedback__Rating'), 0.0))
-        .exclude(average_rating=None)
-        .order_by('name'))
+    data = list(Restaurant.objects.values('name').annotate(average_rating=Avg('rest_feedback__Rating')).order_by('name'))
+    data1 = Restaurant.objects.values('name').annotate(avg=Avg('rest_feedback__Rating'))
     customer_counts = Orders.objects.values('Restaurant_ID__name').annotate(total_customers=Count('Customer_ID', distinct=True)).order_by('-total_customers')
+    print(data[0]["average_rating"])
+
     
-    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas,'order':order, 'top_5_restaurants': top_5_restaurants, 'top_food_totals':top_food_totals,'data':data,'customer_counts':customer_counts})
+   
+    return render(request, 'adminTemp/admin/adminindex.html' , {'noti':noti , 'count':count , 'rest_count':rest_count , 'user_count':user_count , 'total':total, 'datas':datas,'order':order, 'top_5_restaurants': top_5_restaurants, 'top_food_totals':top_food_totals,'data':data, 'data1':data1,'customer_counts':customer_counts})
 
 def read_msg(request , msg_id):
     noti = Notification.objects.get(id = msg_id)
