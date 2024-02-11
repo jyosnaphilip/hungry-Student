@@ -17,7 +17,7 @@
                 
                 <h2 class="animate__animated animate__fadeInDown"><span>{{restaurant.name}}</span> Restaurant</h2> 
                 <p class="animate__animated animate__fadeInUp">Delhi has to offer, the "dhabas" stand out as iconic establishments that have become synonymous with hearty North Indian cuisine. Delhi's restaurant scene is incredibly diverse, offering a plethora of options ranging from fine dining establishments to casual eateries.</p>                <div>
-                  <a href="{% url  'login' %}" class="btn-menu animate__animated animate__fadeInUp scrollto">Order Now</a>
+                  <a href="{% url 'orderOptions' id=request.user.id %}" class="btn-menu animate__animated animate__fadeInUp scrollto">Order Now</a>
                 
                   
                 </div>
