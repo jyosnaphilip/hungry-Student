@@ -4,6 +4,7 @@ import uuid
 
 from customadmin.models import Restaurant
 from restaurants.models import Food
+from django.urls import reverse
 
 
 
@@ -74,3 +75,14 @@ class Rest_Feedback(models.Model):
     
     def __str__(self):
         return str(self.rest_id.__str__()) +" - "+str(self.customer_ID.__str__())
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product}"
+
+    def get_absolute_url(self):
+        return reverse("cart:cart_detail")

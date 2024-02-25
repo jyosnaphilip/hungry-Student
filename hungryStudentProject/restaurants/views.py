@@ -10,7 +10,7 @@ from django.conf import settings
 import plotly.express as px
 import pandas as pd
 from django.db.models.functions import Cast
-from django.db.models import TextField
+from django.db.models import TextField,Sum
 
 def homepage(request):
     return render(request,'homepage.html')
@@ -31,24 +31,25 @@ def ordersServed(rest_id):
 
 def mostOrdered(rest_id):
     food_items=Restaurant_Food_bridge.objects.filter(rest_id=rest_id) #has all unique food items of rest
-    max_v=0                                                 #initialise variable that stores the max of total quantity
-    max_id=0                                      # initialise variable that stores the fod id with highest totat quant
+    max_quantity=0                                                 #initialise variable that stores the max of total quantity
+    max_id=None                                     # initialise variable that stores the fod id with highest totat quant
     for item in food_items:                                        # iterate through each food item
-        item_ID=item.Food_ID                                    #take each item's  id
-        max_q=sum(Order_Items.objects.filter(Restaurant_ID=rest_id,Food_ID=item_ID).values_list('Quantity',flat=True)) 
+        item_ID=item.Food_ID
+        print(item_ID)                                    #take each item's  id
+        max_q=Order_Items.objects.filter(Restaurant_ID=rest_id,Food_ID=item_ID,Order_ID__Order_Status='Complete').aggregate(total_quantity=Sum('Quantity'))['total_quantity'] or 0
                    #filter by restid and food id, then obtain the resultants quantity in list form. then get sum of list
                   # bubblesort
-        if max_q>max_v:
-            max_v=max_q
+        if max_q>max_quantity:
+            max_quantity=max_q
             max_id=item_ID
-    if max_id!=0:                                                # for restaurants that have had atleast one order
-        return max_id.Food_Name,max_v    
+    if max_id!= None:                                                # for restaurants that have had atleast one order
+        return max_id.Food_Name,max_quantity   
     else:
-        return "na","na"    #will through an eror if this is not there, when the restaurant is signing up for 
+        return 'No Completed Orders',0    #will through an eror if this is not there, when the restaurant is signing up for 
                              #first time and has no orders yet.
 
 def totalEarned(rest_id):
-    earning=sum(Orders.objects.filter(Restaurant_ID=rest_id).values_list('Total_Price',flat=True))
+    earning=sum(Orders.objects.filter(Restaurant_ID=rest_id,Order_Status='Complete').values_list('Total_Price',flat=True))
     return earning
 
 def itemRevenue(rest_id): #should return a dictionary with each food_id as key and the amount obtained from each of them as value
@@ -76,7 +77,6 @@ def categoryAnalysis(rest_id):
     for item in items_id:
         item_id=item[-1]
         cat=Food.objects.get(Food_ID=item_id).Category
-        print(cat)
         instances=sum(Order_Items.objects.filter(Food_ID=item_id).values_list('Quantity',flat=True))
         if cat=='Starter':
             cat_dict['Quantity_Sold'][0]+=instances
